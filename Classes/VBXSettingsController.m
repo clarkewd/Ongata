@@ -106,13 +106,13 @@
                       serverLabel,
                       serverUrl,
                       loggedInAs,
-					  @"\n\n\n\n",
+					  @"\n\n\n",
 					  @"",
                       // Logout Button
                       _logoutButton,
 					  // License Button
 					  _licenseButton,
-					  @"\n\n",
+					  @"",
                       nil];
     [_cellDataSource retain];
     
