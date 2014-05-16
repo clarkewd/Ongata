@@ -75,7 +75,6 @@
         [label sizeToFit];
         
         UIView *wrapper = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, label.height + 5)] autorelease];
-        wrapper.backgroundColor = tableView.backgroundColor;
         wrapper.autoresizesSubviews = NO;
         [wrapper addSubview:label];
         label.left = round((tableView.width / 2) - (label.width / 2));
@@ -110,7 +109,6 @@
         [label sizeToFit];
         
         UIView *wrapper = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, label.height + 8)] autorelease];
-        wrapper.backgroundColor = tableView.backgroundColor;
         wrapper.autoresizesSubviews = NO;
         [wrapper addSubview:label];
         label.left = 19;

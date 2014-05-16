@@ -94,9 +94,7 @@
     [serverUrl setBackgroundView:[self tableBackgroundView]];    
     
     VBXFooterTextCell *loggedInAs = [[[VBXFooterTextCell alloc] initwithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil] autorelease];
-    loggedInAs.backgroundColor = _tableView.backgroundColor;
-    loggedInAs.label.backgroundColor = _tableView.backgroundColor;    
-	 
+
     [loggedInAs setBackgroundView:[self tableBackgroundView]];        
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
                       // Callback phone number
