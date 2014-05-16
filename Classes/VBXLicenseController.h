@@ -26,8 +26,6 @@
 	UIWebView *_textView;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-
 @property (nonatomic, retain) NSString *summary;
 @property (nonatomic, retain) UIWebView *webView;
 

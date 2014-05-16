@@ -38,7 +38,8 @@
 }
 
 + (VBXVersion *)fromString:(NSString *)versionString {
-	const char *vstr, *vend;
+	const char *vstr;
+    char *vend;
 	int i = 0, versions[3] = {0, 0, 0};
 	
 	if(![versionString length]) {

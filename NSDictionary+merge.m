@@ -19,6 +19,7 @@
  **/
 
 #import "NSDictionary+merge.h"
+#import "NSExtensions.h"
 
 @implementation NSDictionary (merge)
 

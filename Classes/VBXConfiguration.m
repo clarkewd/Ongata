@@ -244,7 +244,7 @@ static void FakeRelease(CFAllocatorRef allocator, const void *value) { }
             parseError |= ![[NSScanner scannerWithString:[parts objectAtIndex:2]] scanInt:&l];
             
             if (parseError) {
-                debug(@"Failed to parse HSL value from string '%@' for key '%@'", value);
+                debug(@"Failed to parse HSL value from string '%@' for key '%@'", value, key);
             } else {
                 wasSuccessful = YES;
             }

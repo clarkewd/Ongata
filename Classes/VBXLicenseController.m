@@ -30,11 +30,16 @@
 - (id)init {
 	self.navigationItem.title = LocalizedString(@"License Information", @"License Information: title");
     if (self = [super init]) {
+        NSError *error = nil;
 		NSString *path =[[NSBundle mainBundle] pathForResource:@"license" ofType:@"html"];
 		self.summary = [[NSString alloc] initWithContentsOfFile:path
 													   encoding:NSUTF8StringEncoding 
-														  error:[NSError twilioErrorWithCode:VBXErrorLoadingFile underlyingError:NSErrorFailingURLStringKey]];
-		
+														  error:&error];
+
+		// The license file is part of the app bundle, so it should always exist.
+        if (!self.summary) {
+            [NSException raise:NSGenericException format:@"Failed to load %@: %@", path, error];
+        }
 		
         //[[VBXConfiguration sharedConfiguration] addConfigObserver:self];
         //[self applyConfig];

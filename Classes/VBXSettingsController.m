@@ -31,6 +31,7 @@
 #import "VBXSectionedDataSource.h"
 #import "VBXAppDelegate.h"
 #import "VBXSetNumberController.h"
+#import "VBXLicenseController.h"
 #import "VBXObjectBuilder.h"
 #import "VBXGlobal.h"
 #import "VBXConfiguration.h"
