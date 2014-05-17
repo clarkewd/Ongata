@@ -291,7 +291,7 @@
 
 @interface VBXMessageDetailController () <UIActionSheetDelegate, VBXAudioPlaybackControllerDelegate, VBXAudioControlDelegate, VBXMessageDetailAccessorDelegate, VBXDialerAccessorDelegate, UIWebViewDelegate>
 - (void)didClickPhoneNumberInTranscription:(NSString *)phoneNumber;
-@property (nonatomic, retain) NSString *newNoteText;
+@property (nonatomic, retain) NSString *noteText;
 @end
 
 
@@ -304,7 +304,7 @@
 @synthesize messageListController = _messageListController;
 @synthesize builder = _builder;
 @synthesize bundle = _bundle;
-@synthesize newNoteText = _newNoteText;
+@synthesize noteText = _noteText;
 
 
 @synthesize headerView = _headerView;
@@ -365,7 +365,7 @@
     [_dialerAccessor release];
     [_playbackController release];
     [_bundle release];
-    [_newNoteText release];    
+    [_noteText release];
 
     [_headerView release];
     [_callerLabel release];
@@ -706,7 +706,7 @@
     // If newNoteText is not nil, then we're returning from the note text modal view, and we don't
     // want to call refreshView as it re-enables all our controls.  We'll take care of re-enabling
     // stuff after we've posted the note.
-    if (_newNoteText == nil && _accessor.model != nil) {        
+    if (_noteText == nil && _accessor.model != nil) {
         [self refreshView];
     }
     
@@ -982,7 +982,7 @@
     VBXTextEntryController *controller = [_builder textEntryController];
     controller.target = self;
     controller.navTitle = LocalizedString(@"Add Note", @"Message Detail: Title for add note button");
-    controller.initialText = _newNoteText;
+    controller.initialText = _noteText;
     return controller;
 }
 
@@ -991,12 +991,12 @@
     [self disableControls];
     [self.navigationItem setHidesBackButton:YES animated:YES];
     
-    self.newNoteText = text;
+    self.noteText = text;
     [_accessor addNote:text];
 }
 
 - (void)accessor:(VBXMessageDetailAccessor *)a didAddNote:(VBXAnnotation *)annotation {
-    self.newNoteText = nil;
+    self.noteText = nil;
     [self enableControls];
     [self.navigationItem setHidesBackButton:NO animated:YES];
     
@@ -1036,7 +1036,7 @@
 - (NSDictionary *)saveState {
     NSMutableDictionary *state = [NSMutableDictionary dictionary];
     
-    if (_newNoteText) [state setObject:_newNoteText forKey:@"newNoteText"];
+    if (_noteText) [state setObject:_noteText forKey:@"newNoteText"];
     
     UIViewController *modalController = [self modalViewController];
     if ([modalController isKindOfClass:[VBXTextEntryController class]]) {
@@ -1062,7 +1062,7 @@
 }
 
 - (void)restoreState:(NSDictionary *)state {
-    self.newNoteText = [state stringForKey:@"newNoteText"];
+    self.noteText = [state stringForKey:@"newNoteText"];
     
     if ([state containsKey:@"addNoteState"]) {
         VBXTextEntryController *addNoteController = [self addNoteController];

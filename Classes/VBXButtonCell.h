@@ -27,6 +27,6 @@
 
 @property (nonatomic, readonly) UILabel *buttonLabel;
 
-- (id)initwithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

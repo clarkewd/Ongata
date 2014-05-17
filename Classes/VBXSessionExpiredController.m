@@ -116,7 +116,7 @@
     _passwordField.textField.secureTextEntry = YES;
     _passwordField.textField.text = @"";
     
-    _logoutButton = [[[VBXButtonCell alloc] initwithText:LocalizedString(@"Use a different email address", @"Session Expired: Label for login w/ a different email button.") reuseIdentifier:nil] autorelease];    
+    _logoutButton = [[[VBXButtonCell alloc] initWithText:LocalizedString(@"Use a different email address", @"Session Expired: Label for login w/ a different email button.") reuseIdentifier:nil] autorelease];
     
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
                        

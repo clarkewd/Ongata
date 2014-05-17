@@ -603,7 +603,8 @@
                               identifier:(ABMultiValueIdentifier)identifier {
     
     ABMultiValueRef phoneProperty = ABRecordCopyValue(person, property);
-	NSString *phone = (NSString *)ABMultiValueCopyValueAtIndex(phoneProperty, identifier);	
+	NSString *phone = [(NSString *)ABMultiValueCopyValueAtIndex(phoneProperty, identifier) autorelease];
+    CFRelease(phoneProperty);
     
     _toCell.textField.text = VBXStripNonDigitsFromString(phone);
     

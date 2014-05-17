@@ -33,7 +33,7 @@
 @property (nonatomic, readonly) UILabel *label;
 @property (nonatomic, assign) UIEdgeInsets contentInsets;
 
-- (id)initwithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end
 

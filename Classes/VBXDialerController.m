@@ -864,12 +864,13 @@ typedef enum {
                               identifier:(ABMultiValueIdentifier)identifier {
     
     NSString *name = [NSString stringWithFormat:@"%@ %@",
-                      (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty),
-                      (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
+                      [(NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty) autorelease],
+                      [(NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty) autorelease]];
     
     
     ABMultiValueRef phoneProperty = ABRecordCopyValue(person, property);
-	NSString *phone = (NSString *)ABMultiValueCopyValueAtIndex(phoneProperty, identifier);	
+	NSString *phone = [(NSString *)ABMultiValueCopyValueAtIndex(phoneProperty, identifier) autorelease];
+    CFRelease(phoneProperty);
     
     debug(@"Name = %@", name);
     debug(@"Phone Number = %@", phone);

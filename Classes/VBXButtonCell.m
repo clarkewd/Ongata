@@ -25,7 +25,7 @@
 
 @synthesize buttonLabel = _buttonLabel;
 
-- (id)initwithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
         _buttonLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         _buttonLabel.text = text;

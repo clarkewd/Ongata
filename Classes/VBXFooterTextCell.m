@@ -26,7 +26,7 @@
 @synthesize label = _label;
 @synthesize contentInsets = _contentInsets;
 
-- (id)initwithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
         _contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         

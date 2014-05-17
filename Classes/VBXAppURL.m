@@ -40,9 +40,9 @@
     appURL.queryComponents = [launchURL queryComponents];
     appURL.pathComponents = [launchURL pathComponents];
     
-    NSMutableDictionary* urlState = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* urlState = [NSMutableDictionary dictionary];
     
-    NSArray *controllerStates = [[NSMutableArray alloc] init];
+    NSArray *controllerStates = [NSMutableArray array];
     NSString *route = @"";
     if ([appURL.pathComponents count] > 1) {
         route = [appURL.pathComponents objectAtIndex:1];
@@ -65,7 +65,8 @@
     if ([controllerStates count] >= 1) {
         [urlState setObject:controllerStates forKey:@"controllerStates"];
     }
-	
+
+    [appURL release];
 	return urlState;
 }
 
@@ -141,7 +142,7 @@
     }
 	
     if ([[queryComponents objectForKey:@"messageId"] length] > 0) {
-        NSMutableDictionary *messageState = [[NSMutableDictionary alloc] init];	
+        NSMutableDictionary *messageState = [NSMutableDictionary dictionary];
         for (id key in queryArgs) {
             if ([queryComponents containsKey:key]) {
                 [messageState setObject:[queryComponents objectForKey:key] forKey:[queryArgs valueForKey:key]];

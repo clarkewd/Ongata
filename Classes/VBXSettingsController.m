@@ -82,18 +82,18 @@
     _callbackPhoneField.detailTextLabel.text = VBXFormatPhoneNumber([_userDefaults stringForKey:VBXUserDefaultsCallbackPhone]);
     _callbackPhoneField.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    _logoutButton = [[[VBXButtonCell alloc] initwithText:LocalizedString(@"Logout", @"Settings: Label for logout button.") reuseIdentifier:nil] autorelease];    
-    _licenseButton = [[[VBXButtonCell alloc] initwithText:LocalizedString(@"Software Licenses", @"Settings: Label for license button.") reuseIdentifier:nil] autorelease];    
+    _logoutButton = [[[VBXButtonCell alloc] initWithText:LocalizedString(@"Logout", @"Settings: Label for logout button.") reuseIdentifier:nil] autorelease];
+    _licenseButton = [[[VBXButtonCell alloc] initWithText:LocalizedString(@"Software Licenses", @"Settings: Label for license button.") reuseIdentifier:nil] autorelease];
     
-    VBXFooterTextCell *serverLabel = [[[VBXFooterTextCell alloc] initwithText:[NSString stringWithFormat:LocalizedString(@"Server:", @"Settings: Label that appears before the server."), nil] reuseIdentifier:nil] autorelease];
+    VBXFooterTextCell *serverLabel = [[[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"Server:", @"Settings: Label that appears before the server."), nil] reuseIdentifier:nil] autorelease];
     [serverLabel setBackgroundView:[self tableBackgroundView]];
     
     
-    VBXFooterTextCell *serverUrl = [[[VBXFooterTextCell alloc] initwithText:[_userDefaults objectForKey:VBXUserDefaultsBaseURL] reuseIdentifier:nil] autorelease];
+    VBXFooterTextCell *serverUrl = [[[VBXFooterTextCell alloc] initWithText:[_userDefaults objectForKey:VBXUserDefaultsBaseURL] reuseIdentifier:nil] autorelease];
     serverUrl.label.lineBreakMode = UILineBreakModeCharacterWrap;
     [serverUrl setBackgroundView:[self tableBackgroundView]];    
     
-    VBXFooterTextCell *loggedInAs = [[[VBXFooterTextCell alloc] initwithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil] autorelease];
+    VBXFooterTextCell *loggedInAs = [[[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil] autorelease];
 
     [loggedInAs setBackgroundView:[self tableBackgroundView]];        
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
