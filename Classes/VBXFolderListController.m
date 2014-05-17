@@ -182,8 +182,8 @@
     [self showRefreshingState];
 }
 
-- (void)accessorDidLoadData:(VBXFolderListAccessor *)a fromCache:(BOOL)fromCache {        
-
+- (void)accessorDidLoadData:(VBXFolderListAccessor *)a fromCache:(BOOL)fromCache {
+    [self retain]; // the cancel below might release self's last strong reference, as this is a delegate method
     if (!fromCache) {
         // If this hits, then we've already loaded a fresh copy from the network and we don't need
         // to show the "Refreshing..." thing.
@@ -204,6 +204,7 @@
         // the timestamp for the cached data.
         [self performSelector:@selector(showRefreshingAfterDelay) withObject:nil afterDelay:1.0];
     }
+    [self release];
 }
 
 - (void)accessor:(VBXFolderListAccessor *)a loadDidFailWithError:(NSError *)error {
