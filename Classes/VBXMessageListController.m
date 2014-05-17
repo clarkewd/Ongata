@@ -46,11 +46,11 @@
 
 @interface VBXMessageListController () <VBXMessageListAccessorDelegate, VBXAudioControlDelegate, VBXAudioPlaybackControllerDelegate>
 
-@property (nonatomic, retain) VBXAudioPlaybackController *playbackController;
-@property (nonatomic, retain) NSIndexPath *selectedMessageIndexPath;
-@property (nonatomic, retain) NSString *selectedMessageKey;
-@property (nonatomic, retain) NSString *selectedMessageRecordingURL;
-@property (nonatomic, retain) NSIndexPath *playbackControllerIndexPath;
+@property (nonatomic, strong) VBXAudioPlaybackController *playbackController;
+@property (nonatomic, strong) NSIndexPath *selectedMessageIndexPath;
+@property (nonatomic, strong) NSString *selectedMessageKey;
+@property (nonatomic, strong) NSString *selectedMessageRecordingURL;
+@property (nonatomic, strong) NSIndexPath *playbackControllerIndexPath;
 
 @end
 
@@ -70,20 +70,6 @@
 @synthesize refreshButton = _refreshButton;
 @synthesize dialerButton = _dialerButton;
 
-- (void)dealloc {
-    [_loadMoreView release];
-    
-    self.playbackController = nil;
-    self.accessor = nil;
-    self.bundle = nil;
-    self.selectedMessageKey = nil;
-    self.selectedMessageRecordingURL = nil;
-
-    self.refreshButton = nil;
-    self.dialerButton = nil;
-    
-    [super dealloc];
-}
 
 - (BOOL)shouldDisplayFolderNameInListItem {
     return [_accessor.model.name isEqualToString:@"Inbox"];
@@ -149,7 +135,7 @@
 }
 
 - (void)viewDidLoad {
-    _statusLabel = [[[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)] autorelease];
+    _statusLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
     _statusLabel.textAlignment = UITextAlignmentCenter;
     _statusLabel.textColor = [UIColor whiteColor];
     _statusLabel.shadowColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
@@ -244,7 +230,7 @@
         [defaults synchronize];
     }
 
-    [self retain];// the cancel below might release self's last strong reference, as this is a delegate method
+    // the cancel below might release self's last strong reference, as this is a delegate method
     if (!fromCache) {
         // If this hits, then we've already loaded a fresh copy from the network and we don't need
         // to show the "Refreshing..." thing.
@@ -264,7 +250,6 @@
     }
 
     [self.tableView reloadData];
-    [self release];
 }
 
 - (void)accessor:(VBXMessageListAccessor *)a loadDidFailWithError:(NSError *)error {
@@ -315,7 +300,7 @@
 }
 
 - (UITableViewCell *)cellWithReuseIdentifier:(NSString *)identifier {
-    VBXMessageListCell *cell = [[[VBXMessageListCell alloc] initWithReuseIdentifier:identifier] autorelease];
+    VBXMessageListCell *cell = [[VBXMessageListCell alloc] initWithReuseIdentifier:identifier];
     cell.messageListController = self;
     cell.audioControl.delegate = self;
     cell.audioControl.context = cell;
@@ -335,8 +320,8 @@
     }
 
     if (summary.archiving) {
-        UIActivityIndicatorView *cellSpinny = [[[UIActivityIndicatorView alloc]
-                                                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        UIActivityIndicatorView *cellSpinny = [[UIActivityIndicatorView alloc]
+                                                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [cellSpinny startAnimating];
         cell.accessoryView = cellSpinny;
     } else {
@@ -363,10 +348,10 @@
         style = UIBarButtonItemStyleBordered;
     }
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Speaker", @"Message List: Button to change to speaker mode.")
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Speaker", @"Message List: Button to change to speaker mode.")
                                                                                style:style
                                                                               target:self
-                                                                              action:@selector(toggleMediaRoute)] autorelease];    
+                                                                              action:@selector(toggleMediaRoute)];    
 }
 
 - (void)showPlayerForIndexPath:(NSIndexPath *)indexPath {        

@@ -33,7 +33,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
-    [super dealloc];
 }
 
 - (void)applyConfig {

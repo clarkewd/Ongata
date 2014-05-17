@@ -24,17 +24,17 @@
 @implementation VBXResourceRequest
 
 + (VBXResourceRequest *)requestWithResource:(NSString *)resource {
-    return [[[VBXResourceRequest alloc] initWithResource:resource method:nil] autorelease];
+    return [[VBXResourceRequest alloc] initWithResource:resource method:nil];
 }
 
 + (VBXResourceRequest *)requestWithResource:(NSString *)resource method:(NSString*)method {
-    return [[[VBXResourceRequest alloc] initWithResource:resource method:method] autorelease];
+    return [[VBXResourceRequest alloc] initWithResource:resource method:method];
 }
 
 - (id)initWithResource:(NSString *)r method:(NSString*)m {
     if (self = [super init]) {
-        _resource = [r retain];
-        _method = [m retain];
+        _resource = r;
+        _method = m;
         _params = [NSMutableDictionary new];
     }
     return self;
@@ -44,12 +44,6 @@
 @synthesize method = _method;
 @synthesize params = _params;
 
-- (void)dealloc {
-    [_resource release];
-    [_method release];
-    [_params release];
-    [super dealloc];
-}
 
 - (BOOL)isGet {
     return !_method || [_method isEqualToString:@"GET"];

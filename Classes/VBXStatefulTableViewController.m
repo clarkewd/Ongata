@@ -26,19 +26,19 @@
 @implementation VBXStatefulTableViewController
 
 - (UIView *)loadingView {    
-    VBXActivityLabel *label = [[[VBXActivityLabel alloc] initWithText:LocalizedString(@"Loading...", @"StatefulTableViewController: Title shown for loading view.")] autorelease];
+    VBXActivityLabel *label = [[VBXActivityLabel alloc] initWithText:LocalizedString(@"Loading...", @"StatefulTableViewController: Title shown for loading view.")];
     return label;
 }
 
 - (UIView *)emptyView {
-    VBXTableStatusView *statusView = [[[VBXTableStatusView alloc] initWithFrame:CGRectZero] autorelease];
+    VBXTableStatusView *statusView = [[VBXTableStatusView alloc] initWithFrame:CGRectZero];
     [statusView setTitle:LocalizedString(@"Empty", @"StatefulTableViewController: Title shown table is empty.")];
     [statusView setDescription:LocalizedString(@"There are no items to show here.", @"StatefulTableViewController: Description shown when table is empty.")];
     return statusView;
 }
 
 - (UIView *)errorView {
-    VBXTableStatusView *statusView = [[[VBXTableStatusView alloc] initWithFrame:CGRectZero] autorelease];
+    VBXTableStatusView *statusView = [[VBXTableStatusView alloc] initWithFrame:CGRectZero];
     [statusView setTitle:LocalizedString(@"Error", @"StatefulTableViewController: Title shown when there is an error loading table content.")];
     [statusView setDescription:LocalizedString(@"Something went wrong!", @"StatefulTableViewController: Description shown when there is an error loading content.")];
     return statusView;

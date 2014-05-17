@@ -27,7 +27,7 @@
 @interface VBXSecurityAlertController : VBXViewController {
     VBXObjectBuilder *_builder;
 
-    id<VBXSecurityAlertControllerDelegate> _delegate;
+    id<VBXSecurityAlertControllerDelegate> __weak _delegate;
     NSInteger _tag;
 
     NSString *_headingText;
@@ -36,13 +36,13 @@
     NSDictionary *_userInfo;
 }
 
-@property (nonatomic, retain) VBXObjectBuilder *builder;
-@property (nonatomic, assign) id<VBXSecurityAlertControllerDelegate> delegate;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
+@property (nonatomic, weak) id<VBXSecurityAlertControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger tag;
 
-@property (nonatomic, retain) NSString *headingText;
-@property (nonatomic, retain) NSString *descriptionText;
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSString *headingText;
+@property (nonatomic, strong) NSString *descriptionText;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 @end
 

@@ -54,9 +54,6 @@
 }
 
 - (void)tearDown {
-    [page1 release];
-    [page2 release];
-    [page3 release];
     [super tearDown];
 }
 

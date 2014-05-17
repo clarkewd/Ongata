@@ -42,8 +42,6 @@
 
 - (void)dealloc {
     [_loader cancelAllRequests];
-    self.loader = nil;
-    [super dealloc];
 }
 
 - (NSDictionary *)defaultConfigDictionary {

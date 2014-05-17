@@ -32,9 +32,9 @@ NSMutableArray *VBXURLLoaderTrustedServerNames = nil;
 
 @interface VBXURLLoader ()
 
-@property (nonatomic, retain) VBXPerfTimer *perfTimer;
-@property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSURLResponse *response;
+@property (nonatomic, strong) VBXPerfTimer *perfTimer;
+@property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSURLResponse *response;
 
 @end
 
@@ -47,7 +47,7 @@ NSMutableArray *VBXURLLoaderTrustedServerNames = nil;
 
 + (VBXURLLoader *)loadRequest:(NSURLRequest *)request andInform:(id<VBXURLLoaderDelegate>)delegate
 answerAuthChallenges:(BOOL)answerAuthChallenges {
-    VBXURLLoader *loader = [[[VBXURLLoader alloc] initWithURLRequest:request] autorelease];
+    VBXURLLoader *loader = [[VBXURLLoader alloc] initWithURLRequest:request];
     loader.answersAuthChallenges = answerAuthChallenges;
     loader.delegate = delegate;
     [loader load];
@@ -62,7 +62,7 @@ answerAuthChallenges:(BOOL)answerAuthChallenges {
 - (id)initWithURLRequest:(NSURLRequest *)req {
     if (self = [super init]) {
         //debug(@"%@", req);
-        _request = [req retain];
+        _request = req;
         _connection = [[NSURLConnection alloc] initWithRequest:_request delegate:self];
         _data = [NSMutableData new];
     }
@@ -107,12 +107,6 @@ answerAuthChallenges:(BOOL)answerAuthChallenges {
 - (void)dealloc {
     [_connection cancel];
     
-    [_request release];
-    [_connection release];
-    [_response release];
-    [_data release];
-    [_perfTimer release];
-    [super dealloc];
 }
 
 - (void)load {

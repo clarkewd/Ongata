@@ -26,7 +26,7 @@
 	UIWebView *_textView;
 }
 
-@property (nonatomic, retain) NSString *summary;
-@property (nonatomic, retain) UIWebView *webView;
+@property (nonatomic, strong) NSString *summary;
+@property (nonatomic, strong) UIWebView *webView;
 
 @end

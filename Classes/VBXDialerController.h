@@ -44,8 +44,8 @@ void DialerBuildImages();
     BOOL _callerIdPickerIsOpen;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXDialerAccessor *accessor;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXDialerAccessor *accessor;
 
 - (id)initWithPhone:(NSString *)phone;
 

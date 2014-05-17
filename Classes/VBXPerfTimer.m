@@ -24,7 +24,7 @@
 @implementation VBXPerfTimer
 
 + (VBXPerfTimer *) startTimer {
-    return [[[VBXPerfTimer alloc] init] autorelease];
+    return [[VBXPerfTimer alloc] init];
 }
 
 - (id)init {

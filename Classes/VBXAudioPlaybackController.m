@@ -31,8 +31,8 @@
 
 @interface VBXAudioPlaybackController () <AVAudioPlayerDelegate, VBXURLLoaderDelegate>
 
-@property (nonatomic, retain) VBXURLLoader *soundLoader;
-@property (nonatomic, retain) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) VBXURLLoader *soundLoader;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
 @end
 
@@ -53,15 +53,9 @@
     [audioPlayer stop];
     [soundLoader cancel];
 
-    [contentURL release];
-    [soundLoader release];
-    [cache release];
     
-    [audioPlayer release];
 
-    [container release];
 
-    [super dealloc];
 }
 
 - (void)updateAudioControls {
@@ -90,7 +84,7 @@
     progressView.hidden = YES;
 
     NSError *error = nil;
-    self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:data error:&error] autorelease];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&error];
     if (error) {
         NSError *wrappedError = [NSError twilioErrorWithCode:VBXErrorBadAudioData underlyingError:error];
         [self handleAudioError:wrappedError withTitle:LocalizedString(@"Cannot play message", @"AudioPlaybackController: Message shown when the audio player won't start.")];
@@ -146,7 +140,7 @@
     container.backgroundColor = [UIColor clearColor];
     container.autoresizesSubviews = YES;
     
-    progressView = [[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault] autorelease];
+    progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     progressView.backgroundColor = [UIColor clearColor];
     progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     progressView.height = 9;    
@@ -157,7 +151,7 @@
     progressView.progress = 0.05;
     
     
-    slider = [[[UISlider alloc] initWithFrame:container.bounds] autorelease];
+    slider = [[UISlider alloc] initWithFrame:container.bounds];
     slider.backgroundColor = [UIColor clearColor];    
     slider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     slider.height = 22;

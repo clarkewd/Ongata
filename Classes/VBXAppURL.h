@@ -28,9 +28,9 @@
     NSArray *_pathComponents;
 }
 
-@property (nonatomic, retain) NSString *host;
-@property (nonatomic, retain) NSDictionary *queryComponents;
-@property (nonatomic, retain) NSArray *pathComponents;
+@property (nonatomic, strong) NSString *host;
+@property (nonatomic, strong) NSDictionary *queryComponents;
+@property (nonatomic, strong) NSArray *pathComponents;
 
 + (NSDictionary*)route:(NSURL*)launchURL;
 - (NSArray*)routeMessages;

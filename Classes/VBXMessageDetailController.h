@@ -37,7 +37,7 @@
     VBXDialerAccessor *_dialerAccessor;
     VBXAudioPlaybackController *_playbackController;
     VBXMessageListController *_messageListController;
-    VBXObjectBuilder *_builder;
+    VBXObjectBuilder *__weak _builder;
     NSBundle *_bundle;
     NSString *_newNoteText;
     
@@ -65,26 +65,26 @@
     NSString *_phoneNumberClickedInMessage;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXMessageDetailAccessor *accessor;
-@property (nonatomic, retain) VBXDialerAccessor *dialerAccessor;
-@property (nonatomic, retain) VBXAudioPlaybackController *playbackController;
-@property (nonatomic, retain) VBXMessageListController *messageListController;
-@property (nonatomic, assign) VBXObjectBuilder *builder;
-@property (nonatomic, retain) NSBundle *bundle;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXMessageDetailAccessor *accessor;
+@property (nonatomic, strong) VBXDialerAccessor *dialerAccessor;
+@property (nonatomic, strong) VBXAudioPlaybackController *playbackController;
+@property (nonatomic, strong) VBXMessageListController *messageListController;
+@property (nonatomic, weak) VBXObjectBuilder *builder;
+@property (nonatomic, strong) NSBundle *bundle;
 
 
-@property (nonatomic, retain) IBOutlet UIView *headerView;
-@property (nonatomic, retain) IBOutlet UILabel *callerLabel;
-@property (nonatomic, retain) IBOutlet UILabel *destinationLabel;
-@property (nonatomic, retain) IBOutlet UILabel *timeLabel;
-@property (nonatomic, retain) IBOutlet UIView *audioControlsFrame;
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UILabel *callerLabel;
+@property (nonatomic, strong) IBOutlet UILabel *destinationLabel;
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic, strong) IBOutlet UIView *audioControlsFrame;
 
-@property (nonatomic, retain) IBOutlet UITableViewCell *loadMoreCell;
+@property (nonatomic, strong) IBOutlet UITableViewCell *loadMoreCell;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *replyButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *dialerButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *replyButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *dialerButton;
 
 - (IBAction)refresh;
 - (IBAction)loadMoreAnnotations;

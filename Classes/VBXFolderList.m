@@ -34,9 +34,5 @@
 
 @synthesize folders = _folders;
 
-- (void)dealloc {
-    self.folders = nil;
-    [super dealloc];
-}
 
 @end

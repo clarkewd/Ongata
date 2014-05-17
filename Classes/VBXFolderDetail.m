@@ -47,12 +47,6 @@
 
 @synthesize archivingMessageIndex = _archivingMessageIndex;
 
-- (void)dealloc {
-    self.key = nil;
-    self.name = nil;
-    self.messages = nil;
-    [super dealloc];
-}
 
 
 @end

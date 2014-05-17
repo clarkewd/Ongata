@@ -36,12 +36,12 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) NSInteger new;
 @property (nonatomic, assign) NSInteger read;
 @property (nonatomic, assign) NSInteger archived;
-@property (nonatomic, retain) VBXSublist *messages;
+@property (nonatomic, strong) VBXSublist *messages;
 
 @property (nonatomic, assign) NSInteger archivingMessageIndex;
 

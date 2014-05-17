@@ -27,6 +27,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSArray *folders;
+@property (nonatomic, strong) NSArray *folders;
 
 @end

@@ -38,7 +38,7 @@
         }
     }];
 	
-    return (NSDictionary *) [[result mutableCopy] autorelease];
+    return (NSDictionary *) [result mutableCopy];
 }
 
 - (NSDictionary *) dictionaryByMergingWith: (NSDictionary *) dict {

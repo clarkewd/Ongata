@@ -26,7 +26,7 @@
 @synthesize font = _font;
 
 + (VBXStringPart *)partWithText:(NSString *)text font:(UIFont *)font {
-    VBXStringPart *sp = [[[VBXStringPart alloc] init] autorelease];
+    VBXStringPart *sp = [[VBXStringPart alloc] init];
     sp.text = text;
     sp.font = font;
     return sp;
@@ -103,8 +103,7 @@
 
 - (void)setTextColor:(UIColor *)textColor {
     if (_textColor != textColor) {
-        [_textColor release];
-        _textColor = [textColor retain];
+        _textColor = textColor;
         
         [self setNeedsDisplay];
     }    
@@ -117,8 +116,7 @@
 
 - (void)setShadowColor:(UIColor *)shadowColor {
     if (_shadowColor != shadowColor) {
-        [_shadowColor release];
-        _shadowColor = [shadowColor retain];
+        _shadowColor = shadowColor;
 
         [self setNeedsDisplay];
     }
@@ -145,8 +143,7 @@
 
 - (void)setParts:(NSArray *)parts {
     if (_parts != parts) {
-        [_parts release];
-        _parts = [parts retain];
+        _parts = parts;
         
         [self setNeedsDisplay];
     }
@@ -154,8 +151,6 @@
 
 - (void)dealloc {
     self.parts = nil;
-    self.textColor = nil;
-    [super dealloc];
 }
 
 

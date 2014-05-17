@@ -25,7 +25,7 @@
     NSMutableArray *_cells;
 }
 
-@property (nonatomic, retain) NSMutableArray *cells;
+@property (nonatomic, strong) NSMutableArray *cells;
 
 - (id)initWithCells:(NSMutableArray *)cells;
 

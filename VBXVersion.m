@@ -63,7 +63,7 @@
 	if( !i )
 		[NSException raise:NSGenericException format:@"No numeric values in versionString"];
 
-	return [[[VBXVersion alloc] initWith:versions[0] minor:versions[1] patchlevel:versions[2]] autorelease];
+	return [[VBXVersion alloc] initWith:versions[0] minor:versions[1] patchlevel:versions[2]];
 }
 
 - (VBXVersionComparison)compareVersion:(NSString *)comparedVersionString {

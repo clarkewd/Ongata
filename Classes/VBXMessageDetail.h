@@ -47,25 +47,25 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSString *caller;
-@property (nonatomic, retain) NSString *called;
-@property (nonatomic, retain) NSString *folder;
-@property (nonatomic, retain) NSString *assignedUserKey;
-@property (nonatomic, retain) NSString *status;
-@property (nonatomic, retain) NSString *ticketStatusKey;
-@property (nonatomic, retain) NSString *recordingURL;
-@property (nonatomic, retain) NSString *recordingLength;
-@property (nonatomic, retain) NSString *summary;
-@property (nonatomic, retain) NSString *receivedTime;
-@property (nonatomic, retain) NSString *lastUpdated;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *caller;
+@property (nonatomic, strong) NSString *called;
+@property (nonatomic, strong) NSString *folder;
+@property (nonatomic, strong) NSString *assignedUserKey;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *ticketStatusKey;
+@property (nonatomic, strong) NSString *recordingURL;
+@property (nonatomic, strong) NSString *recordingLength;
+@property (nonatomic, strong) NSString *summary;
+@property (nonatomic, strong) NSString *receivedTime;
+@property (nonatomic, strong) NSString *lastUpdated;
 @property (nonatomic, assign) BOOL unread;
 @property (nonatomic, assign) BOOL callback;
 @property (nonatomic, assign) BOOL archived;
-@property (nonatomic, retain) NSArray *activeUsers;
-@property (nonatomic, retain) VBXSublist *annotations;
+@property (nonatomic, strong) NSArray *activeUsers;
+@property (nonatomic, strong) VBXSublist *annotations;
 
-@property (nonatomic, retain) VBXUser *assignedUser;
+@property (nonatomic, strong) VBXUser *assignedUser;
 
 @property (nonatomic, readonly) BOOL isSms;
 

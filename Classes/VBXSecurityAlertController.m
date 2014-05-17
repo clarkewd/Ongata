@@ -43,7 +43,6 @@
                                           cancelButtonTitle:LocalizedString(@"No", nil) 
                                           otherButtonTitles:LocalizedString(@"Yes", nil), nil];
     [alert show];
-    [alert release];
 }
 
 - (void)reject {
@@ -58,15 +57,15 @@
     if (self = [super init]) {
         self.title = LocalizedString(@"Security Alert", @"Security Alert: Title for screen.");
         
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Cancel", @"Security Alert: Title for cancel button.") 
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Cancel", @"Security Alert: Title for cancel button.") 
                                                                                  style:UIBarButtonItemStylePlain 
                                                                                 target:self
-                                                                                 action:@selector(reject)] autorelease];
+                                                                                 action:@selector(reject)];
         
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Continue", @"Security Alert: Title for Continue button")
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Continue", @"Security Alert: Title for Continue button")
                                                                                   style:UIBarButtonItemStyleDone
                                                                                  target:self
-                                                                                 action:@selector(accept)] autorelease];        
+                                                                                 action:@selector(accept)];        
         
         self.headingText = @"heading";
         self.descriptionText = @"description";
@@ -74,16 +73,13 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)loadView {
     [super loadView];
     
     UIView *view = [self view];
         
-    UILabel *firstLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 999)] autorelease];
+    UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 999)];
     firstLabel.numberOfLines = 0;
     firstLabel.font = [UIFont boldSystemFontOfSize:15];
     firstLabel.backgroundColor = [UIColor clearColor];
@@ -93,7 +89,7 @@
     [firstLabel sizeToFit];
     [view addSubview:firstLabel];
     
-    UILabel *secondLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 999)] autorelease];
+    UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 999)];
     secondLabel.numberOfLines = 0;
     secondLabel.font = [UIFont systemFontOfSize:14];
     secondLabel.backgroundColor = [UIColor clearColor];
@@ -117,7 +113,7 @@
     self.navigationController.navigationBar.tintColor = ThemedColor(@"securityAlertNavigationBarTintColor", RGBHEXCOLOR(0x810000));
     
     VBXHSL backgroundHSL = ThemedHSL(@"securityAlertBackgroundHSL", VBXHSLMake(12, 50, -5));
-    self.view.backgroundColor = [[[UIColor alloc] initWithPatternImage:VBXAdjustImageWithPhotoshopHSLWithCache([NSUserDefaults standardUserDefaults], @"security-alert-background.png", @"normal", backgroundHSL)] autorelease];
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:VBXAdjustImageWithPhotoshopHSLWithCache([NSUserDefaults standardUserDefaults], @"security-alert-background.png", @"normal", backgroundHSL)];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

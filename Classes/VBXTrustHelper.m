@@ -148,11 +148,11 @@
 
         if (count >= 1) {
             SecCertificateRef cert = SecTrustGetCertificateAtIndex(serverTrust, 0);
-            data = (NSData *)SecCertificateCopyData(cert);
+            data = (NSData *)CFBridgingRelease(SecCertificateCopyData(cert));
         }
     }
     
-    return [data autorelease];
+    return data;
 }
 
 + (void)acceptCertificateAndRecordCertificateInfoWithChallenge:(NSURLAuthenticationChallenge *)challenge serverTrust:(SecTrustRef)serverTrust {
@@ -168,7 +168,7 @@
             certificateData = nil;
             certificateIsTrusted = YES;
         } else {
-            certificateData = [[self dataForFirstCertificate:serverTrust] retain];
+            certificateData = [self dataForFirstCertificate:serverTrust];
             certificateIsTrusted = NO;
         }
     }
@@ -178,9 +178,6 @@
     
     [[challenge sender] useCredential:[NSURLCredential credentialForTrust:serverTrust] forAuthenticationChallenge:challenge];
 
-    if (certificateData) {
-        [certificateData release];
-    }
 }
 
 @end

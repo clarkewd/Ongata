@@ -87,7 +87,7 @@
         i++;
     }
         
-    return [[[self alloc] initWithHeaders:headers footers:footers sections:sections] autorelease];
+    return [[self alloc] initWithHeaders:headers footers:footers sections:sections];
 }
 
 - (id)initWithHeaders:(NSMutableArray *)headers footers:(NSMutableArray *)footers sections:(NSMutableArray *)sections {

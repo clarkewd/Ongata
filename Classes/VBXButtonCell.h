@@ -22,10 +22,10 @@
 #import "VBXTableViewCell.h"
 
 @interface VBXButtonCell : VBXTableViewCell {
-    UILabel *_buttonLabel;
+    UILabel *__weak _buttonLabel;
 }
 
-@property (nonatomic, readonly) UILabel *buttonLabel;
+@property (weak, nonatomic, readonly) UILabel *buttonLabel;
 
 - (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;
 

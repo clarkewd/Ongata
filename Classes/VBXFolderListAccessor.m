@@ -27,7 +27,7 @@
 
 @interface VBXFolderListAccessor () <VBXResourceLoaderTarget>
 
-@property (nonatomic, retain) VBXFolderList *model;
+@property (nonatomic, strong) VBXFolderList *model;
 
 @end
 
@@ -40,9 +40,6 @@
 
 - (void)dealloc {
     [_loader cancelAllRequests];    
-    [_model release];
-    [_loader release];
-    [super dealloc];
 }
 
 - (NSDate *)timestampOfCachedData {
@@ -56,7 +53,7 @@
 }
 
 - (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
-    self.model = [[[VBXFolderList alloc] initWithDictionary:object] autorelease];
+    self.model = [[VBXFolderList alloc] initWithDictionary:object];
     [_delegate accessorDidLoadData:self fromCache:fromCache];
 }
 

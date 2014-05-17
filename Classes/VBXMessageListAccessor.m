@@ -30,7 +30,7 @@
 
 @interface VBXMessageListAccessor () <VBXResourceLoaderTarget>
 
-@property (nonatomic, retain) VBXFolderDetail *model;
+@property (nonatomic, strong) VBXFolderDetail *model;
 
 @end
 
@@ -39,7 +39,7 @@
 
 - (id)initWithKey:(NSString *)key {
     if (self = [super init]) {
-        _folderKey = [key retain];
+        _folderKey = key;
         _pageSize = 25;
     }
     return self;
@@ -54,11 +54,6 @@
 
 - (void)dealloc {
     [_loader cancelAllRequests];    
-    [_folderKey release];
-    [_model release];
-    [_loader release];
-    [_archivePoster release];
-    [super dealloc];
 }
 
 - (NSDate *)timestampOfCachedData {
@@ -90,7 +85,7 @@
 }
 
 - (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
-    VBXFolderDetail *newModel = [[[VBXFolderDetail alloc] initWithDictionary:object] autorelease];
+    VBXFolderDetail *newModel = [[VBXFolderDetail alloc] initWithDictionary:object];
     [newModel.messages mergeItemsFromBeginning:_model.messages];
     self.model = newModel;
     [_delegate accessorDidLoadData:self fromCache:fromCache];

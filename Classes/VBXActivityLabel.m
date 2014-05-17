@@ -28,14 +28,14 @@
 
 - (id)initWithText:(NSString *)text {
     if (self = [super initWithFrame:CGRectZero]) {
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.text = text;
         _label.font = [UIFont systemFontOfSize:15.0];
         _label.textColor = ThemedColor(@"activityLabelTextColor", ThemedColor(@"secondaryTextColor", [UIColor darkGrayColor]));
         _label.backgroundColor = [UIColor clearColor];
         [_label sizeToFit];
         
-        _activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_activityIndicatorView startAnimating];
         [_activityIndicatorView sizeToFit];
         
@@ -49,9 +49,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)layoutSubviews {
     const CGFloat spacing = 4;

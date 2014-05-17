@@ -44,7 +44,7 @@
 
 @interface VBXAppDelegate () <VBXConfigurable, UIAlertViewDelegate, VBXConfigAccessorDelegate, VBXSecurityAlertControllerDelegate, VBXSessionExpiredControllerDelegate>
 
-@property (nonatomic, retain) VBXObjectBuilder *builder;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
 
 - (void)finishedProcessingAuthenticationChallenge;
 - (void)processAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
@@ -67,15 +67,8 @@
 }
 
 - (void)dealloc {
-    [_authenticationChallenges release];
-    [_configAccessor release];
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_window release];
-    [_mainNavigationController release];
-    [_setupNavigationController release];
-    [_builder release];
-    [super dealloc];
 }
 
 #pragma mark App init
@@ -142,7 +135,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease];    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];    
     
     self.builder = [VBXObjectBuilder sharedBuilder];
     
@@ -158,7 +151,7 @@
     [notificationCenter addObserver:self selector:@selector(didReceiveAuthenticationChallenge:)
 							   name:VBXURLLoaderDidReceiveAuthenticationChallenge object:nil];
 	
-    _configAccessor = [[_builder configAccessor] retain];
+    _configAccessor = [_builder configAccessor];
     _configAccessor.delegate = self;
     [_configAccessor loadDefaultConfig];
     
@@ -219,9 +212,9 @@
     
     if (_authenticationChallenges.count > 0) {
         // process the next challenge if there is one...
-        NSURLAuthenticationChallenge *challenge = [[_authenticationChallenges objectAtIndex:0] retain];
+        NSURLAuthenticationChallenge *challenge = [_authenticationChallenges objectAtIndex:0];
         [_authenticationChallenges removeObjectAtIndex:0];
-        [self processAuthenticationChallenge:[challenge autorelease]];
+        [self processAuthenticationChallenge:challenge];
     }
 }
 
@@ -333,7 +326,6 @@
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];                
         } else if (PostSetupTrustActionDenyWithSecureModeAlert == action) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"Security Alert", @"App Delegate: Title for alert shown when server is in secure mode but is using an invalid cert.")
                                                             message:LocalizedString(@"The OpenVBX server you're connecting to is no longer using a valid secure certificate.  Please contact your OpenVBX service provider right away.", @"App Delegate: Title for alert shown when server is in secure mode but is using an invalid cert.")
@@ -341,7 +333,6 @@
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];                
         } else if (PostSetupTrustActionPromptWithCertificateIsNowUntrustedAlert == action) {
             VBXSecurityAlertController *controller = [_builder securityAlertController];
             controller.delegate = self;
@@ -408,10 +399,10 @@
         self.setupNavigationController = nil;
     }
     
-    VBXFolderListController *folderListController = [[[VBXFolderListController alloc] initWithNibName:@"FolderListController" bundle:nil] autorelease];
+    VBXFolderListController *folderListController = [[VBXFolderListController alloc] initWithNibName:@"FolderListController" bundle:nil];
     [_builder configureFolderListController:folderListController];
     
-    self.mainNavigationController = [[[VBXNavigationController alloc] initWithRootViewController:folderListController] autorelease];
+    self.mainNavigationController = [[VBXNavigationController alloc] initWithRootViewController:folderListController];
     _mainNavigationController.builder = _builder;
     [_mainNavigationController setToolbarHidden:NO];
     
@@ -427,7 +418,7 @@
         self.mainNavigationController = nil;
     }
     
-    self.setupNavigationController = [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)[_builder setServerController]] autorelease];
+    self.setupNavigationController = [[UINavigationController alloc] initWithRootViewController:(UIViewController *)[_builder setServerController]];
     [_window addSubview:self.setupNavigationController.view];
     [_window makeKeyAndVisible];
 }
@@ -505,7 +496,6 @@
                                           cancelButtonTitle:LocalizedString(@"OK", nil) 
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 

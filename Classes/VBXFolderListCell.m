@@ -33,8 +33,8 @@
 }
 
 @property (nonatomic, assign) NSInteger number;
-@property (nonatomic, retain) UIColor *color;
-@property (nonatomic, retain) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *selectedColor;
 
 @end
 
@@ -57,7 +57,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
-    [super dealloc];
 }
 
 - (void)applyConfig {
@@ -90,8 +89,7 @@
 
 - (void)setColor:(UIColor *)color {
     if (_color != color) {
-        [_color release];
-        _color = [color retain];
+        _color = color;
         
         [self setNeedsDisplay];
     }
@@ -99,8 +97,7 @@
 
 - (void)setSelectedColor:(UIColor *)color {
     if (_selectedColor != color) {
-        [_selectedColor release];
-        _selectedColor = [color retain];
+        _selectedColor = color;
         
         [self setNeedsDisplay];
     }
@@ -136,7 +133,7 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.font = [UIFont boldSystemFontOfSize:19.0];
         _label.textColor = [UIColor blackColor];
         _label.numberOfLines = 1;
@@ -145,11 +142,11 @@
         _label.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_label];
         
-        _icon = [[[VBXMaskedImageView alloc] initWithFrame:CGRectZero] autorelease];
+        _icon = [[VBXMaskedImageView alloc] initWithFrame:CGRectZero];
         _icon.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_icon];
         
-        _numberView = [[[RoundedNumberView alloc] initWithFrame:CGRectZero] autorelease];
+        _numberView = [[RoundedNumberView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_numberView];
         
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -186,11 +183,6 @@
     [self applyConfig];
 }
 
-- (void)dealloc {
-    self.label = nil;
-    self.icon = nil;
-    [super dealloc];
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];

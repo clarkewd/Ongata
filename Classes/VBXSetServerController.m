@@ -82,41 +82,35 @@
     
     _serverField.textField.text = serverURL;
         
-    _configAccessor = [[[VBXObjectBuilder sharedBuilder] configAccessorWithBaseURL:_serverField.textField.text] retain];    
+    _configAccessor = [[VBXObjectBuilder sharedBuilder] configAccessorWithBaseURL:_serverField.textField.text];    
     _configAccessor.delegate = self;
     [_configAccessor loadConfigUsingCache:NO];
 }
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Next", @"Set Server: Button label for the next button in the upper right.")
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Next", @"Set Server: Button label for the next button in the upper right.")
                                                                                    style:UIBarButtonItemStyleDone
                                                                                   target:self
-                                                                                  action:@selector(next)] autorelease];
+                                                                                  action:@selector(next)];
         self.title = LocalizedString(@"Setup", @"Set Server: Title for screen.");        
     }
     return self;
 }
 
-- (void)dealloc {
-    [_cellDataSource release];
-    [_serverField release];
-    
-    [super dealloc];
-}
 
 - (void)loadView {
     [super loadView];
 
-    UIView *logoView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)] autorelease];
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
     
-    UIImageView *logo = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"openvbx-logo.png"]] autorelease];
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"openvbx-logo.png"]];
     [logo centerHorizontallyInView:logoView];
     logo.top = 10;
     logo.backgroundColor = _tableView.backgroundColor;
     [logoView addSubview:logo];
     
-    VBXViewCell *logoViewCell = [[[VBXViewCell alloc] initWithView:logoView reuseIdentifier:nil] autorelease];
+    VBXViewCell *logoViewCell = [[VBXViewCell alloc] initWithView:logoView reuseIdentifier:nil];
     logoViewCell.showBackground = NO;
     logoViewCell.backgroundColor = _tableView.backgroundColor;
     logoViewCell.selectedBackgroundView.backgroundColor = logoView.backgroundColor;
@@ -127,7 +121,7 @@
         serverURL = @"";
     }
     
-    _serverField = [[[VBXTextFieldCell alloc] initWithReuseIdentifier:nil] autorelease];
+    _serverField = [[VBXTextFieldCell alloc] initWithReuseIdentifier:nil];
     // Don't show a label
     _serverField.label.text = @"";    
     _serverField.textField.placeholder = @"https://";
@@ -151,7 +145,6 @@
                        @"",
                        nil];
     
-    [_cellDataSource retain];
     
     self.tableView.dataSource = _cellDataSource;
     self.tableView.delegate = _cellDataSource;
@@ -199,7 +192,6 @@
                                               cancelButtonTitle:LocalizedString(@"OK", nil)
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
         
         [self unsetPromptAndUndim];
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -221,7 +213,6 @@
 											  otherButtonTitles:nil];
 		
 			[alert show];
-			[alert release];
 		}
         // Things worked out!
         [[VBXConfiguration sharedConfiguration] loadConfigFromDictionary:dictionary 
@@ -251,7 +242,6 @@
                                  otherButtonTitles:nil];
         alert.tag = kAlertTagFailedToLoad;
         [alert show];
-        [alert release];
         return;
     }
     
@@ -262,7 +252,6 @@
                                           otherButtonTitles:nil];
     alert.tag = kAlertTagFailedToLoad;
     [alert show];
-    [alert release];
 }
 
 - (void)didReceiveAuthenticationChallenge:(NSNotification *)notification {
@@ -287,7 +276,6 @@
                                                   otherButtonTitles:nil];
             alert.tag = kAlertTagDenyWithGenericTrustError;
             [alert show];
-            [alert release];
         } else if (SetupTrustActionDenyWithTrustedCertRequiredAlert == action) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Trusted Certificate Required" 
                                                             message:@"Blah"
@@ -296,8 +284,8 @@
                                                   otherButtonTitles:nil];
             alert.tag = kAlertTagDenyWithTrustedCertRequired;
         } else if (SetupTrustActionPromptWithUntrustedCertAlert == action) {
-            _challenge = [challenge retain];
-            _protectionSpace = [protectionSpace retain];
+            _challenge = challenge;
+            _protectionSpace = protectionSpace;
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"Accept Certificate?", @"Set Server: Title for alert shown when server has untrusted certificate.")
                                                             message:LocalizedString(@"The certificate for this OpenVBX installation is invalid.  Tap Accept to connect to this server anyway.  If unsure, contact your OpenVBX service provider.", @"Set Server: Body for alert shown when server has untrusted cert.")
@@ -306,7 +294,6 @@
                                                   otherButtonTitles:LocalizedString(@"Accept", @"Set Server: Button title for Yes option in alert, asking the user if they want to accept the cert."), nil];
             alert.tag = kAlertTagPromptWithUntrustedCert;
             [alert show];
-            [alert release];
             
         } else if (SetupTrustActionAllow == action) {
             [VBXTrustHelper acceptCertificateAndRecordCertificateInfoWithChallenge:challenge serverTrust:protectionSpace.serverTrust];
@@ -341,9 +328,7 @@
             // Accept the cert!
             [VBXTrustHelper acceptCertificateAndRecordCertificateInfoWithChallenge:_challenge serverTrust:_protectionSpace.serverTrust];
             
-            [_challenge release];
             _challenge = nil;
-            [_protectionSpace release];
             _protectionSpace = nil;
         }
     } else if (alertView.tag == kAlertTagFailedToLoad) {

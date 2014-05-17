@@ -22,7 +22,7 @@
 #import "VBXViewController.h"
 
 @interface VBXTextEntryController : UIViewController {
-    id _target;
+    id __weak _target;
     SEL _action;
     NSString *_navTitle;
     NSString *_initialText;
@@ -30,12 +30,12 @@
     UITextView *_textView;
 }
 
-@property (nonatomic, assign) id target;
+@property (nonatomic, weak) id target;
 @property (nonatomic, assign) SEL action;
-@property (nonatomic, retain) NSString *navTitle;
-@property (nonatomic, retain) NSString *initialText;
-@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, retain) IBOutlet UITextView *textView;
+@property (nonatomic, strong) NSString *navTitle;
+@property (nonatomic, strong) NSString *initialText;
+@property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, strong) IBOutlet UITextView *textView;
 
 - (IBAction)save;
 - (IBAction)cancel;

@@ -29,12 +29,12 @@
 @interface VBXFolderListAccessor : NSObject {
     VBXFolderList *_model;
     VBXResourceLoader *_loader;
-    id<VBXFolderListAccessorDelegate> _delegate;
+    id<VBXFolderListAccessorDelegate> __weak _delegate;
 }
 
-@property (nonatomic, readonly, retain) VBXFolderList *model;
-@property (nonatomic, retain) VBXResourceLoader *loader;
-@property (nonatomic, assign) id<VBXFolderListAccessorDelegate> delegate;
+@property (nonatomic, readonly, strong) VBXFolderList *model;
+@property (nonatomic, strong) VBXResourceLoader *loader;
+@property (nonatomic, weak) id<VBXFolderListAccessorDelegate> delegate;
 
 - (void)loadUsingCache:(BOOL)usingCache;
 

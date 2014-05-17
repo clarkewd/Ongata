@@ -24,18 +24,18 @@
 @implementation VBXResult
 
 + (VBXResult *)resultWithObject:(id)object {
-    return [[[VBXResult alloc] initWithSuccess:YES object:object error:nil] autorelease];
+    return [[VBXResult alloc] initWithSuccess:YES object:object error:nil];
 }
 
 + (VBXResult *)resultWithError:(NSError *)error {
-    return [[[VBXResult alloc] initWithSuccess:NO object:nil error:error] autorelease];
+    return [[VBXResult alloc] initWithSuccess:NO object:nil error:error];
 }
 
 - (id)initWithSuccess:(BOOL)s object:(id)o error:(NSError *)e {
     if (self = [super init]) {
         _success = s;
-        _object = [o retain];
-        _error = [e retain];
+        _object = o;
+        _error = e;
     }
     return self;
 }

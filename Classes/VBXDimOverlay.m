@@ -24,7 +24,7 @@
 @implementation VBXDimOverlay
 
 + (VBXDimOverlay *)overlay {
-    return [[[VBXDimOverlay alloc] initWithFrame:CGRectZero] autorelease];
+    return [[VBXDimOverlay alloc] initWithFrame:CGRectZero];
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -64,9 +64,6 @@
     [super removeFromSuperview];
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 @end

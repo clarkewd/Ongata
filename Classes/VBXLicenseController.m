@@ -32,9 +32,9 @@
     if (self = [super init]) {
         NSError *error = nil;
 		NSString *path =[[NSBundle mainBundle] pathForResource:@"license" ofType:@"html"];
-		self.summary = [[[NSString alloc] initWithContentsOfFile:path
+		self.summary = [[NSString alloc] initWithContentsOfFile:path
                                                         encoding:NSUTF8StringEncoding
-                                                           error:&error] autorelease];
+                                                           error:&error];
 
 		// The license file is part of the app bundle, so it should always exist.
         if (!self.summary) {
@@ -64,8 +64,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
-    self.summary = nil;
-    [super dealloc];
 }
 
 @end

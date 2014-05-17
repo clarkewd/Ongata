@@ -30,7 +30,7 @@
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
         _contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.text = text;
         _label.font = [UIFont systemFontOfSize:15.0];
         _label.numberOfLines = 0;
@@ -50,9 +50,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)setContentInsets:(UIEdgeInsets)insets {
     _contentInsets = insets;

@@ -24,20 +24,16 @@
 @implementation VBXTicketStatus
 
 + (VBXTicketStatus *)ticketStatusWithValue:(NSString *)value {
-    return [[[VBXTicketStatus alloc] initWithTicketStatus:value] autorelease];
+    return [[VBXTicketStatus alloc] initWithTicketStatus:value];
 }
 
 - (id)initWithTicketStatus:(NSString *)value {
     if (self = [super init]) {
-        _value = [value retain];
+        _value = value;
     }
     return self;
 }
 
-- (void)dealloc {
-    [_value release];
-    [super dealloc];
-}
 
 - (NSString *)key {
     return _value;

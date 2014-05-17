@@ -36,7 +36,7 @@ extern NSString *VBXURLLoaderDidReceiveAuthenticationChallenge;
     NSInteger _contentLength;
     VBXPerfTimer *_perfTimer;
     BOOL _answersAuthChallenges;
-    id<VBXURLLoaderDelegate> _delegate;
+    id<VBXURLLoaderDelegate> __weak _delegate;
 }
 
 + (VBXURLLoader *)loadRequest:(NSURLRequest *)request andInform:(id<VBXURLLoaderDelegate>)delegate answerAuthChallenges:(BOOL)answerAuthChallenges;
@@ -50,7 +50,7 @@ extern NSString *VBXURLLoaderDidReceiveAuthenticationChallenge;
 @property (nonatomic, readonly) NSInteger bytesReceived;
 @property (nonatomic, readonly) float downloadProgress;
 @property (nonatomic, assign) BOOL answersAuthChallenges;
-@property (nonatomic, assign) id<VBXURLLoaderDelegate> delegate;
+@property (nonatomic, weak) id<VBXURLLoaderDelegate> delegate;
 @property (nonatomic, readonly) BOOL hadTrustedCertificate;
 
 - (void)load;

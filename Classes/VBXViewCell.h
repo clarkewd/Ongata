@@ -28,7 +28,7 @@
     UIEdgeInsets _contentInsets;
 }
 
-@property (nonatomic, retain) UIView *view;
+@property (nonatomic, strong) UIView *view;
 @property (nonatomic, assign) BOOL showBackground;
 @property (nonatomic, assign) UIEdgeInsets contentInsets;
 

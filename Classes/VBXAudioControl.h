@@ -27,7 +27,7 @@
     UIButton *_controlButton;
     UIActivityIndicatorView *_activityIndicator;
     
-    id<VBXAudioControlDelegate> _delegate;
+    id<VBXAudioControlDelegate> __weak _delegate;
     id _context;
     
     BOOL _isPlayButton;
@@ -35,8 +35,8 @@
     BOOL _isStopButton;
 }
 
-@property (nonatomic, assign) id<VBXAudioControlDelegate> delegate;
-@property (nonatomic, retain) id context;
+@property (nonatomic, weak) id<VBXAudioControlDelegate> delegate;
+@property (nonatomic, strong) id context;
 
 - (void)showPlayButton;
 - (void)showPauseButton;

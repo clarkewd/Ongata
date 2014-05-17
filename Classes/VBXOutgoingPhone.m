@@ -37,11 +37,5 @@
 @synthesize name = _name;
 @synthesize phone = _phone;
 
-- (void)dealloc {
-    self.key = nil;
-    self.name = nil;
-    self.phone = nil;
-    [super dealloc];
-}
 
 @end

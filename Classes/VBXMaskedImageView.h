@@ -27,9 +27,9 @@
     UIColor *_endColor;    
 }
 
-@property (nonatomic, retain) UIImage *image;
-@property (nonatomic, retain) UIColor *startColor;
-@property (nonatomic, retain) UIColor *endColor;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIColor *startColor;
+@property (nonatomic, strong) UIColor *endColor;
 
 - (id)init;
 - (id)initWithImage:(UIImage *)anImage;

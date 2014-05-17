@@ -26,10 +26,10 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)] autorelease];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
         [self addSubview:_imageView];
          
-        _titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)] autorelease];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
         _titleLabel.font = [UIFont boldSystemFontOfSize:19.0];
         _titleLabel.textColor = ThemedColor(@"tableStatusTitleTextColor", ThemedColor(@"secondaryTextColor", [UIColor darkGrayColor]));
         _titleLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
@@ -40,7 +40,7 @@
 
         [self addSubview:_titleLabel];
         
-        _descriptionLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 40)] autorelease];
+        _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
         _descriptionLabel.font = [UIFont systemFontOfSize:14.0];
         _descriptionLabel.textColor = ThemedColor(@"tableStatusDescriptionTextColor", ThemedColor(@"tertiaryTextColor", [UIColor grayColor]));
         _descriptionLabel.lineBreakMode = UILineBreakModeMiddleTruncation;

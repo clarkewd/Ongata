@@ -61,8 +61,8 @@
 @implementation UIAlertView (Extensions)
 
 + (void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message {
-    UIAlertView *view = [[[UIAlertView alloc] initWithTitle:title message:message
-        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+    UIAlertView *view = [[UIAlertView alloc] initWithTitle:title message:message
+        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [view show];
 }
 
@@ -82,11 +82,11 @@
 @implementation UIBarButtonItem (Extensions)
 
 + (UIBarButtonItem *)itemWithCustomView:(UIView *)view {
-    return [[[UIBarButtonItem alloc] initWithCustomView:view] autorelease];
+    return [[UIBarButtonItem alloc] initWithCustomView:view];
 }
 
 + (UIBarButtonItem *)flexibleSpace {
-    return [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 
 @end

@@ -42,8 +42,8 @@
 }
 
 @property (nonatomic, assign) NSInteger number;
-@property (nonatomic, retain) UIColor *color;
-@property (nonatomic, retain) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *selectedColor;
 
 @end
 
@@ -66,7 +66,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
-    [super dealloc];
 }
 
 - (void)applyConfig {
@@ -96,8 +95,7 @@
 
 - (void)setColor:(UIColor *)color {
     if (_color != color) {
-        [_color release];
-        _color = [color retain];
+        _color = color;
         
         [self setNeedsDisplay];
     }
@@ -120,11 +118,11 @@
 @interface BodyCell : UITableViewCell <VBXVariableHeightCell, UIScrollViewDelegate, VBXConfigurable> {
     UITextView *_bodyTextView;
     UIImageView *_shadowView;
-    RemainingCharsView *_remainingCharsView;
+    RemainingCharsView *__weak _remainingCharsView;
 }
 
 @property (nonatomic, readonly) UITextView *bodyTextView;
-@property (nonatomic, readonly) RemainingCharsView *remainingCharsView;
+@property (weak, nonatomic, readonly) RemainingCharsView *remainingCharsView;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 
@@ -145,12 +143,12 @@
         _bodyTextView.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:_bodyTextView];
         
-        _shadowView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow.png"]] autorelease];
+        _shadowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow.png"]];
         [self.contentView addSubview:_shadowView];
         _shadowView.left = 0;
         _shadowView.top = 0;
         
-        _remainingCharsView = [[[RemainingCharsView alloc] initWithFrame:CGRectZero] autorelease];
+        _remainingCharsView = [[RemainingCharsView alloc] initWithFrame:CGRectZero];
         _remainingCharsView.number = 160;
         [self.contentView addSubview:_remainingCharsView];        
         [_remainingCharsView sizeToFit];
@@ -167,7 +165,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];    
-    [super dealloc];
 }
 
 - (void)layoutSubviews {
@@ -180,7 +177,7 @@
 }
 
 - (void)applyConfig {
-    UIView *bgView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectZero];
     bgView.backgroundColor = ThemedColor(@"sendTextBodyBackgroundColor", [UIColor whiteColor]);
     [self setBackgroundView:bgView];
 
@@ -192,12 +189,12 @@
 
 
 @interface ToCell : UITableViewCell <VBXVariableHeightCell, VBXConfigurable> {
-    UILabel *_label;
-    UITextField *_textField;
+    UILabel *__weak _label;
+    UITextField *__weak _textField;
 }
 
-@property (nonatomic, readonly) UILabel *label;
-@property (nonatomic, readonly) UITextField *textField;
+@property (weak, nonatomic, readonly) UILabel *label;
+@property (weak, nonatomic, readonly) UITextField *textField;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 
@@ -210,14 +207,14 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifer]) {
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.backgroundColor = [UIColor clearColor];
         _label.text = LocalizedString(@"To:", @"Send Text: Label for the To: field.");
         _label.font = [UIFont systemFontOfSize:15.0];        
         _label.numberOfLines = 1;
         _label.lineBreakMode = UILineBreakModeTailTruncation;
         
-        _textField = [[[UITextField alloc] initWithFrame:CGRectZero] autorelease];
+        _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.font = [UIFont systemFontOfSize:15.0];
         _textField.textAlignment = UITextAlignmentLeft;
         _textField.borderStyle = UITextBorderStyleNone;
@@ -239,7 +236,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];    
-    [super dealloc];
 }
 
 - (void)layoutSubviews {
@@ -272,7 +268,7 @@
 }
 
 - (void)applyConfig {
-    UIView *bgView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectZero];
     bgView.backgroundColor = ThemedColor(@"sendTextToBackgroundColor", [UIColor whiteColor]);
     [self setBackgroundView:bgView];
 
@@ -283,12 +279,12 @@
 @end
 
 @interface CallerIdCell : UITableViewCell <VBXVariableHeightCell, VBXConfigurable> {
-    UILabel *_label;
-    UILabel *_valueField;
+    UILabel *__weak _label;
+    UILabel *__weak _valueField;
 }
 
-@property (nonatomic, readonly) UILabel *label;
-@property (nonatomic, readonly) UILabel *valueField;
+@property (weak, nonatomic, readonly) UILabel *label;
+@property (weak, nonatomic, readonly) UILabel *valueField;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 
@@ -301,14 +297,14 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifer]) {
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.backgroundColor = [UIColor clearColor];
         _label.text = LocalizedString(@"From:", @"Send Text: Label for the From: field.");
         _label.font = [UIFont systemFontOfSize:15.0];
         _label.numberOfLines = 1;
         _label.lineBreakMode = UILineBreakModeTailTruncation;
         
-        _valueField = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _valueField = [[UILabel alloc] initWithFrame:CGRectZero];
         _valueField.font = [UIFont systemFontOfSize:15.0];
         _valueField.textAlignment = UITextAlignmentLeft;
         _valueField.text = @"";
@@ -328,7 +324,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];    
-    [super dealloc];
 }
 
 - (void)layoutSubviews {
@@ -351,7 +346,7 @@
 }
 
 - (void)applyConfig {
-    UIView *bgView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectZero];
     bgView.backgroundColor = ThemedColor(@"sendTextFromBackgroundColor", [UIColor whiteColor]);
     [self setBackgroundView:bgView];
 
@@ -389,7 +384,6 @@
                                               cancelButtonTitle:LocalizedString(@"OK", nil) 
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     } else if (fromNumber.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"Empty From: Number", @"Send Text: Title for alert when From: number is empty")
                                                         message:LocalizedString(@"You must pick a number to SMS from.", @"Send Text: Body for alert when from: number is empty.")
@@ -397,7 +391,6 @@
                                               cancelButtonTitle:LocalizedString(@"OK", nil) 
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     } else if (body.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"Empty Message", @"Send Text: Title for alert when message is empty.")
                                                         message:LocalizedString(@"You must enter at least something to send.", @"Send Text: Body for alert when message is empty.")
@@ -405,7 +398,6 @@
                                               cancelButtonTitle:LocalizedString(@"OK", nil) 
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];        
     } else {
         [self setPromptAndDimView:LocalizedString(@"Sending message...", @"Send Text: Navigation bar prompt shown when message is sending.")];
         self.navigationItem.leftBarButtonItem.enabled = NO;
@@ -465,32 +457,27 @@
         // This doesn't get us what we want on this screen.
         self.autoRefocusOnSelectedCell = NO;        
         
-        _initialPhoneNumber = [phone retain];
+        _initialPhoneNumber = phone;
         
         // We don't want the back button for our screen to take up too much space
-        self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Back", nil)
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Back", nil)
                                                                                   style:UIBarButtonItemStyleBordered 
                                                                                  target:nil 
-                                                                                 action:nil] autorelease];
+                                                                                 action:nil];
     }
     return self;
 }
 
-- (void)dealloc {
-    [_initialPhoneNumber release];
-    [_dataSource release];
-    [super dealloc];
-}
 
 - (void)loadView {
     [super loadView];
     
-    _callerIdCell = [[[CallerIdCell alloc] initWithReuseIdentifier:nil] autorelease];     
-    _toCell = [[[ToCell alloc] initWithReuseIdentifier:nil] autorelease];
+    _callerIdCell = [[CallerIdCell alloc] initWithReuseIdentifier:nil];     
+    _toCell = [[ToCell alloc] initWithReuseIdentifier:nil];
     _toCell.textField.delegate = self;
     _toCell.textField.text = _initialPhoneNumber;
     
-    _bodyCell = [[[BodyCell alloc] initWithReuseIdentifier:nil] autorelease];
+    _bodyCell = [[BodyCell alloc] initWithReuseIdentifier:nil];
     _bodyCell.bodyTextView.delegate = self;
     
     _dataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
@@ -500,12 +487,11 @@
                    _bodyCell,
                    @"", // empty footer
                    nil];
-    [_dataSource retain];
     _dataSource.proxyToDelegate = self;
     
     self.tableView.delegate = _dataSource;
     self.tableView.dataSource = _dataSource;
-    self.tableView.tableFooterView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.scrollEnabled = NO;
 }
 
@@ -540,7 +526,6 @@
         picker.peoplePickerDelegate = self;
         picker.displayedProperties = [NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]];
         [self.navigationController presentModalViewController:picker animated:YES];
-        [picker release];        
     }
 }
 
@@ -608,7 +593,7 @@
                               identifier:(ABMultiValueIdentifier)identifier {
     
     ABMultiValueRef phoneProperty = ABRecordCopyValue(person, property);
-	NSString *phone = [(NSString *)ABMultiValueCopyValueAtIndex(phoneProperty, identifier) autorelease];
+	NSString *phone = (NSString *)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneProperty, identifier));
     CFRelease(phoneProperty);
     
     _toCell.textField.text = VBXStripNonDigitsFromString(phone);

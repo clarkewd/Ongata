@@ -66,7 +66,6 @@
         [urlState setObject:controllerStates forKey:@"controllerStates"];
     }
 
-    [appURL release];
 	return urlState;
 }
 
@@ -84,7 +83,6 @@
                                           cancelButtonTitle:LocalizedString(@"No", nil)
                                               otherButtonTitles:LocalizedString(@"Yes", nil), nil];
         [alert show];
-        [alert release];
         return controllerStates;
     }
 

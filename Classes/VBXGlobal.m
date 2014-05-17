@@ -55,7 +55,6 @@ NSDate *VBXParseISODateString(NSString *input) {
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
     NSDate *date = [formatter dateFromString:input];
-    [formatter release];
     
     return date;
 }
@@ -80,7 +79,6 @@ NSString *VBXDateToRelativeTime(NSDate *date) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         result = [formatter stringFromDate:date];
-        [formatter release];
     } else if (dateSeconds > midnightYesterdaySeconds) {
         result = @"Yesterday";
     } else if (dateSeconds > midnightSixDaysAgoSeconds) {
@@ -88,13 +86,11 @@ NSString *VBXDateToRelativeTime(NSDate *date) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"EEEE"];
         result = [formatter stringFromDate:date];
-        [formatter release];
     } else {        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterShortStyle];
         [formatter setTimeStyle:NSDateFormatterNoStyle];
         result = [formatter stringFromDate:date];
-        [formatter release];
     }
     
     return result;
@@ -115,13 +111,11 @@ NSString *VBXDateToDateAndTimeString(NSDate *date) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         result = [formatter stringFromDate:date];
-        [formatter release];
     } else {        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterShortStyle];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         result = [formatter stringFromDate:date];
-        [formatter release];
     }
     
     return result;
@@ -145,7 +139,6 @@ NSArray *VBXStringPartsForUpdatedAtDate(NSDate *date) {
     [formatter setDateFormat:@"a"];    
     amPmStr = [[[formatter stringFromDate:date] uppercaseString] stringByTrimmingWhitespace];
     
-    [formatter release];
     
     return [NSArray arrayWithObjects:
             [VBXStringPart partWithText:@"Updated" font:[UIFont boldSystemFontOfSize:13]],
@@ -693,9 +686,8 @@ UIImage *VBXAdjustImageWithPhotoshopHSLWithCache(NSUserDefaults *userDefaults, N
     
     if (image == nil) {
         image = VBXAdjustImageWithPhotoshopHSL([UIImage imageNamed:imageName], hsl);
-        NSData *imagePNGData = [UIImagePNGRepresentation(image) retain];                
+        NSData *imagePNGData = UIImagePNGRepresentation(image);                
         [imagePNGData writeToFile:PathForDocument(cachedFileName) atomically:YES];
-        [imagePNGData release];
         
         [userDefaults setObject:HSLString forKey:key];
         [userDefaults synchronize];        

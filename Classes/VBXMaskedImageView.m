@@ -93,14 +93,10 @@
     }
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)setImage:(UIImage *)image {
     if (_image != image) {
-        [_image release];
-        _image = [image retain];
+        _image = image;
         
         [self setNeedsDisplay];
     }

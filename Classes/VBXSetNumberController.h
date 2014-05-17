@@ -32,13 +32,13 @@
     
     VBXTextFieldCell *_numberField;
     
-    id _finishedTarget;
+    id __weak _finishedTarget;
     SEL _finishedAction;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, assign) id finishedTarget;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, weak) id finishedTarget;
 @property (nonatomic, assign) SEL finishedAction;
-@property (nonatomic, assign) NSString *finishedButtonText;
+@property (nonatomic, weak) NSString *finishedButtonText;
 
 @end

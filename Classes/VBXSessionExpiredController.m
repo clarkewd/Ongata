@@ -68,10 +68,10 @@
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Login", @"Login: Button title in upper right")
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Login", @"Login: Button title in upper right")
                                                                                    style:UIBarButtonItemStyleDone
                                                                                   target:self
-                                                                                  action:@selector(notifyDelegate)] autorelease];
+                                                                                  action:@selector(notifyDelegate)];
         self.navigationItem.rightBarButtonItem.enabled = NO;
         
         self.title = LocalizedString(@"Login", @"Session Expired: Title for screen");
@@ -81,19 +81,11 @@
     return self;
 }
 
-- (void)dealloc {
-    [_cellDataSource release];
-    
-    [_emailField release];
-    [_passwordField release];
-    
-    [super dealloc];
-}
 
 - (void)loadView {
     [super loadView];
     
-    _emailField = [[[VBXTextFieldCell alloc] initWithReuseIdentifier:nil] autorelease];
+    _emailField = [[VBXTextFieldCell alloc] initWithReuseIdentifier:nil];
     _emailField.label.text = LocalizedString(@"E-Mail", @"Login: Label for email text field");
     _emailField.textField.placeholder = LocalizedString(@"yourname@acme.com", @"Login: placeholder text for email text field.");
     _emailField.textField.keyboardType = UIKeyboardTypeEmailAddress;
@@ -104,7 +96,7 @@
     _emailField.textField.placeholder = [[NSUserDefaults standardUserDefaults] stringForKey:VBXUserDefaultsEmailAddress];
     _emailField.textField.enabled = NO;
     
-    _passwordField = [[[VBXTextFieldCell alloc] initWithReuseIdentifier:nil] autorelease];
+    _passwordField = [[VBXTextFieldCell alloc] initWithReuseIdentifier:nil];
     _passwordField.label.text = LocalizedString(@"Password", @"Login: Label for password field.");
     _passwordField.textField.placeholder = @"";
     _passwordField.textField.keyboardType = UIKeyboardTypeEmailAddress;
@@ -116,7 +108,7 @@
     _passwordField.textField.secureTextEntry = YES;
     _passwordField.textField.text = @"";
     
-    _logoutButton = [[[VBXButtonCell alloc] initWithText:LocalizedString(@"Use a different email address", @"Session Expired: Label for login w/ a different email button.") reuseIdentifier:nil] autorelease];
+    _logoutButton = [[VBXButtonCell alloc] initWithText:LocalizedString(@"Use a different email address", @"Session Expired: Label for login w/ a different email button.") reuseIdentifier:nil];
     
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
                        
@@ -130,7 +122,6 @@
                        @"", // no fotter
                        
                        nil];
-    [_cellDataSource retain];
     
     self.tableView.dataSource = _cellDataSource;
     self.tableView.delegate = _cellDataSource;

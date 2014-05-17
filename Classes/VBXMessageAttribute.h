@@ -41,20 +41,20 @@
 + (VBXMessageAttribute *)assignedUserAttributeForMessage:(VBXMessageDetail *)detail name:(NSString *)name;
 + (VBXMessageAttribute *)ticketStatusAttributeForMessage:(VBXMessageDetail *)detail name:(NSString *)name;
 
-@property (nonatomic, retain) VBXMessageDetail *messageDetail;
-@property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSArray *options;
+@property (nonatomic, strong) VBXMessageDetail *messageDetail;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSArray *options;
 
 @property (nonatomic, assign) SEL valueGetter;
 @property (nonatomic, assign) SEL valueSetter;
-@property (nonatomic, retain) id pendingValue;
+@property (nonatomic, strong) id pendingValue;
 
 @property (nonatomic, assign) SEL titleSelector;
 @property (nonatomic, assign) SEL detailSelector;
 @property (nonatomic, assign) SEL keySelector;
 
-@property (nonatomic, retain) id value;
+@property (nonatomic, strong) id value;
 @property (nonatomic, readonly) NSInteger selectedIndex;
 @property (nonatomic, readonly) BOOL hasDetail;
 

@@ -35,19 +35,19 @@
     VBXResourceLoader *_annotationsLoader;
     VBXResourceLoader *_notePoster;
     VBXResourceLoader *_archivePoster;    
-    id<VBXMessageDetailAccessorDelegate> _delegate;
+    id<VBXMessageDetailAccessorDelegate> __weak _delegate;
 }
 
 - (id)initWithKey:(NSString *)key;
 
 @property (nonatomic, assign) NSInteger pageSize;
-@property (nonatomic, retain, readonly) VBXMessageDetail *model;
+@property (nonatomic, strong, readonly) VBXMessageDetail *model;
 @property (nonatomic, assign, readonly) BOOL modelIsFromCache;
-@property (nonatomic, retain) VBXResourceLoader *detailLoader;
-@property (nonatomic, retain) VBXResourceLoader *annotationsLoader;
-@property (nonatomic, retain) VBXResourceLoader *notePoster;
-@property (nonatomic, retain) VBXResourceLoader *archivePoster;
-@property (nonatomic, assign) id<VBXMessageDetailAccessorDelegate> delegate;
+@property (nonatomic, strong) VBXResourceLoader *detailLoader;
+@property (nonatomic, strong) VBXResourceLoader *annotationsLoader;
+@property (nonatomic, strong) VBXResourceLoader *notePoster;
+@property (nonatomic, strong) VBXResourceLoader *archivePoster;
+@property (nonatomic, weak) id<VBXMessageDetailAccessorDelegate> delegate;
 
 - (void)loadUsingCache:(BOOL)usingCache;
 - (void)loadMoreAnnotations;

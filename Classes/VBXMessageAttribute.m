@@ -25,7 +25,7 @@
 @implementation VBXMessageAttribute
 
 + (VBXMessageAttribute *)assignedUserAttributeForMessage:(VBXMessageDetail *)detail name:(NSString *)name {
-    VBXMessageAttribute *attribute = [[VBXMessageAttribute new] autorelease];
+    VBXMessageAttribute *attribute = [VBXMessageAttribute new];
     attribute.messageDetail = detail;
     attribute.key = @"assigned";
     attribute.name = name;
@@ -40,7 +40,7 @@
 }
 
 + (VBXMessageAttribute *)ticketStatusAttributeForMessage:(VBXMessageDetail *)detail name:(NSString *)name {
-    VBXMessageAttribute *attribute = [[VBXMessageAttribute new] autorelease];
+    VBXMessageAttribute *attribute = [VBXMessageAttribute new];
     attribute.messageDetail = detail;
     attribute.key = @"ticket_status";
     attribute.name = name;
@@ -69,14 +69,6 @@
 @synthesize detailSelector = _detailSelector;
 @synthesize keySelector = _keySelector;
 
-- (void)dealloc {
-    self.messageDetail = nil;
-    self.key = nil;
-    self.name = nil;
-    self.options = nil;
-    self.pendingValue = nil;
-    [super dealloc];
-}
 
 - (id)value {
     return [_messageDetail performSelector:_valueGetter];

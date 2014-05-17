@@ -30,7 +30,7 @@
 
 @interface VBXDialerAccessor ()
 
-@property (nonatomic, retain) VBXResult *callerIDsResult;
+@property (nonatomic, strong) VBXResult *callerIDsResult;
 
 @end
 
@@ -48,11 +48,6 @@
     [_callerIDsLoader cancelAllRequests];
     [_callPoster cancelAllRequests];
     
-    self.userDefaults = nil;
-    self.callerIDsResult = nil;
-    self.callerIDsLoader = nil;
-    self.callPoster = nil;
-    [super dealloc];
 }
 
 - (NSString *)callbackNumber {

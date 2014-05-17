@@ -45,7 +45,7 @@
 + (NSArray *)arrayWithDictionaries:(NSArray *)dictionaries class:(Class)class {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[dictionaries count]];
     for (NSDictionary *dictionary in dictionaries) {
-        NSObject *object = [[[class alloc] initWithDictionary:dictionary] autorelease];
+        NSObject *object = [[class alloc] initWithDictionary:dictionary];
         [array addObject:object];
     }
     return array;
@@ -108,7 +108,7 @@
 - (id)modelForKey:(id)key class:(Class)class {
     NSDictionary *dictionary = [self objectForKey:key ofClass:[NSDictionary class]];
     if (!dictionary) return nil;
-    return [[[class alloc] initWithDictionary:dictionary] autorelease];
+    return [[class alloc] initWithDictionary:dictionary];
 }
 
 - (NSArray *)arrayOfModelsForKey:(id)key class:(Class)class {
@@ -120,7 +120,7 @@
 - (VBXSublist *)sublistForKey:(id)key class:(Class)class {
     NSDictionary *dictionary = [self objectForKey:key ofClass:[NSDictionary class]];
     if (!dictionary) return nil;
-    return [[[VBXSublist alloc] initWithDictionary:dictionary class:class] autorelease];
+    return [[VBXSublist alloc] initWithDictionary:dictionary class:class];
 }
 
 @end

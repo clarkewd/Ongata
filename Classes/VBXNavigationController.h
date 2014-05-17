@@ -30,16 +30,16 @@
     BOOL _dialerIsShown;
     BOOL _sendTextIsShown;
     
-    VBXDialerController *_dialerController;
-    VBXSendTextController *_sendTextController;
+    VBXDialerController *__weak _dialerController;
+    VBXSendTextController *__weak _sendTextController;
 }
 
-@property (nonatomic, retain) VBXObjectBuilder *builder;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
 
 @property (nonatomic, readonly) BOOL dialerIsShown;
 @property (nonatomic, readonly) BOOL sendTextIsShown;
-@property (nonatomic, readonly) VBXDialerController *dialerController;
-@property (nonatomic, readonly) VBXSendTextController *sendTextController;
+@property (weak, nonatomic, readonly) VBXDialerController *dialerController;
+@property (weak, nonatomic, readonly) VBXSendTextController *sendTextController;
 
 - (void)showDialOrTextActionSheet;
 

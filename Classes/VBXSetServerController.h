@@ -40,9 +40,9 @@
     NSURLProtectionSpace *_protectionSpace;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) NSHTTPCookieStorage *cookieStorage;
-@property (nonatomic, retain) NSURLCredentialStorage *credentialStorage;
-@property (nonatomic, retain) NSArray *allCaches;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) NSHTTPCookieStorage *cookieStorage;
+@property (nonatomic, strong) NSURLCredentialStorage *credentialStorage;
+@property (nonatomic, strong) NSArray *allCaches;
 
 @end

@@ -193,7 +193,7 @@
 @implementation NSURL (Extensions) 
 
 - (NSDictionary *)queryComponents {
-    NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:6] autorelease];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
     NSArray *pairs = [[self query] componentsSeparatedByString:@"&"];
     
     for (NSString *pair in pairs) {

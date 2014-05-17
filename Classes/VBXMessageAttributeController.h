@@ -30,7 +30,7 @@
     VBXMessageAttributeAccessor *_accessor;
 }
 
-@property (nonatomic, retain) VBXMessageAttribute *attribute;
-@property (nonatomic, retain) VBXMessageAttributeAccessor *accessor;
+@property (nonatomic, strong) VBXMessageAttribute *attribute;
+@property (nonatomic, strong) VBXMessageAttributeAccessor *accessor;
 
 @end

@@ -32,7 +32,7 @@
 
 - (id)initWithAttribute:(VBXMessageAttribute *)attr {
     if (self = [super init]) {
-        _attribute = [attr retain];
+        _attribute = attr;
     }
     return self;
 }
@@ -40,11 +40,6 @@
 @synthesize valuePoster = _valuePoster;
 @synthesize delegate = _delegate;
 
-- (void)dealloc {
-    [_attribute release];
-    self.valuePoster = nil;
-    [super dealloc];
-}
 
 - (void)setValue:(id)value {
     _attribute.pendingValue = value;

@@ -72,23 +72,6 @@
 
 @dynamic isSms;
 
-- (void)dealloc {
-    self.key = nil;
-    self.caller = nil;
-    self.called = nil;
-    self.folder = nil;
-    self.assignedUserKey = nil;
-    self.status = nil;
-    self.ticketStatusKey = nil;
-    self.recordingURL = nil;
-    self.recordingLength = nil;
-    self.summary = nil;
-    self.receivedTime = nil;
-    self.lastUpdated = nil;
-    self.activeUsers = nil;
-    self.annotations = nil;
-    [super dealloc];
-}
 
 - (VBXUser *)activeUserWithKey:(NSString *)userKey {
     for (VBXUser *user in _activeUsers) {
@@ -123,7 +106,6 @@
     
     result = [formatter stringFromDate:date];
     
-    [formatter release];
     
     return result;
 }

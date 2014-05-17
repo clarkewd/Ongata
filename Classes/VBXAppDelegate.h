@@ -40,9 +40,9 @@
     int _numberOfFailedLoginAttemptsWithCurrentCredentials;
 }
 
-@property (nonatomic, retain) UIWindow *window;
-@property (nonatomic, retain) VBXNavigationController *mainNavigationController;
-@property (nonatomic, retain) UINavigationController *setupNavigationController;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) VBXNavigationController *mainNavigationController;
+@property (nonatomic, strong) UINavigationController *setupNavigationController;
 
 - (void)showMainFlow;
 - (void)showSetupFlow;

@@ -37,14 +37,14 @@
     VBXTextFieldCell *_passwordField;
     VBXButtonCell *_logoutButton;
 
-    id<VBXSessionExpiredControllerDelegate> _delegate;
+    id<VBXSessionExpiredControllerDelegate> __weak _delegate;
     NSDictionary *_userInfo;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXObjectBuilder *builder;
-@property (nonatomic, assign) id<VBXSessionExpiredControllerDelegate> delegate;
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
+@property (nonatomic, weak) id<VBXSessionExpiredControllerDelegate> delegate;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 @end
 

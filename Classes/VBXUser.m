@@ -39,13 +39,6 @@
 @synthesize lastName = _lastName;
 @synthesize email = _email;
 
-- (void)dealloc {
-    self.key = nil;
-    self.firstName = nil;
-    self.lastName = nil;
-    self.email = nil;
-    [super dealloc];
-}
 
 - (NSString *)fullName {
     NSMutableString *name = [NSMutableString string];

@@ -27,9 +27,9 @@
     NSMutableArray *_sections;
 }
 
-@property (nonatomic, retain) NSMutableArray *headers;
-@property (nonatomic, retain) NSMutableArray *footers;
-@property (nonatomic, retain) NSMutableArray *sections;
+@property (nonatomic, strong) NSMutableArray *headers;
+@property (nonatomic, strong) NSMutableArray *footers;
+@property (nonatomic, strong) NSMutableArray *sections;
 
 - (id)initWithHeaders:(NSMutableArray *)headers footers:(NSMutableArray *)footers sections:(NSMutableArray *)sections;
 

@@ -61,7 +61,7 @@
     NSString *footerText = [tableView.dataSource tableView:tableView titleForFooterInSection:section];
  
     if (footerText != nil && footerText.length > 0) {
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.text = footerText;
         label.font = [UIFont systemFontOfSize:15.0];
         label.numberOfLines = 0;
@@ -74,7 +74,7 @@
         label.backgroundColor = [UIColor clearColor];
         [label sizeToFit];
         
-        UIView *wrapper = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, label.height + 5)] autorelease];
+        UIView *wrapper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, label.height + 5)];
         wrapper.autoresizesSubviews = NO;
         [wrapper addSubview:label];
         label.left = round((tableView.width / 2) - (label.width / 2));
@@ -95,7 +95,7 @@
     NSString *headerText = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
     
     if (headerText != nil && headerText.length > 0) {
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.text = headerText;
         label.font = [UIFont boldSystemFontOfSize:17.0];
         label.numberOfLines = 1;
@@ -108,7 +108,7 @@
         label.backgroundColor = [UIColor clearColor];
         [label sizeToFit];
         
-        UIView *wrapper = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, label.height + 8)] autorelease];
+        UIView *wrapper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, label.height + 8)];
         wrapper.autoresizesSubviews = NO;
         [wrapper addSubview:label];
         label.left = 19;

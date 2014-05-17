@@ -28,13 +28,13 @@
 @interface VBXMessageAttributeAccessor : NSObject {
     VBXMessageAttribute *_attribute;
     VBXResourceLoader *_valuePoster;
-    id<VBXMessageAttributeAccessorDelegate> _delegate;
+    id<VBXMessageAttributeAccessorDelegate> __weak _delegate;
 }
 
 - (id)initWithAttribute:(VBXMessageAttribute *)attribute;
 
-@property (nonatomic, retain) VBXResourceLoader *valuePoster;
-@property (nonatomic, assign) id<VBXMessageAttributeAccessorDelegate> delegate;
+@property (nonatomic, strong) VBXResourceLoader *valuePoster;
+@property (nonatomic, weak) id<VBXMessageAttributeAccessorDelegate> delegate;
 
 - (void)setValue:(id)value;
 

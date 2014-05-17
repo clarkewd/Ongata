@@ -38,7 +38,7 @@
 }
 
 + (VBXResourceLoader *)loader {
-    return [[VBXResourceLoader new] autorelease];
+    return [VBXResourceLoader new];
 }
 
 - (id)init {
@@ -56,7 +56,7 @@
 @synthesize baseURL = _baseURL;
 
 - (void)setTarget:(id<VBXResourceLoaderTarget>)target {
-    __block id<VBXResourceLoaderTarget> weakTarget = target;
+    __weak id<VBXResourceLoaderTarget> weakTarget = target;
     self.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
         [weakTarget loader:loader didLoadObject:object fromCache:usingCache hadTrustedCertificate:hadTrustedCertificate];
     };
@@ -67,13 +67,6 @@
 
 - (void)dealloc {
     [self cancelAllRequests];
-    [_urlLoaders release];
-    [_successAction release];
-    [_errorAction release];
-    self.cache = nil;
-    self.userDefaults = nil;
-    self.baseURL = nil;
-    [super dealloc];
 }
 
 - (NSString *)keyForRequest:(NSURLRequest *)request {

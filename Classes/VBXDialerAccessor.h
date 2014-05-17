@@ -31,17 +31,17 @@
     VBXResult *_callerIDsResult;
     VBXResourceLoader *_callerIDsLoader;
     VBXResourceLoader *_callPoster;
-    id<VBXDialerAccessorDelegate> _delegate;
+    id<VBXDialerAccessorDelegate> __weak _delegate;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, readonly, retain) VBXResult *callerIDsResult;
-@property (nonatomic, retain) VBXResourceLoader *callerIDsLoader;
-@property (nonatomic, retain) VBXResourceLoader *callPoster;
-@property (nonatomic, assign) id<VBXDialerAccessorDelegate> delegate;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, readonly, strong) VBXResult *callerIDsResult;
+@property (nonatomic, strong) VBXResourceLoader *callerIDsLoader;
+@property (nonatomic, strong) VBXResourceLoader *callPoster;
+@property (nonatomic, weak) id<VBXDialerAccessorDelegate> delegate;
 
 @property (nonatomic, readonly) BOOL hasCallbackNumber;
-@property (nonatomic, readonly) NSArray *callerIDs;
+@property (weak, nonatomic, readonly) NSArray *callerIDs;
 
 - (void)loadCallerIDs;
 - (void)call:(NSString *)phone usingCallerID:(NSString *)callerID;

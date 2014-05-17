@@ -63,9 +63,6 @@
 
 - (void)dealloc {
     _accessor.delegate = nil;
-    self.accessor = nil;
-    self.userDefaults = nil;
-    [super dealloc];
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
@@ -79,7 +76,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VBXOutgoingPhone *phone = [_accessor.callerIDs objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [[[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+    UITableViewCell *cell = [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.textLabel.text = phone.phone;
     
     if ([[_userDefaults objectForKey:VBXUserDefaultsCallerId] isEqualToString:phone.phone]) {

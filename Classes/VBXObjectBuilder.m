@@ -87,7 +87,7 @@
     NSString *systemCacheDirectory = [paths objectAtIndex:0];
 #endif
     NSString *bundleName = [[[self bundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    directory = [[systemCacheDirectory stringByAppendingPathComponent:bundleName] retain];
+    directory = [systemCacheDirectory stringByAppendingPathComponent:bundleName];
     return directory;
 }
 
@@ -150,20 +150,20 @@
 }
 
 - (VBXFolderListAccessor *)folderListAccessor {
-    VBXFolderListAccessor *accessor = [[VBXFolderListAccessor new] autorelease];    
+    VBXFolderListAccessor *accessor = [VBXFolderListAccessor new];    
     accessor.loader = [self resourceLoaderWithCache:[self mainCache]];
     return accessor;
 }
 
 - (VBXMessageListAccessor *)messageListAccessorForFolderKey:(NSString *)key {
-    VBXMessageListAccessor *accessor = [[[VBXMessageListAccessor alloc] initWithKey:key] autorelease];
+    VBXMessageListAccessor *accessor = [[VBXMessageListAccessor alloc] initWithKey:key];
     accessor.loader = [self resourceLoaderWithCache:[self messageListCache]];
     accessor.archivePoster = [self resourceLoader];
     return accessor;
 }
 
 - (VBXMessageDetailAccessor *)messageDetailAccessorForKey:(NSString *)key {
-    VBXMessageDetailAccessor *accessor = [[[VBXMessageDetailAccessor alloc] initWithKey:key] autorelease];
+    VBXMessageDetailAccessor *accessor = [[VBXMessageDetailAccessor alloc] initWithKey:key];
     accessor.detailLoader = [self resourceLoaderWithCache:[self messageDetailCache]];
     accessor.annotationsLoader = [self resourceLoader];
     accessor.notePoster = [self resourceLoader];
@@ -172,7 +172,7 @@
 }
 
 - (VBXMessageAttributeAccessor *)messageAttributeAccessorForAttribute:(VBXMessageAttribute *)attribute {
-    VBXMessageAttributeAccessor *accessor = [[[VBXMessageAttributeAccessor alloc] initWithAttribute:attribute] autorelease];
+    VBXMessageAttributeAccessor *accessor = [[VBXMessageAttributeAccessor alloc] initWithAttribute:attribute];
     accessor.valuePoster = [self resourceLoader];
     return accessor;
 }
@@ -190,14 +190,14 @@
     VBXConfigAccessor *accessor = [VBXConfigAccessor new];
     accessor.loader = [self resourceLoaderWithCache:[self mainCache]];
     accessor.loader.answersAuthChallenges = YES;
-    return [accessor autorelease];
+    return accessor;
 }
 
 - (VBXConfigAccessor *)configAccessorWithBaseURL:(NSString *)URL {
     VBXConfigAccessor *accessor = [VBXConfigAccessor new];
     accessor.loader = [self resourceLoaderWithCache:[self mainCache] baseURL:[NSURL URLWithString:URL]];
     accessor.loader.answersAuthChallenges = YES;
-    return [accessor autorelease];
+    return accessor;
 }
 
 - (void)configureFolderListController:(VBXFolderListController *)controller {
@@ -207,7 +207,7 @@
 }
 
 - (VBXMessageListController *)messageListControllerForFolderKey:(NSString *)key {
-    VBXMessageListController *controller = [[[VBXMessageListController alloc] initWithNibName:@"MessageListController" bundle:nil] autorelease];
+    VBXMessageListController *controller = [[VBXMessageListController alloc] initWithNibName:@"MessageListController" bundle:nil];
     controller.userDefaults = [self userDefaults];
     controller.accessor = [self messageListAccessorForFolderKey:key];
     controller.bundle = [self bundle];
@@ -216,7 +216,7 @@
 }
 
 - (VBXAudioPlaybackController *)audioPlaybackControllerForURL:(NSString *)url {
-    VBXAudioPlaybackController *controller = [[[VBXAudioPlaybackController alloc] init] autorelease]; 
+    VBXAudioPlaybackController *controller = [[VBXAudioPlaybackController alloc] init]; 
     controller.userDefaults = [self userDefaults];
     controller.contentURL = url;
     controller.cache = [self audioCache];
@@ -224,7 +224,7 @@
 }
 
 - (VBXMessageDetailController *)messageDetailControllerForKey:(NSString *)key contentURL:(NSString *)contentURL messageListController:(VBXMessageListController *)messageListController {
-    VBXMessageDetailController *controller = [[[VBXMessageDetailController alloc] initWithNibName:@"MessageDetailController" bundle:nil] autorelease];
+    VBXMessageDetailController *controller = [[VBXMessageDetailController alloc] initWithNibName:@"MessageDetailController" bundle:nil];
     controller.userDefaults = [self userDefaults];
     controller.accessor = [self messageDetailAccessorForKey:key];
     controller.dialerAccessor = [self dialerAccessor];		
@@ -237,14 +237,14 @@
 
 
 - (VBXMessageAttributeController *)messageAttributeControllerForAttribute:(VBXMessageAttribute *)attribute {
-    VBXMessageAttributeController *controller = [[[VBXMessageAttributeController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+    VBXMessageAttributeController *controller = [[VBXMessageAttributeController alloc] initWithStyle:UITableViewStyleGrouped];
     controller.attribute = attribute;
     controller.accessor = [self messageAttributeAccessorForAttribute:attribute];
     return controller;
 }
 
 - (VBXDialerController *)dialerControllerWithPhone:(NSString *)phone {
-    VBXDialerController *controller = [[[VBXDialerController alloc] initWithPhone:phone] autorelease];
+    VBXDialerController *controller = [[VBXDialerController alloc] initWithPhone:phone];
     controller.accessor = [self dialerAccessor];
     controller.userDefaults = [self userDefaults];
     return controller;
@@ -255,13 +255,13 @@
 }
 
 - (UINavigationController *)navControllerWrapping:(UIViewController *)controller {
-    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     navController.navigationBar.tintColor = ThemedColor(@"navigationBarTintColor", RGBHEXCOLOR(0x8094ae));
     return navController;
 }
 
 - (VBXSettingsController *)settingsController {
-    VBXSettingsController *controller = [[[VBXSettingsController alloc] init] autorelease];
+    VBXSettingsController *controller = [[VBXSettingsController alloc] init];
     controller.builder = self;
     controller.userDefaults = [self userDefaults];
     controller.configAccessor = [self configAccessor];
@@ -269,7 +269,7 @@
 }
 
 - (VBXLoginController *)loginController {
-    VBXLoginController *controller = [[[VBXLoginController alloc] init] autorelease];
+    VBXLoginController *controller = [[VBXLoginController alloc] init];
     controller.loader = [self resourceLoader];
     controller.userDefaults = [self userDefaults];
     controller.credentialStorage = [self credentialStorage];    
@@ -277,19 +277,19 @@
 }
 
 - (VBXSessionExpiredController *)sessionExpiredController {
-    VBXSessionExpiredController *controller = [[[VBXSessionExpiredController alloc] init] autorelease];
+    VBXSessionExpiredController *controller = [[VBXSessionExpiredController alloc] init];
     controller.userDefaults = [self userDefaults];
     controller.builder = self;
     return controller;
 }
 
 - (VBXTextEntryController *)textEntryController {
-    VBXTextEntryController *controller = [[[VBXTextEntryController alloc] initWithNibName:@"TextEntryController" bundle:nil] autorelease];
+    VBXTextEntryController *controller = [[VBXTextEntryController alloc] initWithNibName:@"TextEntryController" bundle:nil];
     return controller;
 }
 
 - (VBXSetServerController *)setServerController {
-    VBXSetServerController *controller = [[[VBXSetServerController alloc] init] autorelease];
+    VBXSetServerController *controller = [[VBXSetServerController alloc] init];
     controller.userDefaults = [self userDefaults];
     controller.cookieStorage = [self cookieStorage];
     controller.credentialStorage = [self credentialStorage];
@@ -298,20 +298,20 @@
 }
 
 - (VBXSetNumberController *)setNumberController {
-    VBXSetNumberController *controller = [[[VBXSetNumberController alloc] init] autorelease];
+    VBXSetNumberController *controller = [[VBXSetNumberController alloc] init];
     controller.userDefaults = [self userDefaults];
     return controller;
 }
 
 - (VBXLicenseController *)setLicenseController {
 	/* Read from local license file */
-	VBXLicenseController *controller = [[[VBXLicenseController alloc] init] autorelease];
+	VBXLicenseController *controller = [[VBXLicenseController alloc] init];
 	//controller.userDefaults = [self userDefaults];
 	return controller;
 }
 
 - (VBXCallerIdController *)callerIdController {
-    VBXCallerIdController *controller = [[[VBXCallerIdController alloc] init] autorelease];
+    VBXCallerIdController *controller = [[VBXCallerIdController alloc] init];
     controller.userDefaults = [self userDefaults];
     controller.accessor = [self dialerAccessor];    
     return controller;
@@ -322,14 +322,14 @@
 }
 
 - (VBXSendTextController *)sendTextControllerWithPhone:(NSString *)phone {
-    VBXSendTextController *controller = [[[VBXSendTextController alloc] initWithPhone:phone] autorelease];
+    VBXSendTextController *controller = [[VBXSendTextController alloc] initWithPhone:phone];
     controller.userDefaults = [self userDefaults];
     controller.sendTextPoster = [self resourceLoader];
     return controller;
 }
 
 - (VBXSecurityAlertController *)securityAlertController {
-    VBXSecurityAlertController *controller = [[[VBXSecurityAlertController alloc] init] autorelease];
+    VBXSecurityAlertController *controller = [[VBXSecurityAlertController alloc] init];
     controller.builder = self;
     return controller;
 }

@@ -43,10 +43,5 @@
 @synthesize read = _read;
 @synthesize archived = _archived;
 
-- (void)dealloc {
-    self.key = nil;
-    self.name = nil;
-    [super dealloc];
-}
 
 @end

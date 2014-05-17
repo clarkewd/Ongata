@@ -29,7 +29,7 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
-        _titleLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
         _titleLabel.text = LocalizedString(@"Load more...", @"Load More Cell: Default text");
         _titleLabel.numberOfLines = 1;
@@ -37,7 +37,7 @@
         _titleLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_titleLabel];
         
-        _descriptionLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _descriptionLabel.font = [UIFont systemFontOfSize:13.0];
         _descriptionLabel.text = @"";
         _descriptionLabel.numberOfLines = 1;
@@ -45,7 +45,7 @@
         _descriptionLabel.backgroundColor = [UIColor clearColor];        
         [self.contentView addSubview:_descriptionLabel];
         
-        _spinner = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _spinner.hidesWhenStopped = YES;
         [self.contentView addSubview:_spinner];        
         
@@ -55,9 +55,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)applyConfig {
     [super applyConfig];

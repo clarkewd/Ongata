@@ -22,15 +22,15 @@
 #import "VBXTableViewCell.h"
 
 @interface VBXTextFieldCell : VBXTableViewCell {
-    UILabel *_label;
-    UILabel *_helpLabel;
-    UITextField *_textField;
+    UILabel *__weak _label;
+    UILabel *__weak _helpLabel;
+    UITextField *__weak _textField;
     
 }
 
-@property (nonatomic, readonly) UILabel *label;
-@property (nonatomic, readonly) UILabel *helpLabel;
-@property (nonatomic, readonly) UITextField *textField;
+@property (weak, nonatomic, readonly) UILabel *label;
+@property (weak, nonatomic, readonly) UILabel *helpLabel;
+@property (weak, nonatomic, readonly) UITextField *textField;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 

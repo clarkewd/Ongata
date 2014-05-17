@@ -106,10 +106,10 @@ void DialerBuildImages() {
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 320, 89)]) {
-        _backgroundView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];        
+        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];        
         [self addSubview:_backgroundView];
         
-        _numberLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];        
+        _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];        
         _numberLabel.text = @"123...text to be replaced later";
         _numberLabel.backgroundColor = [UIColor clearColor];
         _numberLabel.font = [UIFont systemFontOfSize:30];
@@ -125,9 +125,6 @@ void DialerBuildImages() {
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)setNumber:(NSString *)number {
     _numberLabel.text = number;
@@ -169,17 +166,17 @@ void DialerBuildImages() {
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 320, 50)]) {
-        _backgroundView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_backgroundView];
         
-        _callerIdLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _callerIdLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _callerIdLabel.text = LocalizedString(@"CALLER ID", @"Dailer: Label for caller id number.");
         _callerIdLabel.backgroundColor = [UIColor clearColor];
         _callerIdLabel.font = [UIFont boldSystemFontOfSize:13];
         [_callerIdLabel sizeToFit];
         [self addSubview:_callerIdLabel];    
 
-        _numberLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _numberLabel.text = @"";
         _numberLabel.backgroundColor = [UIColor clearColor];
         _numberLabel.font = [UIFont boldSystemFontOfSize:18];        
@@ -251,10 +248,10 @@ void DialerBuildImages() {
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 110, 61)]) {
-        _backgroundView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_backgroundView];
         
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.text = LocalizedString(@"Call", @"Dialer: Label for call button");
         _label.backgroundColor = [UIColor clearColor];
         _label.font = [UIFont boldSystemFontOfSize:28];
@@ -308,10 +305,10 @@ void DialerBuildImages() {
 
 - (id)initWithImage:(UIImage *)image {
     if (self = [super initWithFrame:CGRectMake(0, 0, 105, 61)]) {
-        _backgroundView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_backgroundView];
         
-        _iconView = [[[VBXMaskedImageView alloc] initWithImage:image] autorelease];
+        _iconView = [[VBXMaskedImageView alloc] initWithImage:image];
         _iconView.backgroundColor = [UIColor clearColor];
         [_iconView sizeToFit];
         [self addSubview:_iconView];
@@ -376,10 +373,10 @@ typedef enum {
     if (self = [super initWithFrame:CGRectMake(0, 0, (type == NumberKeyTypeMiddle ? 110 : 105), 54)]) {
         _type = type;
         
-        _backgroundView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_backgroundView];
         
-        _numberLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _numberLabel.text = number;
         _numberLabel.backgroundColor = [UIColor clearColor];
         _numberLabel.font = [UIFont boldSystemFontOfSize:28];
@@ -387,7 +384,7 @@ typedef enum {
         [_numberLabel sizeToFit];
         [self addSubview:_numberLabel];
         
-        _lettersLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _lettersLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _lettersLabel.text = letters;
         _lettersLabel.backgroundColor = [UIColor clearColor];
         _lettersLabel.font = [UIFont boldSystemFontOfSize:13];
@@ -399,9 +396,6 @@ typedef enum {
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -444,7 +438,7 @@ typedef enum {
 
 @interface VBXDialerController () <VBXDialerAccessorDelegate, ABPeoplePickerNavigationControllerDelegate>
 
-@property (nonatomic, retain) NSString *phoneNumber;
+@property (nonatomic, strong) NSString *phoneNumber;
 
 @end
 
@@ -457,94 +451,66 @@ typedef enum {
 
 - (id)initWithPhone:(NSString *)phone {
     if (self = [super init]) {
-        _initialPhoneNumber = [phone retain];
+        _initialPhoneNumber = phone;
         
         self.title = LocalizedString(@"Dialer", @"Dialer: Title for screen.");
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                 target:self 
-                                                                                action:@selector(cancelPressed)] autorelease];
+                                                                                action:@selector(cancelPressed)];
         
         // We don't want the back button for our screen to take up too much space
-        self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Back", nil)
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Back", nil)
                                                                                   style:UIBarButtonItemStyleBordered 
                                                                                  target:nil 
-                                                                                 action:nil] autorelease];
+                                                                                 action:nil];
     }
     return self;
 }
 
 - (void)dealloc {
     self.accessor.delegate = nil;
-    self.userDefaults = nil;
-    self.accessor = nil;
-    self.phoneNumber = nil;
 
-    [_initialPhoneNumber release];
-    [_dialerView release];
     
-    [__callerIdNormalImage release];
     __callerIdNormalImage = nil;
-    [__callerIdHighlightedImage release];
     __callerIdHighlightedImage = nil;
-    [__callKeyNormalImage release];
     __callKeyNormalImage = nil;
-    [__callKeyHighlightedImage release];
     __callKeyHighlightedImage = nil;
-    [__accessoryKeyNormalImage release];
     __accessoryKeyNormalImage = nil;
-    [__accessoryKeyHighlightedImage release];
     __accessoryKeyHighlightedImage = nil;
-    [__numberKeyNormalSideImage release];
     __numberKeyNormalSideImage = nil;
-    [__numberKeyHighlightedSideImage release];
     __numberKeyHighlightedSideImage = nil;
-    [__numberKeyNormalMiddleImage release];
     __numberKeyNormalMiddleImage = nil;
-    [__numberKeyHighlightedMiddleImage release];
     __numberKeyHighlightedMiddleImage = nil;
-    [__numberAreaBackgroundImage release];
     __numberAreaBackgroundImage = nil; 
     
-    [super dealloc];
 }
 
 - (void)applyConfig {
     [super applyConfig];
     
-    [__callerIdNormalImage release];
     __callerIdNormalImage = nil;
-    [__callerIdHighlightedImage release];
     __callerIdHighlightedImage = nil;
-    [__callKeyNormalImage release];
     __callKeyNormalImage = nil;
-    [__callKeyHighlightedImage release];
     __callKeyHighlightedImage = nil;
-    [__accessoryKeyNormalImage release];
     __accessoryKeyNormalImage = nil;
-    [__accessoryKeyHighlightedImage release];
     __accessoryKeyHighlightedImage = nil;
-    [__numberKeyNormalSideImage release];
     __numberKeyNormalSideImage = nil;
-    [__numberKeyHighlightedSideImage release];
     __numberKeyHighlightedSideImage = nil;
-    [__numberKeyNormalMiddleImage release];
     __numberKeyNormalMiddleImage = nil;
-    [__numberKeyHighlightedMiddleImage release];
     __numberKeyHighlightedMiddleImage = nil;
-    [__numberAreaBackgroundImage release];
     __numberAreaBackgroundImage = nil;
     
-    __callerIdNormalImage = [DialerCallerIdNormalImage(_userDefaults) retain];
-    __callerIdHighlightedImage = [DialerCallerIdHighlightedImage(_userDefaults) retain];
-    __callKeyNormalImage = [DialerCallKeyNormalImage(_userDefaults) retain];
-    __callKeyHighlightedImage = [DialerCallKeyHighlightedImage(_userDefaults) retain];
-    __accessoryKeyNormalImage = [DialerSpecialKeyNormalImage(_userDefaults) retain];
-    __accessoryKeyHighlightedImage = [DialerSpecialKeyHighlightedImage(_userDefaults) retain];
-    __numberKeyNormalSideImage = [DialerNumberKeySideNormalImage(_userDefaults) retain];
-    __numberKeyHighlightedSideImage = [DialerNumberKeySideHighlightedImage(_userDefaults) retain];
-    __numberKeyNormalMiddleImage = [DialerNumberKeyMiddleNormalImage(_userDefaults) retain];
-    __numberKeyHighlightedMiddleImage = [DialerNumberKeyMiddleHighlightedImage(_userDefaults) retain];
-    __numberAreaBackgroundImage = [DialerNumberAreaBackgroundImage(_userDefaults) retain];
+    __callerIdNormalImage = DialerCallerIdNormalImage(_userDefaults);
+    __callerIdHighlightedImage = DialerCallerIdHighlightedImage(_userDefaults);
+    __callKeyNormalImage = DialerCallKeyNormalImage(_userDefaults);
+    __callKeyHighlightedImage = DialerCallKeyHighlightedImage(_userDefaults);
+    __accessoryKeyNormalImage = DialerSpecialKeyNormalImage(_userDefaults);
+    __accessoryKeyHighlightedImage = DialerSpecialKeyHighlightedImage(_userDefaults);
+    __numberKeyNormalSideImage = DialerNumberKeySideNormalImage(_userDefaults);
+    __numberKeyHighlightedSideImage = DialerNumberKeySideHighlightedImage(_userDefaults);
+    __numberKeyNormalMiddleImage = DialerNumberKeyMiddleNormalImage(_userDefaults);
+    __numberKeyHighlightedMiddleImage = DialerNumberKeyMiddleHighlightedImage(_userDefaults);
+    __numberAreaBackgroundImage = DialerNumberAreaBackgroundImage(_userDefaults);
         
     // Make all our children views refresh with the new image (they might not exist yet, though)
     // You might be wondering why these widgets don't just add themselves as config observers and
@@ -655,28 +621,28 @@ typedef enum {
 
     _dialerView = [[UIView alloc] initWithFrame:self.view.bounds];
     
-    _callerIdControl = [[[CallerIdControl alloc] init] autorelease];
+    _callerIdControl = [[CallerIdControl alloc] init];
     [_dialerView addSubview:_callerIdControl];    
     _callerIdControl.left = 0; _callerIdControl.top = 0;
     
     [_callerIdControl addTarget:self action:@selector(callerIdPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    _numberAreaView = [[[NumberAreaView alloc] init] autorelease];
+    _numberAreaView = [[NumberAreaView alloc] init];
     [_dialerView addSubview:_numberAreaView];
     _numberAreaView.left = 0; _numberAreaView.top = _callerIdControl.bottom;
     
-    NumberKey *num1 = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"1" letters:@""] autorelease];
-    NumberKey *num2 = [[[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"2" letters:@"ABC"] autorelease];
-    NumberKey *num3 = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"3" letters:@"DEF"] autorelease];
-    NumberKey *num4 = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"4" letters:@"GHI"] autorelease];
-    NumberKey *num5 = [[[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"5" letters:@"JKL"] autorelease];
-    NumberKey *num6 = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"6" letters:@"MNO"] autorelease];
-    NumberKey *num7 = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"7" letters:@"PQRS"] autorelease];
-    NumberKey *num8 = [[[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"8" letters:@"TUV"] autorelease];
-    NumberKey *num9 = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"9" letters:@"WXYZ"] autorelease];
-    NumberKey *num0 = [[[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"0" letters:@""] autorelease];
-    NumberKey *numPlus = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"+" letters:@""] autorelease];
-    NumberKey *numPound = [[[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"#" letters:@""] autorelease];
+    NumberKey *num1 = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"1" letters:@""];
+    NumberKey *num2 = [[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"2" letters:@"ABC"];
+    NumberKey *num3 = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"3" letters:@"DEF"];
+    NumberKey *num4 = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"4" letters:@"GHI"];
+    NumberKey *num5 = [[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"5" letters:@"JKL"];
+    NumberKey *num6 = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"6" letters:@"MNO"];
+    NumberKey *num7 = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"7" letters:@"PQRS"];
+    NumberKey *num8 = [[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"8" letters:@"TUV"];
+    NumberKey *num9 = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"9" letters:@"WXYZ"];
+    NumberKey *num0 = [[NumberKey alloc] initWithType:NumberKeyTypeMiddle number:@"0" letters:@""];
+    NumberKey *numPlus = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"+" letters:@""];
+    NumberKey *numPound = [[NumberKey alloc] initWithType:NumberKeyTypeSide number:@"#" letters:@""];
     
     [num1 addTarget:self action:@selector(numberPressed:) forControlEvents:UIControlEventTouchDown];
     [num2 addTarget:self action:@selector(numberPressed:) forControlEvents:UIControlEventTouchDown];
@@ -691,15 +657,15 @@ typedef enum {
     [numPlus addTarget:self action:@selector(numberPressed:) forControlEvents:UIControlEventTouchDown];
     [numPound addTarget:self action:@selector(numberPressed:) forControlEvents:UIControlEventTouchDown];    
     
-    AccessoryKey *contacts = [[[AccessoryKey alloc] initWithImage:[UIImage imageNamed:@"dialer-contacts-icon-mask.png"]] autorelease];
-    AccessoryKey *backspace = [[[AccessoryKey alloc] initWithImage:[UIImage imageNamed:@"dialer-backspace-icon-mask.png"]] autorelease];
+    AccessoryKey *contacts = [[AccessoryKey alloc] initWithImage:[UIImage imageNamed:@"dialer-contacts-icon-mask.png"]];
+    AccessoryKey *backspace = [[AccessoryKey alloc] initWithImage:[UIImage imageNamed:@"dialer-backspace-icon-mask.png"]];
     
     [contacts addTarget:self action:@selector(chooseContactPressed) forControlEvents:UIControlEventTouchDown];
     [backspace addTarget:self action:@selector(deletePressed) forControlEvents:UIControlEventTouchDown];    
     [backspace addTarget:self action:@selector(deleteStartTimer) forControlEvents:UIControlEventTouchDown];    
     [backspace addTarget:self action:@selector(deleteStopTimer) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];    
     
-    CallKey *call = [[[CallKey alloc] init] autorelease];
+    CallKey *call = [[CallKey alloc] init];
     [call addTarget:self action:@selector(callPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [_dialerView addSubview:num1];
@@ -739,10 +705,10 @@ typedef enum {
 }
 
 - (void)viewDidLoad {
-    _callerIdNumber = [[_userDefaults stringForKey:VBXUserDefaultsCallerId] retain];
+    _callerIdNumber = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
     
     if (_callerIdNumber == nil) {
-        _callerIdNumber = [((VBXOutgoingPhone *)[_accessor.callerIDs objectAtIndex:0]).phone retain];
+        _callerIdNumber = ((VBXOutgoingPhone *)[_accessor.callerIDs objectAtIndex:0]).phone;
     }
     
     _accessor.delegate = self;
@@ -766,8 +732,7 @@ typedef enum {
     
     if (_callerIdPickerIsOpen) {
         _callerIdPickerIsOpen = NO;
-        [_callerIdNumber release];
-        _callerIdNumber = [[_userDefaults stringForKey:VBXUserDefaultsCallerId] retain];
+        _callerIdNumber = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
         [_callerIdControl setCallerId:_callerIdNumber];
     }
 }
@@ -782,7 +747,6 @@ typedef enum {
     picker.peoplePickerDelegate = self;
     picker.displayedProperties = [NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]];
     [self.navigationController presentModalViewController:picker animated:YES];
-    [picker release];
 }
 
 - (void)makeCallAfterDelay {
@@ -798,7 +762,6 @@ typedef enum {
                                               cancelButtonTitle:@"OK" 
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     } else if (VBXStripNonDigitsFromString(VBXFormatPhoneNumber(_phoneNumber)).length == 0) {
         // Just don't do anything.  The native dialer does nothing until you enter a number.
     } else {
@@ -857,12 +820,12 @@ typedef enum {
                               identifier:(ABMultiValueIdentifier)identifier {
     
     NSString *name = [NSString stringWithFormat:@"%@ %@",
-                      [(NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty) autorelease],
-                      [(NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty) autorelease]];
+                      (NSString *)CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty)),
+                      (NSString *)CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty))];
     
     
     ABMultiValueRef phoneProperty = ABRecordCopyValue(person, property);
-	NSString *phone = [(NSString *)ABMultiValueCopyValueAtIndex(phoneProperty, identifier) autorelease];
+	NSString *phone = (NSString *)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneProperty, identifier));
     CFRelease(phoneProperty);
     
     debug(@"Name = %@", name);
@@ -936,7 +899,7 @@ typedef enum {
     }
     
     if (fromValue) {
-        _callerIdNumber = [fromValue retain];
+        _callerIdNumber = fromValue;
         [_callerIdControl setCallerId:_callerIdNumber];
     }
 }

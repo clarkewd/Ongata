@@ -39,15 +39,10 @@
 
 - (void)setItems:(NSArray *)items {
     if (_items != items) {
-        [_items release];
         _items = [[NSMutableArray alloc] initWithArray:items];
     }
 }
 
-- (void)dealloc {
-    self.items = nil;
-    [super dealloc];
-}
 
 - (NSInteger)last {
     return _offset + [_items count];

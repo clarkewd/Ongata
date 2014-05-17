@@ -65,16 +65,15 @@
                                               cancelButtonTitle:LocalizedString(@"OK", nil)
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"_i get set later_"
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"_i get set later_"
                                                                                    style:UIBarButtonItemStyleDone
                                                                                   target:self
-                                                                                  action:@selector(finish)] autorelease];
+                                                                                  action:@selector(finish)];
         self.title = LocalizedString(@"Your Number", @"Set Number: Title for screen");
     }
     return self;
@@ -93,17 +92,15 @@
 }
 
 - (void)dealloc {
-    [_cellDataSource release];
     self.finishedTarget = nil;
     self.finishedAction = nil;
     
-    [super dealloc];
 }
 
 - (void)loadView {
     [super loadView];
     
-    _numberField = [[[VBXTextFieldCell alloc] initWithReuseIdentifier:nil] autorelease];
+    _numberField = [[VBXTextFieldCell alloc] initWithReuseIdentifier:nil];
     _numberField.label.text = LocalizedString(@"Your Phone", @"Set Number: Label for table cell that contains phone number");
     _numberField.textField.placeholder = LocalizedString(@"555-555-5555", @"Set Number: Placeholder text for phone number.");
     _numberField.textField.keyboardType = UIKeyboardTypePhonePad;
@@ -129,7 +126,6 @@
                       _numberField,
                       LocalizedString(@"When you place phone calls using OpenVBX, you'll be called at this number to complete the connection.", @"Set Number: Sub text that explains why we need their phone number."),
                       nil];
-    [_cellDataSource retain];
     
     self.tableView.dataSource = _cellDataSource;
     self.tableView.delegate = _cellDataSource;

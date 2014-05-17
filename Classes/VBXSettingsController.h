@@ -42,8 +42,8 @@
 
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXObjectBuilder *builder;
-@property (nonatomic, retain) VBXConfigAccessor *configAccessor;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
+@property (nonatomic, strong) VBXConfigAccessor *configAccessor;
 
 @end

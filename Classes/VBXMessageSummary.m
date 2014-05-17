@@ -59,19 +59,6 @@
 
 @dynamic isSms;
 
-- (void)dealloc {
-    self.key = nil;
-    self.caller = nil;
-    self.called = nil;
-    self.assigned = nil;
-    self.recordingURL = nil;
-    self.shortSummary = nil;
-    self.receivedTime = nil;
-    self.lastUpdated = nil;
-    self.folder = nil;
-    self.relativeReceivedTime = nil;
-    [super dealloc];
-}
 
 - (BOOL)isSms {
     return (_recordingURL == nil || _recordingURL.length == 0);

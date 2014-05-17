@@ -27,7 +27,7 @@
 
 - (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
-        _buttonLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _buttonLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _buttonLabel.text = text;
         _buttonLabel.font = [UIFont boldSystemFontOfSize:15.0];
         _buttonLabel.backgroundColor = [UIColor clearColor];
@@ -38,9 +38,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)layoutSubviews {
     CGSize size = self.contentView.frame.size;

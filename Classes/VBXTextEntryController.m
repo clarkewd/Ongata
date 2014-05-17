@@ -44,11 +44,6 @@
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
-    self.navTitle = nil;
-    self.initialText = nil;
-    self.navBar = nil;
-    self.textView = nil;
-    [super dealloc];
 }
 
 - (void)applyConfig {

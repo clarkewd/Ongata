@@ -30,7 +30,7 @@
     BOOL _autoRefocusOnSelectedCell;
 }
 
-@property (nonatomic, retain) VBXTableView *tableView;
+@property (nonatomic, strong) VBXTableView *tableView;
 @property (nonatomic, assign) BOOL autoRefocusOnSelectedCell;
 
 - (id)initWithStyle:(UITableViewStyle)style;

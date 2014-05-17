@@ -38,7 +38,7 @@
 
 @interface VBXFolderListController () <VBXFolderListAccessorDelegate, UIActionSheetDelegate>
 
-@property (nonatomic, retain) NSString *selectedFolderKey;
+@property (nonatomic, strong) NSString *selectedFolderKey;
 
 @end
 
@@ -57,18 +57,9 @@
 @synthesize spinny = _spinny;
 
 - (void)dealloc {
-    [_statusLabel release];
     self.accessor.delegate = nil;
-    self.accessor = nil;
-    self.selectedFolderKey = nil;
     
-    self.refreshButton = nil;
-    self.dialerButton = nil;
-    self.footerView = nil;
-    self.footerLabel = nil;
-    self.spinny = nil;
 
-    [super dealloc];
 }
 
 - (void)showRefreshingState {
@@ -101,7 +92,7 @@
     
     // Setting our footer view to an empty zero-size view prevents the UITableView from drawing
     // mor separator lines than we need.
-    self.tableView.tableFooterView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.toolbarItems = [NSArray arrayWithObjects:
                          _refreshButton, 
@@ -115,7 +106,7 @@
     
     [self applyConfig];
     
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsPressed)];
 }
 
 - (void)applyConfig {
@@ -128,7 +119,7 @@
     
     if (titleImage) {
         self.title = nil;
-        self.navigationItem.titleView = [[[UIImageView alloc] initWithImage:titleImage] autorelease];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:titleImage];
     } else {
         NSString *title = [[VBXConfiguration sharedConfiguration] localizedStringForKey:@"folderListTitle" 
                                                                            defaultValue:@"Messages"];
@@ -183,7 +174,7 @@
 }
 
 - (void)accessorDidLoadData:(VBXFolderListAccessor *)a fromCache:(BOOL)fromCache {
-    [self retain]; // the cancel below might release self's last strong reference, as this is a delegate method
+     // the cancel below might release self's last strong reference, as this is a delegate method
     if (!fromCache) {
         // If this hits, then we've already loaded a fresh copy from the network and we don't need
         // to show the "Refreshing..." thing.
@@ -204,7 +195,6 @@
         // the timestamp for the cached data.
         [self performSelector:@selector(showRefreshingAfterDelay) withObject:nil afterDelay:1.0];
     }
-    [self release];
 }
 
 - (void)accessor:(VBXFolderListAccessor *)a loadDidFailWithError:(NSError *)error {
@@ -238,7 +228,7 @@
 }
 
 - (UITableViewCell *)cellWithReuseIdentifier:(NSString *)identifier {
-    VBXFolderListCell *cell = [[[VBXFolderListCell alloc] initWithReuseIdentifier:identifier] autorelease];
+    VBXFolderListCell *cell = [[VBXFolderListCell alloc] initWithReuseIdentifier:identifier];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

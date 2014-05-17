@@ -63,7 +63,7 @@
 
 - (void)loadView {
 	[super loadView];
-    UIView *view = [[[UIView alloc] initWithFrame:VBXApplicationFrame()] autorelease];
+    UIView *view = [[UIView alloc] initWithFrame:VBXApplicationFrame()];
     view.opaque = NO;
     view.backgroundColor = [UIColor whiteColor];
 
@@ -91,7 +91,6 @@
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    [super dealloc];
 }
 
 - (void)applyConfig {
@@ -101,8 +100,7 @@
 
 - (void)setOverlayView:(UIView *)overlayView {
     if (_overlayView != overlayView) {
-        [_overlayView release];
-        _overlayView = [overlayView retain];
+        _overlayView = overlayView;
         
         [self.view addSubview:_overlayView];
         _overlayView.frame = self.view.frame;
@@ -112,7 +110,6 @@
 - (void)clearOverlayView {
     if (_overlayView != nil) {
         [_overlayView removeFromSuperview];
-        [_overlayView release];
         _overlayView = nil;
     }
 }
@@ -148,7 +145,7 @@
 - (void)presentAsPseudoModalViewController {
 
     _pseudoModalWindow = [[UIWindow alloc] initWithFrame:VBXApplicationFrame()];
-    _pseudoNavigationController = [[[VBXObjectBuilder sharedBuilder] navControllerWrapping:self] retain];
+    _pseudoNavigationController = [[VBXObjectBuilder sharedBuilder] navControllerWrapping:self];
     [_pseudoModalWindow addSubview:_pseudoNavigationController.view];
     [_pseudoModalWindow makeKeyAndVisible];
 
@@ -165,8 +162,6 @@
 
 - (void)dismissAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     [[[_pseudoModalWindow subviews] objectAtIndex:0] removeFromSuperview];
-    [_pseudoModalWindow release];
-    [_pseudoNavigationController release];
 }
 
 - (void)dismissPseudoModalViewController {

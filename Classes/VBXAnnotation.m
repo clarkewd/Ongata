@@ -49,18 +49,6 @@
 @synthesize lastName = _lastName;
 @synthesize description = _description;
 
-- (void)dealloc {
-    self.key = nil;
-    self.messageKey = nil;
-    self.type = nil;
-    self.created = nil;
-    self.userKey = nil;
-    self.email = nil;
-    self.firstName = nil;
-    self.lastName = nil;
-    self.description = nil;
-    [super dealloc];
-}
 
 - (NSString *)fullName {
     NSMutableString *name = [NSMutableString string];

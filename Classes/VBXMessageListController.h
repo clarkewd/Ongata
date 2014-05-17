@@ -32,7 +32,7 @@
     VBXAudioPlaybackController *_playbackController;
     VBXMessageListAccessor *_accessor;    
     NSBundle *_bundle;
-    VBXObjectBuilder *_builder;
+    VBXObjectBuilder *__weak _builder;
     NSIndexPath *_selectedMessageIndexPath;
     NSString *_selectedMessageKey;
     NSString *_selectedMessageRecordingURL;
@@ -46,13 +46,13 @@
     BOOL _selectedMessageWasArchivedFromDetailsPage;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXMessageListAccessor *accessor;
-@property (nonatomic, retain) NSBundle *bundle;
-@property (nonatomic, assign) VBXObjectBuilder *builder;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXMessageListAccessor *accessor;
+@property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, weak) VBXObjectBuilder *builder;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *dialerButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *dialerButton;
 
 - (IBAction)loadMore;
 - (IBAction)refresh;

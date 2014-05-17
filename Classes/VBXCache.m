@@ -50,9 +50,9 @@
 - (id)initWithFileManager:(NSFileManager *)manager DirectoryPath:(NSString *)path {
     if (self = [super init]) {
         //debug(@"%@", path);
-        _fileManager = [manager retain];
+        _fileManager = manager;
         _dictionary = [NSMutableDictionary new];        
-        _directoryPath = [self validateDirectoryPath:path]? [path retain] : nil;
+        _directoryPath = [self validateDirectoryPath:path]? path : nil;
 
         if (_directoryPath) {
             _numDiskEntries = [self numFilesAtPath:_directoryPath];
@@ -68,10 +68,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_fileManager release];
-    [_directoryPath release];
-    [_dictionary release];
-    [super dealloc];
 }
 
 - (BOOL) isDiskCacheEnabled {
@@ -85,9 +81,8 @@
 }
 
 - (NSString *)filePathForKey:(NSString *)key {
-    NSString *filename = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)key, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+    NSString *filename = (NSString *) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)key, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8));
     NSString *filePath = [_directoryPath stringByAppendingPathComponent:filename];
-    [filename release];
     return filePath;
 }
 

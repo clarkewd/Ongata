@@ -25,7 +25,7 @@
 UIColor *VBXTableViewGroupedBackgroundColor() {
     VBXHSL hsl = ThemedHSL(@"tableViewGroupedBackgroundTintHSL", VBXHSLMake(255, 15, 240));
     UIImage *tintedImage = VBXAdjustImageWithPhotoshopHSLWithCache([NSUserDefaults standardUserDefaults], @"tableview-grouped-background.png", @"normal", hsl);
-    return [[[UIColor alloc] initWithPatternImage:[tintedImage stretchableImageWithLeftCapWidth:0 topCapHeight:1]] autorelease];
+    return [[UIColor alloc] initWithPatternImage:[tintedImage stretchableImageWithLeftCapWidth:0 topCapHeight:1]];
 }
 
 @interface VBXTableView (Private) <VBXConfigurable>
@@ -43,7 +43,6 @@ UIColor *VBXTableViewGroupedBackgroundColor() {
 
 - (void)dealloc {
     [[VBXConfiguration sharedConfiguration] removeConfigObserver:self];
-    [super dealloc];
 }
 
 - (void)applyConfig {

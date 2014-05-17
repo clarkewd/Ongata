@@ -28,7 +28,7 @@
     VBXDialerAccessor *_accessor;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXDialerAccessor *accessor;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXDialerAccessor *accessor;
 
 @end

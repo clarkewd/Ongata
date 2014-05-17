@@ -22,10 +22,10 @@
 
 
 @interface VBXDataSource : NSObject <UITableViewDataSource, UITableViewDelegate> {
-    id<UITableViewDelegate> _proxyToDelegate;
+    id<UITableViewDelegate> __weak _proxyToDelegate;
 }
 
-@property (nonatomic, assign) id<UITableViewDelegate> proxyToDelegate;
+@property (nonatomic, weak) id<UITableViewDelegate> proxyToDelegate;
 
 @end
 

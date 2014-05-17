@@ -25,8 +25,8 @@
     UIFont *_font;
 }
 
-@property (nonatomic, retain) NSString *text;
-@property (nonatomic, retain) UIFont *font;
+@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) UIFont *font;
 
 + (VBXStringPart *)partWithText:(NSString *)text font:(UIFont *)font;
 
@@ -40,10 +40,10 @@
     UITextAlignment _textAlignment;    
 }
 
-@property (nonatomic, retain) UIColor *textColor;
+@property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, assign) CGSize shadowOffset;
-@property (nonatomic, retain) UIColor *shadowColor;
-@property (nonatomic, retain) NSArray *parts;
+@property (nonatomic, strong) UIColor *shadowColor;
+@property (nonatomic, strong) NSArray *parts;
 @property (nonatomic, assign) UITextAlignment textAlignment;
 
 @end

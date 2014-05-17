@@ -41,7 +41,6 @@
 - (void)dealloc {
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
-    [super dealloc];
 }
 
 - (void)applyConfig {
@@ -52,7 +51,7 @@
 - (void)loadView {
     [super loadView];
     
-    self.tableView = [[[VBXTableView alloc] initWithFrame:VBXNavigationFrame() style:_tableStyle] autorelease];
+    self.tableView = [[VBXTableView alloc] initWithFrame:VBXNavigationFrame() style:_tableStyle];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -99,7 +98,7 @@
 }
 
 - (UITableViewCell *)cellWithReuseIdentifier:(NSString *)identifier {
-    return [[[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+    return [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 }
 
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

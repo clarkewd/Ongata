@@ -35,15 +35,15 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSString *messageKey;
-@property (nonatomic, retain) NSString *type;
-@property (nonatomic, retain) NSString *created;
-@property (nonatomic, retain) NSString *userKey;
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic, retain) NSString *firstName;
-@property (nonatomic, retain) NSString *lastName;
-@property (nonatomic, retain) NSString *description;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *messageKey;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *created;
+@property (nonatomic, strong) NSString *userKey;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *description;
 
 - (NSString *)fullName;
 - (NSString *)displayName;

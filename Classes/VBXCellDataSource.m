@@ -35,7 +35,7 @@
     }
     va_end(ap); 
     
-    return [[[self alloc] initWithCells:cells] autorelease];
+    return [[self alloc] initWithCells:cells];
 }
 
 - (id)initWithCells:(NSMutableArray *)cells {

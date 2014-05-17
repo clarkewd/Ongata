@@ -61,7 +61,7 @@
     UILabel *timestampLabel;
 }
 
-@property (nonatomic, retain) VBXAnnotation *annotation;
+@property (nonatomic, strong) VBXAnnotation *annotation;
 
 @end
 
@@ -74,14 +74,14 @@
         self.annotation = anAnnotation;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        nameLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
         nameLabel.numberOfLines = 1;
         nameLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", anAnnotation.firstName, anAnnotation.lastName];
         [self.contentView addSubview:nameLabel];
         
-        timestampLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        timestampLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         timestampLabel.font = [UIFont systemFontOfSize:14.0];
         timestampLabel.numberOfLines = 1;
         timestampLabel.lineBreakMode = UILineBreakModeTailTruncation;
@@ -89,7 +89,7 @@
         timestampLabel.text = VBXDateToDateAndTimeString(VBXParseISODateString(anAnnotation.created));
         [self.contentView addSubview:timestampLabel];
         
-        bodyLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         bodyLabel.font = [UIFont systemFontOfSize:14.0];
         bodyLabel.numberOfLines = 0;
         bodyLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
@@ -130,10 +130,6 @@
     bodyLabel.height = MIN(bodyLabel.height, self.contentView.height - vertPadding - bodyLabel.top);    
 }
 
-- (void)dealloc {
-    self.annotation = nil;
-    [super dealloc];
-}
 
 - (void)applyConfig {
     [super applyConfig];
@@ -163,7 +159,7 @@
     UILabel *bodyLabel;
 }
 
-@property (nonatomic, retain) VBXAnnotation *annotation;
+@property (nonatomic, strong) VBXAnnotation *annotation;
 
 @end
 
@@ -176,14 +172,14 @@
         self.annotation = anAnnotation;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        nameLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
         nameLabel.numberOfLines = 1;
         nameLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", anAnnotation.firstName, anAnnotation.lastName];
         [self.contentView addSubview:nameLabel];
         
-        timestampLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        timestampLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         timestampLabel.font = [UIFont systemFontOfSize:14.0];
         timestampLabel.numberOfLines = 1;
         timestampLabel.lineBreakMode = UILineBreakModeTailTruncation;
@@ -191,7 +187,7 @@
         timestampLabel.text = VBXDateToDateAndTimeString(VBXParseISODateString(anAnnotation.created));
         [self.contentView addSubview:timestampLabel];
         
-        bodyLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         bodyLabel.font = [UIFont systemFontOfSize:14.0];
         bodyLabel.numberOfLines = 0;
         bodyLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
@@ -245,10 +241,6 @@
     bodyLabel.textColor = ThemedColor(@"messageDetailAnnotationBodyTextColor", ThemedColor(@"secondaryTextColor", [UIColor grayColor]));    
 }
 
-- (void)dealloc {
-    self.annotation = nil;
-    [super dealloc];
-}
 
 - (CGFloat)heightForCell {
     self.height = 9999;    
@@ -262,7 +254,7 @@
     VBXMessageAttribute *_attribute;
 }
 
-@property (nonatomic, retain) VBXMessageAttribute *attribute;
+@property (nonatomic, strong) VBXMessageAttribute *attribute;
 
 - (id)initWithAttribute:(VBXMessageAttribute *)attribute_ reuseIdentifier:(NSString *)reuseIdentifier;
 
@@ -282,16 +274,12 @@
     return self;
 }
 
-- (void)dealloc {
-    self.attribute = nil;
-    [super dealloc];
-}
 
 @end
 
 @interface VBXMessageDetailController () <UIActionSheetDelegate, VBXAudioPlaybackControllerDelegate, VBXAudioControlDelegate, VBXMessageDetailAccessorDelegate, VBXDialerAccessorDelegate, UIWebViewDelegate>
 - (void)didClickPhoneNumberInTranscription:(NSString *)phoneNumber;
-@property (nonatomic, retain) NSString *noteText;
+@property (nonatomic, strong) NSString *noteText;
 @end
 
 
@@ -338,10 +326,10 @@
         style = UIBarButtonItemStyleBordered;
     }
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Speaker", @"Message Detail: Used to switch to speaker mode.")
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Speaker", @"Message Detail: Used to switch to speaker mode.")
                                                                                style:style
                                                                               target:self 
-                                                                              action:@selector(toggleMediaRoute)] autorelease];    
+                                                                              action:@selector(toggleMediaRoute)];    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -361,28 +349,11 @@
     }
     _webView.delegate = nil;
     
-    [_accessor release];
-    [_dialerAccessor release];
-    [_playbackController release];
-    [_bundle release];
-    [_noteText release];
 
-    [_headerView release];
-    [_callerLabel release];
-    [_timeLabel release];
-    [_audioControlsFrame release];
 
-    [_refreshButton release];
-    [_replyButton release];
-    [_dialerButton release];
     
-    [_messageView release];
-    [_deleteButton release];
     
-    [_webView release];
-    [_phoneNumberClickedInMessage release];
 
-    [super dealloc];
 }
 
 #pragma mark Message detail control
@@ -396,10 +367,10 @@
 }
 
 - (UITableViewCell *)audioPlayerCell {
-    UIView *audioPlayerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 50)] autorelease];
+    UIView *audioPlayerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 50)];
     audioPlayerView.backgroundColor = [UIColor clearColor];
     
-    _audioControl = [[[VBXAudioControl alloc] init] autorelease];
+    _audioControl = [[VBXAudioControl alloc] init];
     _audioControl.delegate = self;
     [audioPlayerView addSubview:_audioControl];
     [audioPlayerView addSubview:_playbackController.view];
@@ -419,7 +390,7 @@
     _playbackController.view.width = audioPlayerView.width - padding - _playbackController.view.left;
     _playbackController.view.top = round((audioPlayerView.height / 2) - (_playbackController.view.height / 2));    
     
-    return [[[VBXViewCell alloc] initWithView:audioPlayerView reuseIdentifier:nil] autorelease];    
+    return [[VBXViewCell alloc] initWithView:audioPlayerView reuseIdentifier:nil];    
 }
 
 - (void)rebuildSections {
@@ -432,7 +403,7 @@
         [items addObject:[self audioPlayerCell]];
     }
     
-    VBXViewCell *transcriptionCell = [[[VBXViewCell alloc] initWithView:_webView reuseIdentifier:nil] autorelease];
+    VBXViewCell *transcriptionCell = [[VBXViewCell alloc] initWithView:_webView reuseIdentifier:nil];
     // Add some extra padding at the end so that the boxed edges of our UIWebView don't obsure the rounded
     // edges of our grouped tableviewcell.
     // Also, if it's an SMS message, then the top corners of the transcription cell will be rounded.  In that
@@ -445,14 +416,14 @@
     if (!detail.isSms) {
         [items addObjectsFromArray:[NSArray arrayWithObjects:
                                     @"", // empty header
-                                    [[[MessageAttributeCell alloc] initWithAttribute:[VBXMessageAttribute ticketStatusAttributeForMessage:detail name:LocalizedString(@"Status", @"Message Detail: Title for table cell")]
-                                                                     reuseIdentifier:nil] autorelease],
-                                    [[[MessageAttributeCell alloc] initWithAttribute:[VBXMessageAttribute assignedUserAttributeForMessage:detail name:LocalizedString(@"Assigned to", @"Message Detail: Title for table cell")]
-                                                                     reuseIdentifier:nil] autorelease],
+                                    [[MessageAttributeCell alloc] initWithAttribute:[VBXMessageAttribute ticketStatusAttributeForMessage:detail name:LocalizedString(@"Status", @"Message Detail: Title for table cell")]
+                                                                     reuseIdentifier:nil],
+                                    [[MessageAttributeCell alloc] initWithAttribute:[VBXMessageAttribute assignedUserAttributeForMessage:detail name:LocalizedString(@"Assigned to", @"Message Detail: Title for table cell")]
+                                                                     reuseIdentifier:nil],
                                     @"", // empty footter                                    
                                     nil]];
 
-        _addNoteCell = [[[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+        _addNoteCell = [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         _addNoteCell.textLabel.text = @"Add Note";
         _addNoteCell.textLabel.textAlignment = UITextAlignmentCenter;
         
@@ -463,9 +434,9 @@
             UITableViewCell *cell = nil;
             
             if ([annotation.type isEqualToString:@"changed"]) {
-                cell = [[[ChangeAnnotationCell alloc] initWithAnnotation:annotation reuseIdentifier:nil] autorelease];
+                cell = [[ChangeAnnotationCell alloc] initWithAnnotation:annotation reuseIdentifier:nil];
             } else if ([annotation.type isEqualToString:@"noted"]) {
-                cell = [[[NoteAnnotationCell alloc] initWithAnnotation:annotation reuseIdentifier:nil] autorelease];
+                cell = [[NoteAnnotationCell alloc] initWithAnnotation:annotation reuseIdentifier:nil];
             } else {
                 debug(@"Skipping annotation with type '%@' - I don't know how to render it.", annotation.type);
             }
@@ -475,7 +446,7 @@
             }
         }
         
-        _loadMoreCell = [[[VBXLoadMoreCell alloc] initWithReuseIdentifier:nil] autorelease];
+        _loadMoreCell = [[VBXLoadMoreCell alloc] initWithReuseIdentifier:nil];
         _loadMoreCell.detailTextLabel.text = nil;
         
         if (detail.annotations.items.count < detail.annotations.total) {
@@ -486,7 +457,7 @@
     }
     
 
-    _dataSource = [[VBXSectionedCellDataSource dataSourceWithArray:items] retain];
+    _dataSource = [VBXSectionedCellDataSource dataSourceWithArray:items];
     
     self.tableView.dataSource = _dataSource;
     self.tableView.delegate = _dataSource;
@@ -518,12 +489,11 @@
 }
 
 - (void)deleteMessage {
-    UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:LocalizedString(@"Permanently delete this message?", @"Message Details: Title on the action sheet when you click delete.")
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:LocalizedString(@"Permanently delete this message?", @"Message Details: Title on the action sheet when you click delete.")
                                                               delegate:self
                                                      cancelButtonTitle:LocalizedString(@"Cancel", nil)
                                                 destructiveButtonTitle:LocalizedString(@"Delete Message", @"Message Detail: Label for Delete action in action sheet.")
-                                                     otherButtonTitles:nil]
-                                  autorelease];
+                                                     otherButtonTitles:nil];
     actionSheet.tag = kSheetTagArchive;
     [actionSheet showFromToolbar:self.navigationController.toolbar];    
 }
@@ -542,7 +512,6 @@
                                           cancelButtonTitle:LocalizedString(@"OK", nil)
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];    
 }
 
 
@@ -746,7 +715,7 @@
 
 - (NSString *)wrapPhoneNumbersInLinks:(NSString *)text {
     
-    NSMutableString *copy = [[[NSMutableString alloc] initWithString:text] autorelease];
+    NSMutableString *copy = [[NSMutableString alloc] initWithString:text];
     
     NSArray *patterns = [NSArray arrayWithObjects:
                          // Any string of 7 or more numbers
@@ -890,11 +859,11 @@
     NSString *callbackButtonTitle = [NSString stringWithFormat:LocalizedString(@"Call %@", @"Mesage Detail: Title for Call button in action sheet, param is phone number"), detail.caller];
     NSString *smsButtonTitle = [NSString stringWithFormat:LocalizedString(@"SMS %@", @"Mesage Detail: Title for SMS button in action sheet, param is phone number"), detail.caller];
     
-    UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
                                                               delegate:self
                                                      cancelButtonTitle:LocalizedString(@"Cancel", nil) 
                                                 destructiveButtonTitle:nil 
-                                                     otherButtonTitles:callbackButtonTitle, smsButtonTitle, nil] autorelease];
+                                                     otherButtonTitles:callbackButtonTitle, smsButtonTitle, nil];
     actionSheet.tag = kSheetTagCallback;
     [actionSheet showFromToolbar:self.navigationController.toolbar];
 }
@@ -963,17 +932,15 @@
     NSString *callText = [NSString stringWithFormat:LocalizedString(@"Call %@", @"Message Detail: Title for Call button when phone number link is clicked in the message."), formattedNumber];
     NSString *smsText = [NSString stringWithFormat:LocalizedString(@"SMS %@", @"Message Detail: Title for SMS button when phone number link is clicked in the message."), formattedNumber];    
     
-    UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
                                                               delegate:self
                                                      cancelButtonTitle:LocalizedString(@"Cancel", nil)
                                                 destructiveButtonTitle:nil
-                                                     otherButtonTitles:callText, smsText, nil]
-                                  autorelease];
+                                                     otherButtonTitles:callText, smsText, nil];
     actionSheet.tag = kSheetTagContactFromLinkInTranscription;
     [actionSheet showFromToolbar:self.navigationController.toolbar];
     
-    [_phoneNumberClickedInMessage release];
-    _phoneNumberClickedInMessage = [formattedNumber retain];
+    _phoneNumberClickedInMessage = formattedNumber;
 }
 
 #pragma mark Adding annotations

@@ -59,22 +59,17 @@ static void FakeRelease(CFAllocatorRef allocator, const void *value) { }
         CFArrayCallBacks callbacks = kCFTypeArrayCallBacks;
         callbacks.retain = FakeRetain;
         callbacks.release = FakeRelease;
-        _observers = (NSMutableArray *)CFArrayCreateMutable(nil, 0, &callbacks);
+        _observers = (NSMutableArray *)CFBridgingRelease(CFArrayCreateMutable(nil, 0, &callbacks));
     }
     return self;
 }
 
-- (void)dealloc {
-    [_observers release];
-    [super dealloc];
-}
 
 - (NSDictionary *)dictionary {
   return _dict;
 }
 
 - (void)loadConfigFromDictionary:(NSDictionary *)dict serverURL:(NSString *)serverURL hadTrustedCertificate:(BOOL)hadTrustedCertificate {
-    [_dict release];
     _dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
              [NSMutableDictionary dictionaryWithObjectsAndKeys:
               @"#000000",
@@ -111,7 +106,6 @@ static void FakeRelease(CFAllocatorRef allocator, const void *value) { }
              @"theme",
              nil];
     [_dict mergeWithContentsOfDictionary:dict];
-    [_dict retain];
     
     // If the config came from a secure site with a trusted certificate, then the config
     // is permitted to toggle our secure mode feature...
@@ -291,7 +285,7 @@ static void FakeRelease(CFAllocatorRef allocator, const void *value) { }
     UIImage *image = nil;
     
     if (value != nil) {
-        image = [[[UIImage alloc] initWithData:[NSData dataFromBase64String:value]] autorelease];
+        image = [[UIImage alloc] initWithData:[NSData dataFromBase64String:value]];
     }
     
     if (image == nil && defaultImageFileName != nil) {

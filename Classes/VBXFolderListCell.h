@@ -34,9 +34,9 @@
     RoundedNumberView *_numberView;
     NSInteger _number;
 }
-@property (nonatomic, retain) VBXConfiguration *configuration;
-@property (nonatomic, retain) UILabel *label;
-@property (nonatomic, retain) VBXMaskedImageView *icon;
+@property (nonatomic, strong) VBXConfiguration *configuration;
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) VBXMaskedImageView *icon;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (void)showFolderSummary:(VBXFolderSummary *)folderSummary;

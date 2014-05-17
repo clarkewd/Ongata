@@ -35,9 +35,9 @@ typedef void (^VBXResourceLoaderErrorAction)(VBXResourceLoader *, NSError *);
 @property (nonatomic, copy) VBXResourceLoaderSuccessAction successAction;
 @property (nonatomic, copy) VBXResourceLoaderErrorAction errorAction;
 @property (nonatomic, assign) BOOL answersAuthChallenges;
-@property (nonatomic, retain) VBXCache *cache;
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) NSURL *baseURL;
+@property (nonatomic, strong) VBXCache *cache;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) NSURL *baseURL;
 
 - (void)setTarget:(id<VBXResourceLoaderTarget>)target; // sets successAction and errorAction
 

@@ -28,7 +28,7 @@
 @interface VBXFolderListController : VBXStatefulTableViewController {
     NSUserDefaults *_userDefaults;
     VBXFolderListAccessor *_accessor;
-    VBXObjectBuilder *_builder;
+    VBXObjectBuilder *__weak _builder;
     NSString *_selectedFolderKey;
     
     UIBarButtonItem *_refreshButton;
@@ -39,15 +39,15 @@
     VBXStringPartLabel *_statusLabel;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXFolderListAccessor *accessor;
-@property (nonatomic, assign) VBXObjectBuilder *builder;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXFolderListAccessor *accessor;
+@property (nonatomic, weak) VBXObjectBuilder *builder;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *dialerButton;
-@property (nonatomic, retain) IBOutlet UIView *footerView;
-@property (nonatomic, retain) IBOutlet UILabel *footerLabel;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spinny;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *dialerButton;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
+@property (nonatomic, strong) IBOutlet UILabel *footerLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinny;
 
 - (IBAction)refresh;
 - (IBAction)dialerPressed;

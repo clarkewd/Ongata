@@ -49,9 +49,6 @@ static UIImage *__pauseImage = nil;
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (UIImage *)imageWithSymbol:(UIImage *)symbolImage color:(UIColor *)color {
     CGSize size = CGSizeMake(24, 24);
@@ -77,30 +74,27 @@ static UIImage *__pauseImage = nil;
 
 - (UIImage *)imageForPlay {
     if (__playImage == nil) {
-        __playImage = [[self imageWithSymbol:[UIImage imageNamed:@"play-symbol.png"] color:ThemedColor(@"playButtonColor", RGBHEXCOLOR(0x0099cc))] retain];
+        __playImage = [self imageWithSymbol:[UIImage imageNamed:@"play-symbol.png"] color:ThemedColor(@"playButtonColor", RGBHEXCOLOR(0x0099cc))];
     }
     return __playImage;
 }
 
 - (UIImage *)imageForPause {
     if (__pauseImage == nil) {
-        __pauseImage = [[self imageWithSymbol:[UIImage imageNamed:@"pause-symbol.png"] color:ThemedColor(@"pauseButtonColor", RGBHEXCOLOR(0x287cda))] retain];
+        __pauseImage = [self imageWithSymbol:[UIImage imageNamed:@"pause-symbol.png"] color:ThemedColor(@"pauseButtonColor", RGBHEXCOLOR(0x287cda))];
     }
     return __pauseImage;
 }
 
 - (UIImage *)imageForStop {
     if (__stopImage == nil) {
-        __stopImage = [[self imageWithSymbol:[UIImage imageNamed:@"stop-symbol.png"] color:ThemedColor(@"stopButtonColor", RGBHEXCOLOR(0x287cda))] retain];
+        __stopImage = [self imageWithSymbol:[UIImage imageNamed:@"stop-symbol.png"] color:ThemedColor(@"stopButtonColor", RGBHEXCOLOR(0x287cda))];
     }
     return __stopImage;
 }
 
 - (void)applyConfig {
     // Clear and rebuild the images
-    [__stopImage release];
-    [__pauseImage release];
-    [__playImage release];
     __stopImage = nil;
     __playImage = nil;
     __pauseImage = nil;

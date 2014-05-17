@@ -42,7 +42,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
 }
 
 - (void)viewDidLoad {
@@ -76,7 +75,6 @@
                                               otherButtonTitles:LocalizedString(@"Make a call", @"NavigationController: Title for make a call button."), 
                                                                 LocalizedString(@"Send a text", @"NavigationController: Title for send a text button."), nil];
     [sheet showFromToolbar:self.toolbar];
-    [sheet release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

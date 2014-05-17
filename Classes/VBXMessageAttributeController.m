@@ -37,11 +37,6 @@
 @synthesize attribute = _attribute;
 @synthesize accessor = _accessor;
 
-- (void)dealloc {
-    [_attribute release];
-    [_accessor release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
 }
@@ -61,8 +56,8 @@
 }
 
 - (UIView *)spinny {
-    UIActivityIndicatorView *spinny = [[[UIActivityIndicatorView alloc]
-        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    UIActivityIndicatorView *spinny = [[UIActivityIndicatorView alloc]
+        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinny startAnimating];
     return spinny;
 }
@@ -72,7 +67,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[VBXTableViewCell alloc] initWithStyle:[self cellStyle] reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[VBXTableViewCell alloc] initWithStyle:[self cellStyle] reuseIdentifier:CellIdentifier];
     }
 
     id value = [_attribute.options objectAtIndex:indexPath.row];

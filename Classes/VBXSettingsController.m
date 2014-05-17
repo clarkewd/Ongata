@@ -53,23 +53,18 @@
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", @"Settings: Title for done button in upper right.")
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", @"Settings: Title for done button in upper right.")
                                                                            style:UIBarButtonItemStyleDone 
                                                                           target:self
-                                                                           action:@selector(done)] autorelease];
+                                                                           action:@selector(done)];
         self.title = LocalizedString(@"Settings", @"Settings: Title for screen");
     }
     return self;
 }
 
-- (void)dealloc {    
-    [_cellDataSource release];
-    [_callbackPhoneField release];
-    [super dealloc];
-}
 
 - (UIView *)tableBackgroundView {
-    UIView *view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     view.backgroundColor = _tableView.backgroundColor;
     return view;
 }
@@ -77,23 +72,23 @@
 - (void)loadView {
     [super loadView];
     
-    _callbackPhoneField = [[[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+    _callbackPhoneField = [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     _callbackPhoneField.textLabel.text = LocalizedString(@"Your Number", @"Settings: Label for callback number field.");
     _callbackPhoneField.detailTextLabel.text = VBXFormatPhoneNumber([_userDefaults stringForKey:VBXUserDefaultsCallbackPhone]);
     _callbackPhoneField.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    _logoutButton = [[[VBXButtonCell alloc] initWithText:LocalizedString(@"Logout", @"Settings: Label for logout button.") reuseIdentifier:nil] autorelease];
-    _licenseButton = [[[VBXButtonCell alloc] initWithText:LocalizedString(@"Software Licenses", @"Settings: Label for license button.") reuseIdentifier:nil] autorelease];
+    _logoutButton = [[VBXButtonCell alloc] initWithText:LocalizedString(@"Logout", @"Settings: Label for logout button.") reuseIdentifier:nil];
+    _licenseButton = [[VBXButtonCell alloc] initWithText:LocalizedString(@"Software Licenses", @"Settings: Label for license button.") reuseIdentifier:nil];
     
-    VBXFooterTextCell *serverLabel = [[[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"Server:", @"Settings: Label that appears before the server."), nil] reuseIdentifier:nil] autorelease];
+    VBXFooterTextCell *serverLabel = [[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"Server:", @"Settings: Label that appears before the server."), nil] reuseIdentifier:nil];
     [serverLabel setBackgroundView:[self tableBackgroundView]];
     
     
-    VBXFooterTextCell *serverUrl = [[[VBXFooterTextCell alloc] initWithText:[_userDefaults objectForKey:VBXUserDefaultsBaseURL] reuseIdentifier:nil] autorelease];
+    VBXFooterTextCell *serverUrl = [[VBXFooterTextCell alloc] initWithText:[_userDefaults objectForKey:VBXUserDefaultsBaseURL] reuseIdentifier:nil];
     serverUrl.label.lineBreakMode = UILineBreakModeCharacterWrap;
     [serverUrl setBackgroundView:[self tableBackgroundView]];    
     
-    VBXFooterTextCell *loggedInAs = [[[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil] autorelease];
+    VBXFooterTextCell *loggedInAs = [[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil];
 
     [loggedInAs setBackgroundView:[self tableBackgroundView]];        
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
@@ -114,7 +109,6 @@
 					  _licenseButton,
 					  @"",
                       nil];
-    [_cellDataSource retain];
     
     self.tableView.dataSource = _cellDataSource;
     self.tableView.delegate = _cellDataSource;
@@ -138,7 +132,7 @@
 }
 
 - (void)fadeToDark {
-    UIView *blackView = [[[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame] autorelease];
+    UIView *blackView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     blackView.backgroundColor = [UIColor blackColor];
     blackView.alpha = 0.0;
     blackView.userInteractionEnabled = YES;

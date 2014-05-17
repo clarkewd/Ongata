@@ -29,7 +29,7 @@
 
 @interface VBXMessageDetailAccessor () <VBXResourceLoaderTarget>
 
-@property (nonatomic, retain) VBXMessageDetail *model;
+@property (nonatomic, strong) VBXMessageDetail *model;
 
 @end
 
@@ -38,7 +38,7 @@
 
 - (id)initWithKey:(NSString *)key {
     if (self = [super init]) {
-        _messageKey = [key retain];
+        _messageKey = key;
         _pageSize = 10;
     }
     return self;
@@ -57,12 +57,6 @@
     [_detailLoader cancelAllRequests];
     [_annotationsLoader cancelAllRequests];
     
-    [_messageKey release];
-    self.model = nil;
-    self.detailLoader = nil;
-    self.annotationsLoader = nil;
-    self.notePoster = nil;
-    [super dealloc];
 }
 
 - (NSDate *)timestampOfCachedData {
@@ -90,7 +84,7 @@
     [request.params setInt:_pageSize forKey:@"max"];
 
     _annotationsLoader.target = self;
-    __block VBXMessageDetailAccessor *selph = self;
+    __weak VBXMessageDetailAccessor *selph = self;
     _annotationsLoader.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
         [selph loader:loader didFinishWithAnnotations:object];
     };
@@ -99,13 +93,13 @@
 
 - (void)loader:(VBXResourceLoader *)loader didLoadObject:(NSDictionary *)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
     //debug(@"object=%@", object);
-    self.model = [[[VBXMessageDetail alloc] initWithDictionary:object] autorelease];
+    self.model = [[VBXMessageDetail alloc] initWithDictionary:object];
     _modelIsFromCache = fromCache;
     [_delegate accessorDidLoadData:self fromCache:fromCache];
 }
 
 - (void)loader:(VBXResourceLoader *)loader didFinishWithAnnotations:(NSDictionary *)object {
-    VBXSublist *a = [[[VBXSublist alloc] initWithDictionary:object class:[VBXAnnotation class]] autorelease];
+    VBXSublist *a = [[VBXSublist alloc] initWithDictionary:object class:[VBXAnnotation class]];
     if (_model.annotations) [a mergeItemsFromBeginning:_model.annotations];
     _model.annotations = a;
     [_delegate accessorDidLoadData:self fromCache:NO];

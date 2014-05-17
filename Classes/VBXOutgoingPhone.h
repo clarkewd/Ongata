@@ -29,8 +29,8 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *phone;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *phone;
 
 @end

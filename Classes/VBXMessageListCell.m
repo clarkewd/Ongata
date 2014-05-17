@@ -38,33 +38,33 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
-        _titleLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
         _titleLabel.numberOfLines = 1;
         _titleLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
         [self.contentView addSubview:_titleLabel];
         
-        _timestampLabel = [[[VBXStringPartLabel alloc] initWithFrame:CGRectZero] autorelease];
+        _timestampLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectZero];
         _timestampLabel.textAlignment = UITextAlignmentRight;
         [self.contentView addSubview:_timestampLabel];
                 
-        _bodyLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _bodyLabel.font = [UIFont systemFontOfSize:13.0];
         _bodyLabel.numberOfLines = 2;
         _bodyLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
         _bodyLabel.contentMode = UIViewContentModeBottomLeft;
         [self.contentView addSubview:_bodyLabel];
         
-        _folderLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _folderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _folderLabel.numberOfLines = 1;
         _folderLabel.text = @"FOLDER";
         _folderLabel.font = [UIFont boldSystemFontOfSize:12.0];
         [self.contentView addSubview:_folderLabel];
                 
-        _audioControl = [[[VBXAudioControl alloc] init] autorelease];
+        _audioControl = [[VBXAudioControl alloc] init];
         [self.contentView addSubview:_audioControl];
         
-        _deliveryMethodView = [[[VBXMaskedImageView alloc] initWithImage:[UIImage imageNamed:@"delivery-phone-icon.png"]] autorelease];
+        _deliveryMethodView = [[VBXMaskedImageView alloc] initWithImage:[UIImage imageNamed:@"delivery-phone-icon.png"]];
         [self.contentView addSubview:_deliveryMethodView];
                 
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
@@ -73,11 +73,6 @@
     return self;
 }
 
-- (void)dealloc {
-    self.messageListController = nil;
-    self.messageSummary = nil;
-    [super dealloc];
-}
 
 - (void)adjustForSelectionOrHighlight {
     if (self.isSelected || self.isHighlighted) {
@@ -99,7 +94,7 @@
         backgroundColor = ThemedColor(@"messageListReadBackgroundColor", RGBHEXCOLOR(0xf3f6fc));        
     }
     
-    UIView *bgView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectZero];
     bgView.backgroundColor = backgroundColor;
     [self setBackgroundView:bgView];
     

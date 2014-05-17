@@ -40,8 +40,8 @@
     BOOL _callerIdPickerIsOpen;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXResourceLoader *sendTextPoster;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXResourceLoader *sendTextPoster;
 
 - (id)initWithPhone:(NSString *)phone;
 

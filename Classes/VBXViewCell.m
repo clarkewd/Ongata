@@ -40,8 +40,7 @@
 - (void)setView:(UIView *)newView {
     if (_view != newView) {
         [_view removeFromSuperview];
-        [_view release];
-        _view = [newView retain];
+        _view = newView;
         [self.contentView addSubview:_view];
         
         [self setNeedsLayout];
@@ -64,10 +63,6 @@
     }    
 }
 
-- (void)dealloc {
-    self.view = nil;
-    [super dealloc];
-}
 
 - (CGFloat)heightForCell {
     return _view.height + _contentInsets.top + _contentInsets.bottom;

@@ -29,14 +29,14 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifer]) {
-        _label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.backgroundColor = [UIColor clearColor];
         _label.text = @"";
         _label.font = [UIFont boldSystemFontOfSize:17.0];
         _label.numberOfLines = 1;
         _label.lineBreakMode = UILineBreakModeTailTruncation;
         
-        _helpLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        _helpLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _helpLabel.backgroundColor = [UIColor clearColor];
         _helpLabel.textColor = [UIColor grayColor];
         _helpLabel.text = @"";
@@ -44,7 +44,7 @@
         _helpLabel.numberOfLines = 1;
         _helpLabel.lineBreakMode = UILineBreakModeTailTruncation;
         
-        _textField = [[[UITextField alloc] initWithFrame:CGRectZero] autorelease];
+        _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.font = [UIFont systemFontOfSize:17.0];
         _textField.textAlignment = UITextAlignmentLeft;
         _textField.borderStyle = UITextBorderStyleNone;
@@ -59,9 +59,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void)applyConfig {
     [super applyConfig];

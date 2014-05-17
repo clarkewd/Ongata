@@ -31,17 +31,17 @@
     VBXFolderDetail *_model;
     VBXResourceLoader *_loader;
     VBXResourceLoader *_archivePoster;
-    id<VBXMessageListAccessorDelegate> _delegate;
+    id<VBXMessageListAccessorDelegate> __weak _delegate;
 }
 
 - (id)initWithKey:(NSString *)key;
 
 @property (nonatomic, readonly) NSString *folderKey;
 @property (nonatomic, assign) NSInteger pageSize;
-@property (nonatomic, readonly, retain) VBXFolderDetail *model;
-@property (nonatomic, retain) VBXResourceLoader *loader;
-@property (nonatomic, retain) VBXResourceLoader *archivePoster;
-@property (nonatomic, assign) id<VBXMessageListAccessorDelegate> delegate;
+@property (nonatomic, readonly, strong) VBXFolderDetail *model;
+@property (nonatomic, strong) VBXResourceLoader *loader;
+@property (nonatomic, strong) VBXResourceLoader *archivePoster;
+@property (nonatomic, weak) id<VBXMessageListAccessorDelegate> delegate;
 
 - (void)loadUsingCache:(BOOL)usingCache;
 - (void)loadMore;

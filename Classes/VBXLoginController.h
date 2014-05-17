@@ -36,8 +36,8 @@
     VBXTextFieldCell *_passwordField;
 }
 
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXResourceLoader *loader;
-@property (nonatomic, retain) NSURLCredentialStorage *credentialStorage;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXResourceLoader *loader;
+@property (nonatomic, strong) NSURLCredentialStorage *credentialStorage;
 
 @end

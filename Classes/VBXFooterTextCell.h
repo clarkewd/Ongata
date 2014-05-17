@@ -26,11 +26,11 @@
  * Mimics the style of text you get UITableView footers.
  */
 @interface VBXFooterTextCell : VBXTableViewCell <VBXVariableHeightCell> {
-    UILabel *_label;
+    UILabel *__weak _label;
     UIEdgeInsets _contentInsets;
 }
 
-@property (nonatomic, readonly) UILabel *label;
+@property (weak, nonatomic, readonly) UILabel *label;
 @property (nonatomic, assign) UIEdgeInsets contentInsets;
 
 - (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;

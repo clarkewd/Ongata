@@ -47,17 +47,17 @@
     UIProgressView *progressView;
     UISlider *slider;
     
-    id<VBXAudioPlaybackControllerDelegate> playbackDelegate;
+    id<VBXAudioPlaybackControllerDelegate> __weak playbackDelegate;
 }
 
-@property (nonatomic, retain) NSString *contentURL;
-@property (nonatomic, retain) NSUserDefaults *userDefaults;
-@property (nonatomic, retain) VBXCache *cache;
+@property (nonatomic, strong) NSString *contentURL;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) VBXCache *cache;
 
 @property (nonatomic, readonly) BOOL isPaused;
 @property (nonatomic, readonly) BOOL isPlaying;
 
-@property (nonatomic, assign) id<VBXAudioPlaybackControllerDelegate> playbackDelegate;
+@property (nonatomic, weak) id<VBXAudioPlaybackControllerDelegate> playbackDelegate;
 
 - (void)refresh;
 

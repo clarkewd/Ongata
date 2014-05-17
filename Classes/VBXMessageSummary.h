@@ -40,20 +40,20 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSString *caller;
-@property (nonatomic, retain) NSString *called;
-@property (nonatomic, retain) NSString *assigned;
-@property (nonatomic, retain) NSString *recordingURL;
-@property (nonatomic, retain) NSString *shortSummary;
-@property (nonatomic, retain) NSString *receivedTime;
-@property (nonatomic, retain) NSString *lastUpdated;
-@property (nonatomic, retain) NSString *folder;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *caller;
+@property (nonatomic, strong) NSString *called;
+@property (nonatomic, strong) NSString *assigned;
+@property (nonatomic, strong) NSString *recordingURL;
+@property (nonatomic, strong) NSString *shortSummary;
+@property (nonatomic, strong) NSString *receivedTime;
+@property (nonatomic, strong) NSString *lastUpdated;
+@property (nonatomic, strong) NSString *folder;
 @property (nonatomic, assign, getter=isArchived) BOOL archived;
 @property (nonatomic, assign, getter=isUnread) BOOL unread;
 @property (nonatomic, assign, getter=isArchiving) BOOL archiving;
 
 @property (nonatomic, readonly) BOOL isSms;
-@property (nonatomic, retain) NSString *relativeReceivedTime;
+@property (nonatomic, strong) NSString *relativeReceivedTime;
 
 @end

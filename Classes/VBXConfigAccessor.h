@@ -25,11 +25,11 @@
 
 @interface VBXConfigAccessor : NSObject {
     VBXResourceLoader *_loader;
-    id<VBXConfigAccessorDelegate> _delegate;
+    id<VBXConfigAccessorDelegate> __weak _delegate;
 }
 
-@property (nonatomic, retain) VBXResourceLoader *loader;
-@property (nonatomic, assign) id<VBXConfigAccessorDelegate> delegate;
+@property (nonatomic, strong) VBXResourceLoader *loader;
+@property (nonatomic, weak) id<VBXConfigAccessorDelegate> delegate;
 
 
 - (void)loadDefaultConfig;
