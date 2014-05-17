@@ -243,6 +243,7 @@
         [defaults synchronize];
     }
 
+    [self retain];// the cancel below might release self's last strong reference, as this is a delegate method
     if (!fromCache) {
         // If this hits, then we've already loaded a fresh copy from the network and we don't need
         // to show the "Refreshing..." thing.
@@ -262,6 +263,7 @@
     }
 
     [self.tableView reloadData];
+    [self release];
 }
 
 - (void)accessor:(VBXMessageListAccessor *)a loadDidFailWithError:(NSError *)error {
