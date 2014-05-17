@@ -80,27 +80,20 @@ UIImage *DialerNumberKeyMiddleHighlightedImage(NSUserDefaults *userDefaults) {
     return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-number-middle-bg.png", @"highlighted", ThemedHSL(@"dialerNumberKeyHighlightedTintHSL", VBXHSLMake(218, 100, 0)));
 }
 
-#define WRAP_IN_AUTORELEASE_POOL(x) \
-    do { \
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; \
-        x; \
-        [pool release]; \
-    } while (0)
-
 void DialerBuildImages() {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-    WRAP_IN_AUTORELEASE_POOL(DialerCallerIdNormalImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerCallerIdHighlightedImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerCallKeyNormalImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerCallKeyHighlightedImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerSpecialKeyNormalImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerSpecialKeyHighlightedImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerNumberKeySideNormalImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerNumberKeySideHighlightedImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerNumberKeyMiddleNormalImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerNumberKeyMiddleHighlightedImage(userDefaults));
-    WRAP_IN_AUTORELEASE_POOL(DialerNumberAreaBackgroundImage(userDefaults));
+    @autoreleasepool { DialerCallerIdNormalImage(userDefaults); }
+    @autoreleasepool { DialerCallerIdHighlightedImage(userDefaults); }
+    @autoreleasepool { DialerCallKeyNormalImage(userDefaults); }
+    @autoreleasepool { DialerCallKeyHighlightedImage(userDefaults); }
+    @autoreleasepool { DialerSpecialKeyNormalImage(userDefaults); }
+    @autoreleasepool { DialerSpecialKeyHighlightedImage(userDefaults); }
+    @autoreleasepool { DialerNumberKeySideNormalImage(userDefaults); }
+    @autoreleasepool { DialerNumberKeySideHighlightedImage(userDefaults); }
+    @autoreleasepool { DialerNumberKeyMiddleNormalImage(userDefaults); }
+    @autoreleasepool { DialerNumberKeyMiddleHighlightedImage(userDefaults); }
+    @autoreleasepool { DialerNumberAreaBackgroundImage(userDefaults); }
 }
 
 @interface NumberAreaView : UIView <VBXConfigurable> {
