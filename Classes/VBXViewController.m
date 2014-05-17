@@ -104,7 +104,7 @@
         [_overlayView release];
         _overlayView = [overlayView retain];
         
-        [self.view.superview addSubview:_overlayView];
+        [self.view addSubview:_overlayView];
         _overlayView.frame = self.view.frame;
     }
 }
