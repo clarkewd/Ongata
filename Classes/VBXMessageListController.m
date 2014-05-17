@@ -23,6 +23,7 @@
 #import "VBXAudioPlaybackController.h"
 #import "VBXMessageDetailController.h"
 #import "VBXDialerController.h"
+#import "VBXSendTextController.h"
 #import "VBXFolderDetail.h"
 #import "VBXSublist.h"
 #import "VBXMessageSummary.h"
