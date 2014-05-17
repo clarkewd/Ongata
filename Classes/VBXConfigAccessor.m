@@ -26,6 +26,9 @@
 #import "VBXGlobal.h"
 #import "VBXConfiguration.h"
 
+@interface VBXConfigAccessor () <VBXResourceLoaderTarget>
+@end
+
 @implementation VBXConfigAccessor
 
 - (id)init {
@@ -59,7 +62,6 @@
 
 - (void)loadConfigUsingCache:(BOOL)usingCache {
     _loader.target = self;
-    _loader.successAction = @selector(loader:didLoadObject:fromCache:hadTrustedCertificate:);
     [_loader loadRequest:[VBXResourceRequest requestWithResource:@"client?with_i18n=1&type=iphone"] usingCache:usingCache];
 }
 

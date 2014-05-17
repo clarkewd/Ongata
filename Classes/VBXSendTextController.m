@@ -416,8 +416,13 @@
         [request.params setObject:_callerIdCell.valueField.text forKey:@"from"];
         [request.params setObject:_bodyCell.bodyTextView.text forKey:@"content"];
         
-        [_sendTextPoster setTarget:self successAction:@selector(loader:didSendText:)
-                       errorAction:@selector(loader:sendTextWithError:)];
+        __block __typeof__(self) selph = self;
+        _sendTextPoster.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+            [selph loader:loader didSendText:object];
+        };
+        _sendTextPoster.errorAction = ^(VBXResourceLoader *loader, NSError *error){
+            [selph loader:loader sendTextWithError:error];
+        };
         [_sendTextPoster loadRequest:request];        
     }
 }

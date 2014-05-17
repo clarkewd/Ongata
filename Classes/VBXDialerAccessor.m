@@ -66,8 +66,13 @@
 
 - (void)loadCallerIDs {
     self.callerIDsResult = nil;
-    [_callerIDsLoader setTarget:self successAction:@selector(loader:didLoadCallerIDs:fromCache:)
-        errorAction:@selector(loader:callerIDsFailedWithError:)];
+    __block __typeof__(self) selph = self;
+    _callerIDsLoader.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+        [selph loader:loader didLoadCallerIDs:object fromCache:usingCache];
+    };
+    _callerIDsLoader.errorAction = ^(VBXResourceLoader *loader, NSError *error){
+        [selph loader:loader callerIDsFailedWithError:error];
+    };
     [_callerIDsLoader loadRequest:[VBXResourceRequest requestWithResource:@"numbers/outgoingcallerid"] usingCache:YES];
 }
 
@@ -105,9 +110,14 @@
     [request.params setObject:phone forKey:@"to"];
     [request.params setObject:callerID forKey:@"callerid"];
     [request.params setObject:[self callbackNumber] forKey:@"from"];
-    
-    [_callPoster setTarget:self successAction:@selector(loader:didPlaceCall:)
-        errorAction:@selector(loader:callFailedWithError:)];
+
+    __block __typeof__(self) selph = self;
+    _callPoster.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+        [selph loader:loader didPlaceCall:object];
+    };
+    _callPoster.errorAction = ^(VBXResourceLoader *loader, NSError *error){
+        [selph loader:loader callFailedWithError:error];
+    };
     [_callPoster loadRequest:request];
 }
 

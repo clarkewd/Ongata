@@ -25,7 +25,7 @@
 #import "VBXCache.h"
 
 
-@interface VBXFolderListAccessor ()
+@interface VBXFolderListAccessor () <VBXResourceLoaderTarget>
 
 @property (nonatomic, retain) VBXFolderList *model;
 
@@ -55,7 +55,7 @@
     [_loader loadRequest:[VBXResourceRequest requestWithResource:@"messages/inbox"] usingCache:usingCache];
 }
 
-- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache {
+- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
     self.model = [[[VBXFolderList alloc] initWithDictionary:object] autorelease];
     [_delegate accessorDidLoadData:self fromCache:fromCache];
 }

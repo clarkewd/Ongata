@@ -27,7 +27,7 @@
 #import "NSExtensions.h"
 #import "VBXCache.h"
 
-@interface VBXMessageDetailAccessor ()
+@interface VBXMessageDetailAccessor () <VBXResourceLoaderTarget>
 
 @property (nonatomic, retain) VBXMessageDetail *model;
 
@@ -88,12 +88,16 @@
     VBXResourceRequest *request = [VBXResourceRequest requestWithResource:resource];
     [request.params setInt:_model.annotations.last forKey:@"offset"];
     [request.params setInt:_pageSize forKey:@"max"];
-    
-    [_annotationsLoader setTarget:self successAction:@selector(loader:didFinishWithAnnotations:)];
+
+    _annotationsLoader.target = self;
+    __block VBXMessageDetailAccessor *selph = self;
+    _annotationsLoader.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+        [selph loader:loader didFinishWithAnnotations:object];
+    };
     [_annotationsLoader loadRequest:request];
 }
 
-- (void)loader:(VBXResourceLoader *)loader didLoadObject:(NSDictionary *)object fromCache:(BOOL)fromCache {
+- (void)loader:(VBXResourceLoader *)loader didLoadObject:(NSDictionary *)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
     //debug(@"object=%@", object);
     self.model = [[[VBXMessageDetail alloc] initWithDictionary:object] autorelease];
     _modelIsFromCache = fromCache;
@@ -117,8 +121,13 @@
     [request.params setObject:@"noted" forKey:@"annotation_type"];
     [request.params setObject:text forKey:@"description"];
     
-    [_notePoster setTarget:self successAction:@selector(loader:didAddNote:)
-        errorAction:@selector(loader:addNoteDidFailWithError:)];
+    __block __typeof__(self) selph = self;
+    _notePoster.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+        [selph loader:loader didAddNote:object];
+    };
+    _archivePoster.errorAction = ^(VBXResourceLoader *loader, NSError *error){
+        [selph loader:loader addNoteDidFailWithError:error];
+    };
     [_notePoster loadRequest:request];
 }
 
@@ -138,8 +147,13 @@
     VBXResourceRequest *request = [VBXResourceRequest requestWithResource:resource method:@"POST"];
     [request.params setObject:@"true" forKey:@"archived"];
     
-    [_archivePoster setTarget:self successAction:@selector(loader:didArchiveMessage:)
-                 errorAction:@selector(loader:archiveDidFailWithError:)];
+    __block __typeof__(self) selph = self;
+    _archivePoster.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+        [selph loader:loader didArchiveMessage:object];
+    };
+    _archivePoster.errorAction = ^(VBXResourceLoader *loader, NSError *error){
+        [selph loader:loader archiveDidFailWithError:error];
+    };
     [_archivePoster loadRequest:request];
 }
 

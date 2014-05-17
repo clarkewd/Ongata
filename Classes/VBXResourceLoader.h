@@ -22,30 +22,24 @@
 
 @class VBXResourceRequest;
 @class VBXCache;
+@class VBXResourceLoader;
+@protocol VBXResourceLoaderTarget;
 
-@interface VBXResourceLoader : NSObject {
-    NSMutableArray *_urlLoaders;
-    id _target;
-    SEL _successAction;
-    SEL _errorAction;
-    BOOL _answersAuthChallenges;
-    VBXCache *_cache;
-    NSUserDefaults *_userDefaults;
-    NSURL *_baseURL;
-}
+typedef void (^VBXResourceLoaderSuccessAction)(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate);
+typedef void (^VBXResourceLoaderErrorAction)(VBXResourceLoader *, NSError *);
+
+@interface VBXResourceLoader : NSObject
 
 + (VBXResourceLoader *)loader;
 
-@property (nonatomic, assign) id target;
-@property (nonatomic, assign) SEL successAction;
-@property (nonatomic, assign) SEL errorAction;
+@property (nonatomic, copy) VBXResourceLoaderSuccessAction successAction;
+@property (nonatomic, copy) VBXResourceLoaderErrorAction errorAction;
 @property (nonatomic, assign) BOOL answersAuthChallenges;
 @property (nonatomic, retain) VBXCache *cache;
 @property (nonatomic, retain) NSUserDefaults *userDefaults;
 @property (nonatomic, retain) NSURL *baseURL;
 
-- (void)setTarget:(id)target successAction:(SEL)successAction;
-- (void)setTarget:(id)target successAction:(SEL)successAction errorAction:(SEL)errorAction;
+- (void)setTarget:(id<VBXResourceLoaderTarget>)target; // sets successAction and errorAction
 
 - (void)loadRequest:(VBXResourceRequest *)request;
 - (void)loadRequest:(VBXResourceRequest *)request usingCache:(BOOL)usingCache;
@@ -54,4 +48,9 @@
 - (NSURLRequest *)URLRequestForRequest:(VBXResourceRequest *)request;
 - (NSString *)keyForRequest:(NSURLRequest *)request;
 
+@end
+
+@protocol VBXResourceLoaderTarget <NSObject>
+- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)cache hadTrustedCertificate:(BOOL)hadTrustedCertificate;
+- (void)loader:(VBXResourceLoader *)loader didFailWithError:(NSError *)error;
 @end

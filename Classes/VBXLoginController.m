@@ -43,7 +43,7 @@
 #import "VBXConfiguration.h"
 #import "SFHFKeychainUtils.h"
 
-@interface VBXLoginController (Private) <UIAlertViewDelegate>
+@interface VBXLoginController () <UIAlertViewDelegate, VBXResourceLoaderTarget>
 @end
 
 
@@ -103,7 +103,7 @@
     [appDelegate showMainFlow];    
 }
 
-- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache {
+- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
     [self clearOverlayView];
     self.navigationItem.rightBarButtonItem.enabled = YES;
     self.navigationItem.prompt = nil;

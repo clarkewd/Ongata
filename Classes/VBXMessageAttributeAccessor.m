@@ -25,6 +25,8 @@
 #import "VBXResourceRequest.h"
 #import "NSExtensions.h"
 
+@interface VBXMessageAttributeAccessor () <VBXResourceLoaderTarget>
+@end
 
 @implementation VBXMessageAttributeAccessor
 
@@ -50,12 +52,12 @@
     NSString *resource = [@"messages/details/" stringByAppendingString:_attribute.messageDetail.key];
     VBXResourceRequest *request = [VBXResourceRequest requestWithResource:resource method:@"POST"];
     [request.params setObject:[_attribute keyForValue:value] forKey:_attribute.key];
-    
-    [_valuePoster setTarget:self successAction:@selector(loader:didSetValue:)];
+
+    _valuePoster.target = self;
     [_valuePoster loadRequest:request];
 }
 
-- (void)loader:(VBXResourceLoader *)loader didSetValue:(id)response {
+- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)response fromCache:(BOOL)cache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
     _attribute.value = _attribute.pendingValue;
     _attribute.pendingValue = nil;
     [_delegate accessorDidSetValue:self];

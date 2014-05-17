@@ -28,7 +28,7 @@
 #import "NSExtensions.h"
 
 
-@interface VBXMessageListAccessor ()
+@interface VBXMessageListAccessor () <VBXResourceLoaderTarget>
 
 @property (nonatomic, retain) VBXFolderDetail *model;
 
@@ -89,7 +89,7 @@
     [self loadFromOffset:[_model.messages last] usingCache:NO];
 }
 
-- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache {
+- (void)loader:(VBXResourceLoader *)loader didLoadObject:(id)object fromCache:(BOOL)fromCache hadTrustedCertificate:(BOOL)hadTrustedCertificate {
     VBXFolderDetail *newModel = [[[VBXFolderDetail alloc] initWithDictionary:object] autorelease];
     [newModel.messages mergeItemsFromBeginning:_model.messages];
     self.model = newModel;
@@ -109,8 +109,13 @@
     VBXResourceRequest *request = [VBXResourceRequest requestWithResource:resource method:@"POST"];
     [request.params setObject:@"true" forKey:@"archived"];
     
-    [_archivePoster setTarget:self successAction:@selector(loader:didArchiveMessage:)
-        errorAction:@selector(loader:archiveDidFailWithError:)];
+    __block __typeof__(self) selph = self;
+    _loader.successAction = ^(VBXResourceLoader *loader, id object, BOOL usingCache, BOOL hadTrustedCertificate){
+        [selph loader:loader didArchiveMessage:object];
+    };
+    _loader.errorAction = ^(VBXResourceLoader *loader, NSError *error){
+        [selph loader:loader archiveDidFailWithError:error];
+    };
     [_archivePoster loadRequest:request];
 }
 
