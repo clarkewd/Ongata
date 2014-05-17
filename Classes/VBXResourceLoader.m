@@ -85,7 +85,7 @@
     id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     
     if (error != nil) {
-        debug(@"Got error (%@) while parsing JSON: %@", error, [[[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding] autorelease]);
+        debug(@"Got error (%@) while parsing JSON: %@", error, [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding]);
         if (_errorAction) {
             _errorAction(self, [NSError twilioErrorForBadJSON:[error description]]);
         }

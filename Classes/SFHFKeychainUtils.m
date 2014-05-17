@@ -218,12 +218,12 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	// One likely way such an incorrect item could have come about is due to the previous (incorrect)
 	// version of this code (which set the password as a generic attribute instead of password data).
 	
-	NSDictionary *attributeResult = NULL;
+	CFDictionaryRef attributeResult = NULL;
 	NSMutableDictionary *attributeQuery = [query mutableCopy];
 	[attributeQuery setObject: (id) kCFBooleanTrue forKey:(id) kSecReturnAttributes];
-	OSStatus status = SecItemCopyMatching((CFDictionaryRef) attributeQuery, (CFTypeRef *) &attributeResult);
-	
-	[attributeResult release];
+	OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef) attributeQuery, (CFTypeRef *) &attributeResult);
+
+	CFRelease(attributeResult);
 	[attributeQuery release];
 	
 	if (status != noErr) {
@@ -238,13 +238,13 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	
 	// We have an existing item, now query for the password data associated with it.
 	
-	NSData *resultData = nil;
+	CFDataRef resultCFData = NULL;
 	NSMutableDictionary *passwordQuery = [query mutableCopy];
 	[passwordQuery setObject: (id) kCFBooleanTrue forKey: (id) kSecReturnData];
   
-	status = SecItemCopyMatching((CFDictionaryRef) passwordQuery, (CFTypeRef *) &resultData);
-	
-	[resultData autorelease];
+	status = SecItemCopyMatching((__bridge CFDictionaryRef) passwordQuery, (CFTypeRef *) &resultCFData);
+    NSData *resultData = (__bridge_transfer NSData *)resultCFData;
+
 	[passwordQuery release];
 	
 	if (status != noErr) {
@@ -282,7 +282,8 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 			*error = [NSError errorWithDomain: SFHFKeychainUtilsErrorDomain code: -1999 userInfo: nil];
 		}
 	}
-  
+	[resultData release];
+
 	return [password autorelease];
 }
 
@@ -358,7 +359,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 			
 			NSDictionary *query = [[[NSDictionary alloc] initWithObjects: objects forKeys: keys] autorelease];			
 			
-			status = SecItemUpdate((CFDictionaryRef) query, (CFDictionaryRef) [NSDictionary dictionaryWithObject: [password dataUsingEncoding: NSUTF8StringEncoding] forKey: (NSString *) kSecValueData]);
+			status = SecItemUpdate((__bridge CFDictionaryRef) query, (CFDictionaryRef) [NSDictionary dictionaryWithObject: [password dataUsingEncoding: NSUTF8StringEncoding] forKey: (NSString *) kSecValueData]);
 		}
 	}
 	else 
@@ -382,7 +383,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 		
 		NSDictionary *query = [[[NSDictionary alloc] initWithObjects: objects forKeys: keys] autorelease];			
     
-		status = SecItemAdd((CFDictionaryRef) query, NULL);
+		status = SecItemAdd((__bridge CFDictionaryRef) query, NULL);
 	}
 	
 	if (error != nil && status != noErr) 
@@ -417,7 +418,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	
 	NSDictionary *query = [[[NSDictionary alloc] initWithObjects: objects forKeys: keys] autorelease];
 	
-	OSStatus status = SecItemDelete((CFDictionaryRef) query);
+	OSStatus status = SecItemDelete((__bridge CFDictionaryRef) query);
 	
 	if (error != nil && status != noErr) 
   {
