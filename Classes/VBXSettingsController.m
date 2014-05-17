@@ -129,31 +129,12 @@
     [[self parentViewController] dismissModalViewControllerAnimated:YES];
 }
 
-- (void)fadeOutToMainFlowDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    UIView *blackView = (UIView *)context;
-    [blackView removeFromSuperview];
-}
-
 - (void)fadeToMainFlow:(UIView *)blackView {
-    [UIView beginAnimations:@"FadeToMainFlow" context:blackView];
-    [UIView setAnimationDuration:0.75];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(fadeOutToMainFlowDidStop:finished:context:)];
-    
-    blackView.alpha = 0.0;
-    
-    [UIView commitAnimations];    
-}
-
-- (void)fadeToDarkDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    UIView *blackView = (UIView *)context;
-
-    VBXAppDelegate *appDelegate = (VBXAppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDelegate showSetupFlow];
-    
-    [appDelegate.window bringSubviewToFront:blackView];
-    
-    [self performSelector:@selector(fadeToMainFlow:) withObject:blackView afterDelay:0.0];
+    [UIView animateWithDuration:0.75 animations:^{
+        blackView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [blackView removeFromSuperview];
+    }];
 }
 
 - (void)fadeToDark {
@@ -161,17 +142,19 @@
     blackView.backgroundColor = [UIColor blackColor];
     blackView.alpha = 0.0;
     blackView.userInteractionEnabled = YES;
-    
+
     [[UIApplication sharedApplication].keyWindow addSubview:blackView];
 
-    [UIView beginAnimations:@"FadeToDark" context:blackView];
-    [UIView setAnimationDuration:.75];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(fadeToDarkDidStop:finished:context:)];
-    
-    blackView.alpha = 1.0;
-    
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.75 animations:^{
+        blackView.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        VBXAppDelegate *appDelegate = (VBXAppDelegate *)[UIApplication sharedApplication].delegate;
+        [appDelegate showSetupFlow];
+
+        [appDelegate.window bringSubviewToFront:blackView];
+
+        [self performSelector:@selector(fadeToMainFlow:) withObject:blackView afterDelay:0.0];
+    }];
 }
 
 - (void)logout {
