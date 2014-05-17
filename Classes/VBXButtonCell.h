@@ -21,11 +21,9 @@
 #import <UIKit/UIKit.h>
 #import "VBXTableViewCell.h"
 
-@interface VBXButtonCell : VBXTableViewCell {
-    UILabel *__weak _buttonLabel;
-}
+@interface VBXButtonCell : VBXTableViewCell
 
-@property (weak, nonatomic, readonly) UILabel *buttonLabel;
+@property (nonatomic, strong, readonly) UILabel *buttonLabel;
 
 - (id)initWithText:(NSString *)text reuseIdentifier:(NSString *)reuseIdentifier;
 

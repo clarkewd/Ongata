@@ -118,11 +118,11 @@
 @interface BodyCell : UITableViewCell <VBXVariableHeightCell, UIScrollViewDelegate, VBXConfigurable> {
     UITextView *_bodyTextView;
     UIImageView *_shadowView;
-    RemainingCharsView *__weak _remainingCharsView;
+    RemainingCharsView *_remainingCharsView;
 }
 
 @property (nonatomic, readonly) UITextView *bodyTextView;
-@property (weak, nonatomic, readonly) RemainingCharsView *remainingCharsView;
+@property (nonatomic, strong, readonly) RemainingCharsView *remainingCharsView;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 
@@ -188,13 +188,10 @@
 @end
 
 
-@interface ToCell : UITableViewCell <VBXVariableHeightCell, VBXConfigurable> {
-    UILabel *__weak _label;
-    UITextField *__weak _textField;
-}
+@interface ToCell : UITableViewCell <VBXVariableHeightCell, VBXConfigurable>
 
-@property (weak, nonatomic, readonly) UILabel *label;
-@property (weak, nonatomic, readonly) UITextField *textField;
+@property (nonatomic, strong, readonly) UILabel *label;
+@property (nonatomic, strong, readonly) UITextField *textField;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 
@@ -278,13 +275,10 @@
 
 @end
 
-@interface CallerIdCell : UITableViewCell <VBXVariableHeightCell, VBXConfigurable> {
-    UILabel *__weak _label;
-    UILabel *__weak _valueField;
-}
+@interface CallerIdCell : UITableViewCell <VBXVariableHeightCell, VBXConfigurable>
 
-@property (weak, nonatomic, readonly) UILabel *label;
-@property (weak, nonatomic, readonly) UILabel *valueField;
+@property (nonatomic, strong, readonly) UILabel *label;
+@property (nonatomic, strong, readonly) UILabel *valueField;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 

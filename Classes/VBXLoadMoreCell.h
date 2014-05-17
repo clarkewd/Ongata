@@ -21,15 +21,11 @@
 #import <UIKit/UIKit.h>
 #import "VBXTableViewCell.h"
 
-@interface VBXLoadMoreCell : VBXTableViewCell <VBXConfigurable> {
-    UILabel *__weak _titleLabel;
-    UILabel *__weak _descriptionLabel;
-    UIActivityIndicatorView *__weak _spinner;
-}
+@interface VBXLoadMoreCell : VBXTableViewCell <VBXConfigurable>
 
-@property (weak, nonatomic, readonly) UILabel *titleLabel;
-@property (weak, nonatomic, readonly) UILabel *descriptionLabel;
-@property (weak, nonatomic, readonly) UIActivityIndicatorView *spinner;
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UILabel *descriptionLabel;
+@property (nonatomic, strong, readonly) UIActivityIndicatorView *spinner;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 

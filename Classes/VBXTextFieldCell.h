@@ -21,16 +21,11 @@
 #import <UIKit/UIKit.h>
 #import "VBXTableViewCell.h"
 
-@interface VBXTextFieldCell : VBXTableViewCell {
-    UILabel *__weak _label;
-    UILabel *__weak _helpLabel;
-    UITextField *__weak _textField;
-    
-}
+@interface VBXTextFieldCell : VBXTableViewCell
 
-@property (weak, nonatomic, readonly) UILabel *label;
-@property (weak, nonatomic, readonly) UILabel *helpLabel;
-@property (weak, nonatomic, readonly) UITextField *textField;
+@property (nonatomic, strong, readonly) UILabel *label;
+@property (nonatomic, strong, readonly) UILabel *helpLabel;
+@property (nonatomic, strong, readonly) UITextField *textField;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer;
 

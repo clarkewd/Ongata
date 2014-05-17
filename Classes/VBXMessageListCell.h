@@ -41,13 +41,13 @@
     
     UIView *_playerView;
     
-    VBXAudioControl *__weak _audioControl;
+    VBXAudioControl *_audioControl;
 }
 
 @property (nonatomic, strong) VBXMessageListController *messageListController;
 @property (nonatomic, strong) VBXMessageSummary *messageSummary;
 @property (nonatomic, strong) UIView *playerView;
-@property (weak, nonatomic, readonly) VBXAudioControl *audioControl;
+@property (nonatomic, strong, readonly) VBXAudioControl *audioControl;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 

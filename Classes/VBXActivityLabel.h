@@ -23,12 +23,10 @@
 
 @interface VBXActivityLabel : UIView {
     UIActivityIndicatorView *_activityIndicatorView;
-    UILabel *__weak _label;
-    
     BOOL _parentHadUserInteractionEnabled;
 }
 
-@property (weak, nonatomic, readonly) UILabel *label;
+@property (nonatomic, strong, readonly) UILabel *label;
 
 - (id)initWithText:(NSString *)text;
 
