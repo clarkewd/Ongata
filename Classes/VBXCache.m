@@ -91,11 +91,6 @@
     return filePath;
 }
 
-NSInteger compareFilesByDate(id filename1, id filename2, void *context) {
-    NSDictionary *fileDates = context;
-    return [[fileDates objectForKey:filename1] compare:[fileDates objectForKey:filename2]];
-}
-
 - (void)ensureRoomOnDisk {
     if (_numDiskEntries < _maxDiskEntries) return;
     
@@ -117,7 +112,9 @@ NSInteger compareFilesByDate(id filename1, id filename2, void *context) {
         [fileDates setObject:[attributes fileModificationDate] forKey:path];
     }
     
-    NSArray *sortedPaths = [[fileDates allKeys] sortedArrayUsingFunction:compareFilesByDate context:fileDates];
+    NSArray *sortedPaths = [[fileDates allKeys] sortedArrayUsingComparator:^(id filename1, id filename2) {
+        return [[fileDates objectForKey:filename1] compare:[fileDates objectForKey:filename2]];
+    }];
     for (int index = 0; index < [sortedPaths count]; index++) {
         NSString *path = [sortedPaths objectAtIndex:index];
         [_fileManager removeItemAtPath:path error:&error];
