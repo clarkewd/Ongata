@@ -243,19 +243,6 @@
 @end
 
 
-@implementation NSBundle (Extensions)
-
-- (id)loadObjectFromNib:(NSString *)nibName ofType:(Class)class {
-    NSArray *objects = [self loadNibNamed:nibName owner:nil options:nil];
-    for (id object in objects) {
-        if ([object isKindOfClass:class]) return object;
-    }
-    return nil;
-}
-
-@end
-
-
 @implementation NSMethodSignature (Extensions)
 
 - (NSString *)description {

@@ -107,13 +107,6 @@
 @end
 
 
-@interface NSBundle (Extensions)
-
-- (id)loadObjectFromNib:(NSString *)nibName ofType:(Class)class;
-
-@end
-
-
 @interface NSMethodSignature (Extensions)
 
 - (NSString *)description;
