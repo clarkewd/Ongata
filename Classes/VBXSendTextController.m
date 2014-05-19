@@ -462,6 +462,13 @@
     return self;
 }
 
+- (void)dealloc {
+    _toCell.textField.delegate = nil;
+    _bodyCell.bodyTextView.delegate = nil;
+    _dataSource.proxyToDelegate = nil;
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
+}
 
 - (void)loadView {
     [super loadView];
