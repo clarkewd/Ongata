@@ -154,14 +154,7 @@
     _configAccessor = [_builder configAccessor];
     _configAccessor.delegate = self;
     [_configAccessor loadDefaultConfig];
-    
-    if ([[_builder userDefaults] boolForKey:VBXUserDefaultsCompletedSetup] == YES) {
-        [self showMainFlow];
-        [self restoreState];        
-    } else {
-        [self showSetupFlow];
-    }
-    
+
     if (launchOptions != nil && [launchOptions allKeys].count > 0) {
         NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
         debug(@"opened with URL: %@", url);
