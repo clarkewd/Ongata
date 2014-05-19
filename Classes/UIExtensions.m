@@ -28,7 +28,7 @@
     CGFloat red = [dictionary floatForKey:@"r"];
     CGFloat green = [dictionary floatForKey:@"g"];
     CGFloat blue = [dictionary floatForKey:@"b"];
-    CGFloat alpha = [dictionary containsKey:@"a"]? [dictionary floatForKey:@"a"] : 1.0;
+    CGFloat alpha = [dictionary objectForKey:@"a"]? [dictionary floatForKey:@"a"] : 1.0;
     return [self initWithRed:red green:green blue:blue alpha:alpha];
 }
 

@@ -88,7 +88,7 @@
     if ([object isKindOfClass:[NSDictionary class]]) {
         NSDictionary *dict = object;
     
-        if ([dict containsKey:@"error"] && ([[dict objectForKey:@"error"] boolValue])) {
+        if ([dict objectForKey:@"error"] && ([[dict objectForKey:@"error"] boolValue])) {
             if (_errorAction) {
                 _errorAction(self, [NSError twilioErrorForServerError:[dict objectForKey:@"message"]]);
             }

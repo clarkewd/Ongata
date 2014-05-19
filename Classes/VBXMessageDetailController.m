@@ -1031,7 +1031,7 @@
 - (void)restoreState:(NSDictionary *)state {
     self.noteText = [state stringForKey:@"newNoteText"];
     
-    if ([state containsKey:@"addNoteState"]) {
+    if ([state objectForKey:@"addNoteState"]) {
         VBXTextEntryController *addNoteController = [self addNoteController];
         [addNoteController restoreState:[state objectForKey:@"addNoteState"]];
         [self presentModalViewController:addNoteController animated:NO];

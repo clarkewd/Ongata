@@ -56,10 +56,6 @@
 
 @implementation NSDictionary (Extensions)
 
-- (BOOL)containsKey:(NSString *)key {
-    return [self objectForKey:key] != nil;
-}
-
 - (id)objectForKeyTranslatingNSNull:(id)key {
     id object = [self objectForKey:key];
     if ([object isKindOfClass:[NSNull class]]) return nil;
@@ -138,7 +134,7 @@
 
 - (void)mergeWithContentsOfDictionary:(NSDictionary *)dict {
     for (NSString *key in [dict allKeys]) {
-        if ([self containsKey:key]) {
+        if ([self objectForKey:key]) {
             if ([[dict objectForKey:key] isKindOfClass:[NSDictionary class]] &&
                 [[self objectForKey:key] isKindOfClass:[NSDictionary class]]) {
                 

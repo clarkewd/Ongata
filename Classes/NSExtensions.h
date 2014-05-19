@@ -45,8 +45,6 @@
 
 @interface NSDictionary (Extensions)
 
-- (BOOL)containsKey:(NSString *)key;
-
 - (id)objectForKeyTranslatingNSNull:(id)key;
 
 - (id)objectForKey:(id)key ofClass:(Class)class;

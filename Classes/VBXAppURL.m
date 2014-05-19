@@ -142,7 +142,7 @@
     if ([[queryComponents objectForKey:@"messageId"] length] > 0) {
         NSMutableDictionary *messageState = [NSMutableDictionary dictionary];
         for (id key in queryArgs) {
-            if ([queryComponents containsKey:key]) {
+            if ([queryComponents objectForKey:key]) {
                 [messageState setObject:[queryComponents objectForKey:key] forKey:[queryArgs valueForKey:key]];
             } else {	
                 [messageState setObject:@"" forKey:[queryArgs valueForKey:key]];

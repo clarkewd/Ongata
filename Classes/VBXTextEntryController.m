@@ -92,7 +92,7 @@
 }
 
 - (void)restoreState:(NSDictionary *)state {
-    if ([state containsKey:@"text"]) {
+    if ([state objectForKey:@"text"]) {
         self.initialText = [state stringForKey:@"text"];
     }
 }
