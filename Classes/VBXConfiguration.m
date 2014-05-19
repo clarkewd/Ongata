@@ -20,7 +20,6 @@
 
 #import "VBXConfiguration.h"
 #import "NSExtensions.h"
-#import "NSData+Base64.h"
 #import "VBXUserDefaultsKeys.h"
 
 VBXHSL ThemedHSL(NSString *key, VBXHSL defaultHSL) {
@@ -285,7 +284,7 @@ static void FakeRelease(CFAllocatorRef allocator, const void *value) { }
     UIImage *image = nil;
     
     if (value != nil) {
-        image = [[UIImage alloc] initWithData:[NSData dataFromBase64String:value]];
+        image = [[UIImage alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:value options:0]];
     }
     
     if (image == nil && defaultImageFileName != nil) {

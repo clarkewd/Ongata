@@ -49,7 +49,6 @@
 		284BC32D11389E0000EA7884 /* VBXLoadMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 284BC32B11389E0000EA7884 /* VBXLoadMoreCell.m */; };
 		284BCB15113DF34900EA7884 /* VBXSendTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28475373112F2530003DE32A /* VBXSendTextController.m */; };
 		284CC46D114199AE006358D2 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 284CC46C114199AE006358D2 /* gear.png */; };
-		284CC49C11419B99006358D2 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 284CC49A11419B99006358D2 /* NSData+Base64.m */; };
 		284CCB181145E249006358D2 /* TrustTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 284CCB161145E244006358D2 /* TrustTest.m */; };
 		284CCB1C1145E2B2006358D2 /* VBXTrustHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 284CCB1A1145E2B2006358D2 /* VBXTrustHelper.m */; };
 		284CCB1E1145E2B2006358D2 /* VBXTrustHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 284CCB1A1145E2B2006358D2 /* VBXTrustHelper.m */; };
@@ -227,8 +226,6 @@
 		284BC32B11389E0000EA7884 /* VBXLoadMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXLoadMoreCell.m; sourceTree = "<group>"; };
 		284BC7EB113DA4BB00EA7884 /* hideous-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hideous-config.json"; sourceTree = "<group>"; };
 		284CC46C114199AE006358D2 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = Resources/gear.png; sourceTree = "<group>"; };
-		284CC49911419B99006358D2 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Classes/NSData+Base64.h"; sourceTree = "<group>"; };
-		284CC49A11419B99006358D2 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Classes/NSData+Base64.m"; sourceTree = "<group>"; };
 		284CCB161145E244006358D2 /* TrustTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustTest.m; sourceTree = "<group>"; };
 		284CCB191145E2B2006358D2 /* VBXTrustHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXTrustHelper.h; sourceTree = "<group>"; };
 		284CCB1A1145E2B2006358D2 /* VBXTrustHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXTrustHelper.m; sourceTree = "<group>"; };
@@ -682,8 +679,6 @@
 		96AF94A410D1D37100E0DA8B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				284CC49911419B99006358D2 /* NSData+Base64.h */,
-				284CC49A11419B99006358D2 /* NSData+Base64.m */,
 				2838C050110FE30500426893 /* UIViewPositioningExtension.h */,
 				2838C051110FE30500426893 /* UIViewPositioningExtension.m */,
 				969CCC9A10BCB164007FCB56 /* NSExtensions.h */,
@@ -996,7 +991,6 @@
 				284BBE8811376E6100EA7884 /* VBXTableViewCell.m in Sources */,
 				284BC32D11389E0000EA7884 /* VBXLoadMoreCell.m in Sources */,
 				284BCB15113DF34900EA7884 /* VBXSendTextController.m in Sources */,
-				284CC49C11419B99006358D2 /* NSData+Base64.m in Sources */,
 				284CCB1C1145E2B2006358D2 /* VBXTrustHelper.m in Sources */,
 				2847D1A9114AD11600C5326C /* VBXSecurityAlertController.m in Sources */,
 				288B3BDE11A34A250096A815 /* VBXSessionExpiredController.m in Sources */,
