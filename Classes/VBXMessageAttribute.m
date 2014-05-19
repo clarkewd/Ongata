@@ -21,6 +21,17 @@
 #import "VBXMessageAttribute.h"
 #import "VBXMessageDetail.h"
 #import "VBXTicketStatus.h"
+#import "VBXUser.h"
+
+@interface VBXMessageAttribute ()
+
+@property (nonatomic, copy) id (^valueGetter)();
+@property (nonatomic, copy) void (^valueSetter)(id);
+
+@property (nonatomic, assign) NSString *(^titleGetter)();
+@property (nonatomic, assign) NSString *(^detailGetter)();
+
+@end
 
 @implementation VBXMessageAttribute
 
@@ -30,11 +41,10 @@
     attribute.key = @"assigned";
     attribute.name = name;
     attribute.options = detail.activeUsers;
-    attribute.valueGetter = @selector(assignedUser);
-    attribute.valueSetter = @selector(setAssignedUser:);
-    attribute.titleSelector = @selector(fullName);
-    attribute.detailSelector = @selector(email);
-    attribute.keySelector = @selector(key);
+    attribute.valueGetter = ^{ return [detail assignedUser]; };
+    attribute.valueSetter = ^(VBXUser *user){ [detail setAssignedUser:user]; };
+    attribute.titleGetter = ^(VBXUser *user){ return user.fullName; };
+    attribute.detailGetter = ^(VBXUser *user){ return user.email; };
 
     return attribute;
 }
@@ -49,10 +59,9 @@
                          [VBXTicketStatus ticketStatusWithValue:@"closed"],
                          [VBXTicketStatus ticketStatusWithValue:@"pending"],
                          nil];
-    attribute.valueGetter = @selector(ticketStatus);
-    attribute.valueSetter = @selector(setTicketStatus:);
-    attribute.titleSelector = @selector(title);
-    attribute.keySelector = @selector(key);
+    attribute.valueGetter = ^{ return [detail ticketStatus]; };
+    attribute.valueSetter = ^(id status){ [detail setTicketStatus:status]; };
+    attribute.titleGetter = ^(id value){ return [value title]; };
     return attribute;
 }
 
@@ -61,21 +70,20 @@
 @synthesize name = _name;
 @synthesize options = _options;
 
-@synthesize valueGetter = _valueGetter;
-@synthesize valueSetter = _valueSetter;
+@synthesize valueGetter;
+@synthesize valueSetter;
 @synthesize pendingValue = _pendingValue;
 
-@synthesize titleSelector = _titleSelector;
-@synthesize detailSelector = _detailSelector;
-@synthesize keySelector = _keySelector;
+@synthesize titleGetter;
+@synthesize detailGetter;
 
 
 - (id)value {
-    return [_messageDetail performSelector:_valueGetter];
+    return self.valueGetter();
 }
 
 - (void)setValue:(id)value {
-    [_messageDetail performSelector:_valueSetter withObject:value];
+    self.valueSetter(value);
 }
 
 - (NSInteger)selectedIndex {
@@ -83,19 +91,19 @@
 }
 
 - (BOOL)hasDetail {
-    return _detailSelector != NULL;
+    return detailGetter != nil;
 }
 
 - (NSString *)titleForValue:(id)value {
-    return [value performSelector:_titleSelector];
+    return self.titleGetter(value);
 }
 
 - (NSString *)detailForValue:(id)value {
-    return self.hasDetail? [value performSelector:_detailSelector] : nil;
+    return self.hasDetail ? self.detailGetter(value) : nil;
 }
 
 - (NSString *)keyForValue:(id)value {
-    return [value performSelector:_keySelector];
+    return [value key];
 }
 
 @end

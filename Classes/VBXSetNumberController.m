@@ -44,9 +44,8 @@
 
 @implementation VBXSetNumberController
 
+@synthesize delegate;
 @synthesize userDefaults = _userDefaults;
-@synthesize finishedTarget = _finishedTarget;
-@synthesize finishedAction = _finishedAction;
 @dynamic finishedButtonText;
 
 - (void)finish {
@@ -57,7 +56,7 @@
         [_userDefaults setObject:phoneNumber forKey:VBXUserDefaultsCallbackPhone];
         [_userDefaults synchronize];
         
-        [_finishedTarget performSelector:_finishedAction withObject:self];        
+        [self.delegate phoneNumberWasValidated:self];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"Incorrect Phone Number", @"Set Number: Title for alert when number fails to validate.")
                                                         message:LocalizedString(@"A 10-digit phone number is required to continue.", @"Set Number: Body for alert when number fails to validate.")
@@ -81,20 +80,6 @@
 
 - (void)setFinishedButtonText:(NSString *)text {
     self.navigationItem.rightBarButtonItem.title = text;
-}
-
-- (void)setFinishedTarget:(id)finishedTarget {
-    _finishedTarget = finishedTarget;
-}
-
-- (void)setFinishedAction:(SEL)finishedAction {
-    _finishedAction = finishedAction;
-}
-
-- (void)dealloc {
-    self.finishedTarget = nil;
-    self.finishedAction = nil;
-    
 }
 
 - (void)loadView {

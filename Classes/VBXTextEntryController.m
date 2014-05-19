@@ -28,8 +28,7 @@
 
 @implementation VBXTextEntryController
 
-@synthesize target = _target;
-@synthesize action = _action;
+@synthesize delegate;
 @synthesize navTitle = _navTitle;
 @synthesize initialText = _initialText;
 @synthesize navBar = _navBar;
@@ -73,11 +72,7 @@
 
 - (IBAction)save {
     //debug(@"text: %@", textView.text);
-    if (!_action) {
-        _action = @selector(textEntryControllerFinishedWithText:);
-    }
-    
-    [_target performSelector:_action withObject:_textView.text];
+    [self.delegate textEntryControllerFinishedWithText:_textView.text];
     [self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 

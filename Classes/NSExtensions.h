@@ -114,20 +114,6 @@
 @end
 
 
-
-@interface NSObject (Extensions)
-
-- (id)performSelectorIfImplemented:(SEL)selector;
-
-- (id)performSelectorIfImplemented:(SEL)selector withObject:(id)object;
-
-- (id)performSelectorIfImplemented:(SEL)selector withObject:(id)object1 withObject:(id)object2;
-
-- (NSInvocation *)invocationForSelector:(SEL)selector;
-
-@end
-
-
 @interface NSMethodSignature (Extensions)
 
 - (NSString *)description;

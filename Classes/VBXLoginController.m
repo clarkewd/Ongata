@@ -43,7 +43,7 @@
 #import "VBXConfiguration.h"
 #import "SFHFKeychainUtils.h"
 
-@interface VBXLoginController () <UIAlertViewDelegate, VBXResourceLoaderTarget>
+@interface VBXLoginController () <UIAlertViewDelegate, VBXResourceLoaderTarget, VBXSetNumberControllerDelegate>
 @end
 
 
@@ -125,8 +125,7 @@
     }
     
     VBXSetNumberController *setNumberController = [[VBXObjectBuilder sharedBuilder] setNumberController];
-    setNumberController.finishedTarget = self;
-    setNumberController.finishedAction = @selector(phoneNumberWasValidated:);
+    setNumberController.delegate = self;
     setNumberController.finishedButtonText = LocalizedString(@"Finish", @"Login: Button label to show in the top right of the SetNumber screen.");
     [self.navigationController pushViewController:setNumberController animated:YES];
 }

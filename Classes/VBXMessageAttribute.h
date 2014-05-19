@@ -23,20 +23,7 @@
 @class VBXMessageDetail;
 
 
-@interface VBXMessageAttribute : NSObject {
-    VBXMessageDetail *_messageDetail;
-    NSString *_key;
-    NSString *_name;
-    NSArray *_options;
-    
-    SEL _valueGetter;
-    SEL _valueSetter;
-    id _pendingValue;
-    
-    SEL _titleSelector;
-    SEL _detailSelector;
-    SEL _keySelector;
-}
+@interface VBXMessageAttribute : NSObject
 
 + (VBXMessageAttribute *)assignedUserAttributeForMessage:(VBXMessageDetail *)detail name:(NSString *)name;
 + (VBXMessageAttribute *)ticketStatusAttributeForMessage:(VBXMessageDetail *)detail name:(NSString *)name;
@@ -46,15 +33,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSArray *options;
 
-@property (nonatomic, assign) SEL valueGetter;
-@property (nonatomic, assign) SEL valueSetter;
-@property (nonatomic, strong) id pendingValue;
-
-@property (nonatomic, assign) SEL titleSelector;
-@property (nonatomic, assign) SEL detailSelector;
-@property (nonatomic, assign) SEL keySelector;
-
 @property (nonatomic, strong) id value;
+@property (nonatomic, strong) id pendingValue;
 @property (nonatomic, readonly) NSInteger selectedIndex;
 @property (nonatomic, readonly) BOOL hasDetail;
 

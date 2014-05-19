@@ -96,7 +96,10 @@
 
     NSMutableArray *controllerStates = [NSMutableArray arrayWithCapacity:[self.viewControllers count]];
     for (UIViewController *controller in self.viewControllers) {
-        id controllerState = [controller performSelectorIfImplemented:@selector(saveState)];
+        id controllerState = nil;
+        if ([controller respondsToSelector:@selector(saveState)]) {
+            controllerState = [controller performSelector:@selector(saveState)];
+        }
         if (!controllerState) break;
         [controllerStates addObject:controllerState];
     }
@@ -115,7 +118,9 @@
         }
         
         UIViewController *controller = [self.viewControllers objectAtIndex:index++];
-        [controller performSelectorIfImplemented:@selector(restoreState:) withObject:controllerState];
+        if ([controller respondsToSelector:@selector(restoreState:)]) {
+            [controller performSelector:@selector(restoreState:) withObject:controllerState];
+        }
     }
 }
 

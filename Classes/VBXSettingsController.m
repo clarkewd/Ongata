@@ -36,7 +36,7 @@
 #import "VBXGlobal.h"
 #import "VBXConfiguration.h"
 
-@interface VBXSettingsController () <UITableViewDelegate, UITextFieldDelegate>
+@interface VBXSettingsController () <UITableViewDelegate, UITextFieldDelegate, VBXSetNumberControllerDelegate>
 @end
 
 
@@ -173,8 +173,7 @@
 		[self.navigationController pushViewController:controller animated:YES];
     } else if (cell == _callbackPhoneField) {
         VBXSetNumberController *controller = [_builder setNumberController];
-        controller.finishedTarget = self;
-        controller.finishedAction = @selector(phoneNumberWasValidated:);
+        controller.delegate = self;
         controller.finishedButtonText = LocalizedString(@"Save", @"Settings: Button title used for the done action in the set number controller when invoked from settings.");
         [self.navigationController pushViewController:controller animated:YES];
     }

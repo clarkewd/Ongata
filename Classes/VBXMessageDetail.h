@@ -53,6 +53,7 @@
 @property (nonatomic, strong) NSString *folder;
 @property (nonatomic, strong) NSString *assignedUserKey;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) VBXTicketStatus *ticketStatus;
 @property (nonatomic, strong) NSString *ticketStatusKey;
 @property (nonatomic, strong) NSString *recordingURL;
 @property (nonatomic, strong) NSString *recordingLength;

@@ -256,35 +256,6 @@
 @end
 
 
-@implementation NSObject (Extensions)
-
-- (id)performSelectorIfImplemented:(SEL)selector {
-    if (![self respondsToSelector:selector]) return nil;
-    return [self performSelector:selector];
-}
-
-- (id)performSelectorIfImplemented:(SEL)selector withObject:(id)object {
-    if (![self respondsToSelector:selector]) return nil;
-    return [self performSelector:selector withObject:object];
-}
-
-- (id)performSelectorIfImplemented:(SEL)selector withObject:(id)object1 withObject:(id)object2 {
-    if (![self respondsToSelector:selector]) return nil;
-    return [self performSelector:selector withObject:object1 withObject:object2];
-}
-
-- (NSInvocation *)invocationForSelector:(SEL)selector {
-    if (![self respondsToSelector:selector]) return nil;
-    NSMethodSignature *signature = [self methodSignatureForSelector:selector];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-    [invocation setTarget:self];
-    [invocation setSelector:selector];
-    return invocation;
-}
-
-@end
-
-
 @implementation NSMethodSignature (Extensions)
 
 - (NSString *)description {

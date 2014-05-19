@@ -277,7 +277,7 @@
 
 @end
 
-@interface VBXMessageDetailController () <UIActionSheetDelegate, VBXAudioPlaybackControllerDelegate, VBXAudioControlDelegate, VBXMessageDetailAccessorDelegate, VBXDialerAccessorDelegate, UIWebViewDelegate>
+@interface VBXMessageDetailController () <UIActionSheetDelegate, VBXAudioPlaybackControllerDelegate, VBXAudioControlDelegate, VBXMessageDetailAccessorDelegate, VBXDialerAccessorDelegate, VBXTextEntryControllerDelegate, UIWebViewDelegate>
 - (void)didClickPhoneNumberInTranscription:(NSString *)phoneNumber;
 @property (nonatomic, strong) NSString *noteText;
 @end
@@ -947,7 +947,7 @@
 
 - (VBXTextEntryController *)addNoteController {
     VBXTextEntryController *controller = [_builder textEntryController];
-    controller.target = self;
+    controller.delegate = self;
     controller.navTitle = LocalizedString(@"Add Note", @"Message Detail: Title for add note button");
     controller.initialText = _noteText;
     return controller;
@@ -1008,7 +1008,7 @@
     UIViewController *modalController = [self modalViewController];
     if ([modalController isKindOfClass:[VBXTextEntryController class]]) {
         VBXTextEntryController *textEntryController = (VBXTextEntryController *)modalController;
-        if (textEntryController.target == self) {
+        if (textEntryController.delegate == self) {
             [state setObject:[textEntryController saveState] forKey:@"addNoteState"];
         }
     } else {

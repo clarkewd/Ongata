@@ -24,6 +24,7 @@
 
 @class VBXTextFieldCell;
 @class VBXSectionedCellDataSource;
+@protocol VBXSetNumberControllerDelegate;
 
 @interface VBXSetNumberController : VBXTableViewController {
     NSUserDefaults *_userDefaults;    
@@ -31,14 +32,14 @@
     VBXSectionedCellDataSource *_cellDataSource;
     
     VBXTextFieldCell *_numberField;
-    
-    id __weak _finishedTarget;
-    SEL _finishedAction;
 }
 
+@property (nonatomic, weak) id<VBXSetNumberControllerDelegate> delegate;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic, weak) id finishedTarget;
-@property (nonatomic, assign) SEL finishedAction;
 @property (nonatomic, weak) NSString *finishedButtonText;
 
+@end
+
+@protocol VBXSetNumberControllerDelegate <NSObject>
+- (void)phoneNumberWasValidated:(UIViewController *)sender;
 @end

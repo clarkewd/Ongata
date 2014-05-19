@@ -21,17 +21,16 @@
 #import <UIKit/UIKit.h>
 #import "VBXViewController.h"
 
+@protocol VBXTextEntryControllerDelegate;
+
 @interface VBXTextEntryController : UIViewController {
-    id __weak _target;
-    SEL _action;
     NSString *_navTitle;
     NSString *_initialText;
     UINavigationBar *_navBar;
     UITextView *_textView;
 }
 
-@property (nonatomic, weak) id target;
-@property (nonatomic, assign) SEL action;
+@property (nonatomic, weak) id<VBXTextEntryControllerDelegate> delegate;
 @property (nonatomic, strong) NSString *navTitle;
 @property (nonatomic, strong) NSString *initialText;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
@@ -43,4 +42,8 @@
 - (NSDictionary *)saveState;
 - (void)restoreState:(NSDictionary *)state;
 
+@end
+
+@protocol VBXTextEntryControllerDelegate <NSObject>
+- (void)textEntryControllerFinishedWithText:(NSString *)text;
 @end
