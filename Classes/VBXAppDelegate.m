@@ -404,9 +404,9 @@
     [_mainNavigationController setToolbarHidden:NO];
     
     [_configAccessor loadConfig];
-    
-    [_window addSubview:self.mainNavigationController.view];
-    [_window makeKeyAndVisible];    
+
+    _window.rootViewController = self.mainNavigationController;
+    [_window makeKeyAndVisible];
 }
 
 - (void)showSetupFlow {
@@ -414,9 +414,9 @@
         [_mainNavigationController.view removeFromSuperview];
         self.mainNavigationController = nil;
     }
-    
+
     self.setupNavigationController = [[UINavigationController alloc] initWithRootViewController:(UIViewController *)[_builder setServerController]];
-    [_window addSubview:self.setupNavigationController.view];
+    _window.rootViewController = self.setupNavigationController;
     [_window makeKeyAndVisible];
 }
 
