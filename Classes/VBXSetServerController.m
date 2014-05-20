@@ -98,6 +98,12 @@
     return self;
 }
 
+- (void)dealloc {
+    _configAccessor.delegate = nil;
+    _serverField.textField.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.tableView.delegate = nil;
+}
 
 - (void)loadView {
     [super loadView];

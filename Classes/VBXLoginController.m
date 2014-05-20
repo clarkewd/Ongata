@@ -155,9 +155,10 @@
 
 - (void)dealloc {
     [_loader cancelAllRequests];
-    
-
-    
+    _emailField.textField.delegate = nil;
+    _passwordField.textField.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.tableView.delegate = nil;
 }
 
 - (void)loadView {

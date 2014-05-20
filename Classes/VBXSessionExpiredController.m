@@ -81,6 +81,11 @@
     return self;
 }
 
+- (void)dealloc {
+    _passwordField.textField.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.tableView.delegate = nil;
+}
 
 - (void)loadView {
     [super loadView];

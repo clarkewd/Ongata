@@ -348,12 +348,11 @@
         [_webView stopLoading];
     }
     _webView.delegate = nil;
-    
-
-
-    
-    
-
+    _accessor.delegate = nil;
+    _audioControl.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.tableView.delegate = nil;
+    _dataSource.proxyToDelegate = nil;
 }
 
 #pragma mark Message detail control

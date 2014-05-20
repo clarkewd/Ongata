@@ -78,6 +78,12 @@
     return self;
 }
 
+- (void)dealloc {
+    _numberField.textField.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.tableView.delegate = nil;
+}
+
 - (void)setFinishedButtonText:(NSString *)text {
     self.navigationItem.rightBarButtonItem.title = text;
 }
