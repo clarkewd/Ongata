@@ -137,10 +137,7 @@
 - (void)viewDidLoad {
     _statusLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
     _statusLabel.textAlignment = UITextAlignmentCenter;
-    _statusLabel.textColor = [UIColor whiteColor];
-    _statusLabel.shadowColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
-    _statusLabel.shadowOffset = CGSizeMake(0, -1);
-    
+
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.toolbarItems = [NSArray arrayWithObjects:
                          _refreshButton, 
@@ -150,6 +147,12 @@
     _loadMoreView = [[VBXLoadMoreCell alloc] initWithReuseIdentifier:nil];
     
     _accessor.delegate = self;
+}
+
+- (void)applyConfig {
+    [super applyConfig];
+
+    _statusLabel.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor blackColor]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -75,7 +75,6 @@
         // The color of the status text shown in the bottom toolbar (e.g. Updated 7/16/10 1:52 PM)
         // Default: white
         // "toolBarInfoTextColor" : "@whiteColor",
-        // "toolBarInfoTextShadowColor" : "@darkGrayColor",
         
         // The color for the header text of table sections.  (e.g. The "Server" header you see on the first
         // setup screen of the application).

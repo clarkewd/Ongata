@@ -599,6 +599,8 @@
     _headerView.backgroundColor = VBXTableViewGroupedBackgroundColor();    
     _audioControlsFrame.backgroundColor = [UIColor clearColor];
     _audioControl.backgroundColor = [UIColor clearColor];
+
+    _messageView.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor blackColor]);
 }
 
 - (void)loadView {
@@ -618,9 +620,6 @@
     
     _messageView = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
     _messageView.textAlignment = UITextAlignmentCenter;
-    _messageView.textColor = [UIColor whiteColor];
-    _messageView.shadowColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
-    _messageView.shadowOffset = CGSizeMake(0, -1);
     
     self.toolbarItems = [NSArray arrayWithObjects:
                          _refreshButton,

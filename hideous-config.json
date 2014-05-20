@@ -7,7 +7,6 @@
         "navigationBarTintColor" : "#aa3333",
         "toolbarTintColor" : "@navigationBarTintColor",
         "toolBarInfoTextColor" : "@blueColor",
-        "toolBarInfoTextShadowColor" : "@greenColor",
         
         "tableViewHeaderTextColor" : "@redColor",
         "tableViewHeaderTextShadowColor" : "@purpleColor",

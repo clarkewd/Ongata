@@ -88,7 +88,6 @@
 - (void)viewDidLoad {    
     _statusLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
     _statusLabel.textAlignment = UITextAlignmentCenter;
-    _statusLabel.shadowOffset = CGSizeMake(0, -1);
     
     // Setting our footer view to an empty zero-size view prevents the UITableView from drawing
     // mor separator lines than we need.
@@ -112,9 +111,8 @@
 - (void)applyConfig {
     [super applyConfig];
     
-    _statusLabel.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor whiteColor]);
-    _statusLabel.shadowColor = ThemedColor(@"toolBarInfoTextShadowColor", [[UIColor darkGrayColor] colorWithAlphaComponent:0.8]);
-    
+    _statusLabel.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor blackColor]);
+
     UIImage *titleImage = ThemedImage(@"folderListTitleImage", nil);
     
     if (titleImage) {
