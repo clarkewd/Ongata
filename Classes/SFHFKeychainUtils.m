@@ -223,7 +223,9 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	[attributeQuery setObject: (id) kCFBooleanTrue forKey:(__bridge id) kSecReturnAttributes];
 	OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef) attributeQuery, (CFTypeRef *) &attributeResult);
 
-	CFRelease(attributeResult);
+	if (attributeResult != NULL) {
+        CFRelease(attributeResult);
+    }
 	
 	if (status != noErr) {
 		// No existing item found--simply return nil for the password
