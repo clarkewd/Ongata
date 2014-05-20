@@ -41,8 +41,6 @@
 }
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) VBXNavigationController *mainNavigationController;
-@property (nonatomic, strong) UINavigationController *setupNavigationController;
 
 - (void)showMainFlow;
 - (void)showSetupFlow;

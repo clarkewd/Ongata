@@ -55,8 +55,6 @@
 @implementation VBXAppDelegate
 
 @synthesize window = _window;
-@synthesize mainNavigationController = _mainNavigationController;
-@synthesize setupNavigationController = _setupNavigationController;
 @synthesize builder = _builder;
 
 - (id)init {
@@ -391,32 +389,21 @@
 }
 
 - (void)showMainFlow {
-    if (_setupNavigationController != nil) {
-        [_setupNavigationController.view removeFromSuperview];
-        self.setupNavigationController = nil;
-    }
-    
     VBXFolderListController *folderListController = [[VBXFolderListController alloc] initWithNibName:@"FolderListController" bundle:nil];
     [_builder configureFolderListController:folderListController];
     
-    self.mainNavigationController = [[VBXNavigationController alloc] initWithRootViewController:folderListController];
-    _mainNavigationController.builder = _builder;
-    [_mainNavigationController setToolbarHidden:NO];
+    VBXNavigationController *mainNavigationController = [[VBXNavigationController alloc] initWithRootViewController:folderListController];
+    mainNavigationController.builder = _builder;
+    [mainNavigationController setToolbarHidden:NO];
     
     [_configAccessor loadConfig];
 
-    _window.rootViewController = self.mainNavigationController;
+    _window.rootViewController = mainNavigationController;
     [_window makeKeyAndVisible];
 }
 
 - (void)showSetupFlow {
-    if (_mainNavigationController != nil) {
-        [_mainNavigationController.view removeFromSuperview];
-        self.mainNavigationController = nil;
-    }
-
-    self.setupNavigationController = [[UINavigationController alloc] initWithRootViewController:(UIViewController *)[_builder setServerController]];
-    _window.rootViewController = self.setupNavigationController;
+    _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:(UIViewController *)[_builder setServerController]];
     [_window makeKeyAndVisible];
 }
 
