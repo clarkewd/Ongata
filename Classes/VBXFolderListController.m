@@ -28,7 +28,7 @@
 #import "UIExtensions.h"
 #import "NSExtensions.h"
 #import "VBXFolderListCell.h"
-#import "VBXStringPartLabel.h"
+#import "VBXUpdatedLabel.h"
 #import "VBXGlobal.h"
 #import "VBXSendTextController.h"
 #import "VBXNavigationController.h"
@@ -86,9 +86,8 @@
 }
 
 - (void)viewDidLoad {    
-    _statusLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
-    _statusLabel.textAlignment = UITextAlignmentCenter;
-    
+    _statusLabel = [[VBXUpdatedLabel alloc] init];
+
     // Setting our footer view to an empty zero-size view prevents the UITableView from drawing
     // mor separator lines than we need.
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -110,8 +109,7 @@
 
 - (void)applyConfig {
     [super applyConfig];
-    
-    _statusLabel.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor blackColor]);
+    [_statusLabel applyConfig];
 
     UIImage *titleImage = ThemedImage(@"folderListTitleImage", nil);
     
@@ -129,16 +127,15 @@
 - (void)showLoadedState {
     [super showLoadedState];
     [self updateControls];
-    
-    NSDate *lastUpdatedDate = [_accessor timestampOfCachedData];    
-    _statusLabel.parts = VBXStringPartsForUpdatedAtDate(lastUpdatedDate);
+
+    _statusLabel.lastUpdatedDate = [_accessor timestampOfCachedData];
 }
 
 - (void)showLoadingState {
     [super showLoadingState];
     
     _refreshButton.enabled = NO;
-    _statusLabel.parts = [NSArray arrayWithObjects:nil];
+    _statusLabel.lastUpdatedDate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

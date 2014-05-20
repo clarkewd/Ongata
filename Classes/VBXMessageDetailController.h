@@ -27,7 +27,7 @@
 @class VBXObjectBuilder;
 @class VBXSectionedCellDataSource;
 @class VBXAudioControl;
-@class VBXStringPartLabel;
+@class VBXUpdatedLabel;
 @class VBXMessageListController;
 @class VBXLoadMoreCell;
 
@@ -43,7 +43,7 @@
     
     VBXSectionedCellDataSource *_dataSource;
     UIView *_loadingView;
-    VBXStringPartLabel *_messageView;
+    VBXUpdatedLabel *_messageView;
     
     UIView *_headerView;
     UILabel *_callerLabel;

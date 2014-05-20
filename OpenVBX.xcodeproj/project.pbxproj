@@ -145,6 +145,7 @@
 		96FEFF5F10B76E1A00AED0A4 /* VBXMessageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FEFF5D10B76E1A00AED0A4 /* VBXMessageListController.m */; };
 		96FEFFFE10B7722200AED0A4 /* VBXMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FEFFFC10B7722200AED0A4 /* VBXMessageDetailController.m */; };
 		96FEFFFF10B7722200AED0A4 /* MessageDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96FEFFFD10B7722200AED0A4 /* MessageDetailController.xib */; };
+		BFE2FE0F192C17E300660741 /* VBXUpdatedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2FE0E192C17E300660741 /* VBXUpdatedLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -373,6 +374,8 @@
 		96FEFFFB10B7722200AED0A4 /* VBXMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXMessageDetailController.h; sourceTree = "<group>"; };
 		96FEFFFC10B7722200AED0A4 /* VBXMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXMessageDetailController.m; sourceTree = "<group>"; };
 		96FEFFFD10B7722200AED0A4 /* MessageDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetailController.xib; sourceTree = "<group>"; };
+		BFE2FE0D192C17E300660741 /* VBXUpdatedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXUpdatedLabel.h; sourceTree = "<group>"; };
+		BFE2FE0E192C17E300660741 /* VBXUpdatedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXUpdatedLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,6 +546,8 @@
 				2818F05F111C97A10021AF7A /* VBXAudioControl.m */,
 				2818F395111CDB090021AF7A /* VBXStringPartLabel.h */,
 				2818F396111CDB090021AF7A /* VBXStringPartLabel.m */,
+				BFE2FE0D192C17E300660741 /* VBXUpdatedLabel.h */,
+				BFE2FE0E192C17E300660741 /* VBXUpdatedLabel.m */,
 				2818F773111D0C330021AF7A /* VBXDimOverlay.h */,
 				2818F774111D0C330021AF7A /* VBXDimOverlay.m */,
 				281804891120DFA40021AF7A /* VBXTableStatusView.h */,
@@ -933,6 +938,7 @@
 				969CC82710BA9917007FCB56 /* VBXDialerController.m in Sources */,
 				969CCA0E10BB5A03007FCB56 /* VBXURLLoader.m in Sources */,
 				969CCC9C10BCB164007FCB56 /* NSExtensions.m in Sources */,
+				BFE2FE0F192C17E300660741 /* VBXUpdatedLabel.m in Sources */,
 				969CCDA510BDD876007FCB56 /* VBXResourceLoader.m in Sources */,
 				969CCDAD10BDDD87007FCB56 /* VBXResult.m in Sources */,
 				969CCE6410BE0622007FCB56 /* VBXFolderDetail.m in Sources */,

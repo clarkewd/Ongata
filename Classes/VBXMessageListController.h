@@ -24,7 +24,7 @@
 @class VBXAudioPlaybackController;
 @class VBXMessageListAccessor;
 @class VBXObjectBuilder;
-@class VBXStringPartLabel;
+@class VBXUpdatedLabel;
 @class VBXLoadMoreCell;
 
 @interface VBXMessageListController : VBXStatefulTableViewController {
@@ -41,7 +41,7 @@
     UIBarButtonItem *_refreshButton;
     UIBarButtonItem *_dialerButton;
     VBXLoadMoreCell *_loadMoreView;
-    VBXStringPartLabel *_statusLabel;
+    VBXUpdatedLabel *_statusLabel;
     
     BOOL _selectedMessageWasArchivedFromDetailsPage;
 }

@@ -39,7 +39,7 @@
 #import "VBXSectionedDataSource.h"
 #import "VBXGlobal.h"
 #import "VBXAudioControl.h"
-#import "VBXStringPartLabel.h"
+#import "VBXUpdatedLabel.h"
 #import "VBXUserDefaultsKeys.h"
 #import "VBXMessageListController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -533,8 +533,7 @@
     [super showLoadedState];
     
     // Show the newly updated timestmap
-    NSDate *lastUpdatedDate = [_accessor timestampOfCachedData];
-    _messageView.parts = VBXStringPartsForUpdatedAtDate(lastUpdatedDate);
+    _messageView.lastUpdatedDate = [_accessor timestampOfCachedData];
     
     if (fromNetwork) {
         // Then, after a moment, show more controls
@@ -547,7 +546,7 @@
     
     [self disableControls];
 
-    _messageView.parts = [NSArray arrayWithObjects:nil];
+    _messageView.lastUpdatedDate = nil;
 }
 
 - (void)showErrorState {
@@ -570,7 +569,7 @@
 - (void)showLoadMoreSpinny {
     [self disableControls];
 
-    _messageView.parts = [NSArray arrayWithObjects:nil];
+    _messageView.lastUpdatedDate = nil;
 }
 
 - (void)refreshView {
@@ -600,7 +599,7 @@
     _audioControlsFrame.backgroundColor = [UIColor clearColor];
     _audioControl.backgroundColor = [UIColor clearColor];
 
-    _messageView.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor blackColor]);
+    [_messageView applyConfig];
 }
 
 - (void)loadView {
@@ -618,9 +617,8 @@
         }
     }
     
-    _messageView = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
-    _messageView.textAlignment = UITextAlignmentCenter;
-    
+    _messageView = [[VBXUpdatedLabel alloc] init];
+
     self.toolbarItems = [NSArray arrayWithObjects:
                          _refreshButton,
                          [UIBarButtonItem flexibleSpace], 

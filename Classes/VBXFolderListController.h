@@ -23,7 +23,7 @@
 
 @class VBXFolderListAccessor;
 @class VBXObjectBuilder;
-@class VBXStringPartLabel;
+@class VBXUpdatedLabel;
 
 @interface VBXFolderListController : VBXStatefulTableViewController {
     NSUserDefaults *_userDefaults;
@@ -36,7 +36,7 @@
     UIView *_footerView;
     UILabel *_footerLabel;
     UIActivityIndicatorView *_spinny;
-    VBXStringPartLabel *_statusLabel;
+    VBXUpdatedLabel *_statusLabel;
 }
 
 @property (nonatomic, strong) NSUserDefaults *userDefaults;

@@ -34,7 +34,7 @@
 #import "VBXMessageListCell.h"
 #import "VBXTableView.h"
 #import "VBXAudioControl.h"
-#import "VBXStringPartLabel.h"
+#import "VBXUpdatedLabel.h"
 #import "VBXUserDefaultsKeys.h"
 #import "UIViewPositioningExtension.h"
 #import "NSExtensions.h"
@@ -91,7 +91,7 @@
     [super showLoadingState];
         
     _refreshButton.enabled = NO;
-    _statusLabel.parts = [NSMutableArray array];    
+    _statusLabel.lastUpdatedDate = nil;
 }
 
 - (void)showErrorState {
@@ -122,8 +122,7 @@
     
     [self updateControls];
        
-    NSDate *lastUpdatedDate = [_accessor timestampOfCachedData];
-    _statusLabel.parts = VBXStringPartsForUpdatedAtDate(lastUpdatedDate);    
+    _statusLabel.lastUpdatedDate = [_accessor timestampOfCachedData];
 }
 - (void)showRefreshingState {
     [super showRefreshingState];
@@ -135,8 +134,7 @@
 }
 
 - (void)viewDidLoad {
-    _statusLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 18)];
-    _statusLabel.textAlignment = UITextAlignmentCenter;
+    _statusLabel = [[VBXUpdatedLabel alloc] init];
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.toolbarItems = [NSArray arrayWithObjects:
@@ -151,8 +149,7 @@
 
 - (void)applyConfig {
     [super applyConfig];
-
-    _statusLabel.textColor = ThemedColor(@"toolBarInfoTextColor", [UIColor blackColor]);
+    [_statusLabel applyConfig];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
