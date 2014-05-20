@@ -798,7 +798,7 @@ typedef enum {
         [self unsetPromptAndUndim];
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(makeCallAfterDelay) object:nil];
     } else {
-        [[self parentViewController] dismissModalViewControllerAnimated:YES];
+        [self.presentingViewController dismissModalViewControllerAnimated:YES];
     }
 }
 

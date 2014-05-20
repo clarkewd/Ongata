@@ -120,7 +120,7 @@
 }
 
 - (void)done {
-    [[self parentViewController] dismissModalViewControllerAnimated:YES];
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)fadeToMainFlow:(UIView *)blackView {

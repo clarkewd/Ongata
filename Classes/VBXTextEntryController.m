@@ -73,12 +73,12 @@
 - (IBAction)save {
     //debug(@"text: %@", textView.text);
     [self.delegate textEntryControllerFinishedWithText:_textView.text];
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)cancel {
     //trace();
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark State save and restore
