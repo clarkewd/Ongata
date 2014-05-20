@@ -84,17 +84,17 @@
 
 - (int)intForKey:(id)key {
     id object = [self objectForKey:key respondingToSelector:@selector(intValue)];
-    return [object intValue];
+    return object ? [object intValue] : 0;
 }
 
 - (float)floatForKey:(id)key {
     id object = [self objectForKey:key respondingToSelector:@selector(floatValue)];
-    return [object floatValue];
+    return object ? [object floatValue] : 0.0f;
 }
 
 - (BOOL)boolForKey:(id)key {
     id object = [self objectForKey:key respondingToSelector:@selector(boolValue)];
-    return [object boolValue];
+    return object ? [object boolValue] : NO;
 }
 
 - (NSString *)stringForKey:(id)key {
