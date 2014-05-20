@@ -728,6 +728,7 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
     [self refreshView];
     
     if (_callerIdPickerIsOpen) {
@@ -735,6 +736,11 @@ typedef enum {
         _callerIdNumber = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
         [_callerIdControl setCallerId:_callerIdNumber];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.navigationController.navigationBar.translucent = YES;
 }
 
 - (void)viewDidUnload {

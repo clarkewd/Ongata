@@ -27,13 +27,13 @@
 #import "NSURLExtensions.h"
 
 CGRect VBXApplicationFrame() {
-    CGRect appFrame = [UIScreen mainScreen].applicationFrame;
+    CGRect appFrame = [UIScreen mainScreen].bounds;
     return CGRectMake(0, 0, appFrame.size.width, appFrame.size.height);
 }
 
 CGRect VBXNavigationFrame() {
     CGRect appFrame = VBXApplicationFrame();
-    return CGRectMake(0, 0, appFrame.size.width, appFrame.size.height - TOOLBAR_HEIGHT);
+    return CGRectMake(0, 0, appFrame.size.width, appFrame.size.height);
 }
 
 CGRect VBXNavigationFrameWithKeyboard() {

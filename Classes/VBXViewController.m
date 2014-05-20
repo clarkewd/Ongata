@@ -30,7 +30,8 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     [UIView beginAnimations:@"showKeyboard" context:nil];
-    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
 
     self.view.frame = VBXNavigationFrameWithKeyboard();
 
@@ -43,7 +44,8 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     [UIView beginAnimations:@"hideKeyboard" context:nil];
-    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
 
     self.view.frame = VBXNavigationFrame();
 
@@ -103,7 +105,7 @@
         _overlayView = overlayView;
         
         [self.view addSubview:_overlayView];
-        _overlayView.frame = self.view.frame;
+        _overlayView.frame = self.view.bounds;
     }
 }
 
