@@ -125,7 +125,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	if ([[[_builder userDefaults] objectForKey:VBXUserDefaultsCompletedSetup] boolValue]) {
+	if ([[_builder userDefaults] boolForKey:VBXUserDefaultsCompletedSetup]) {
 		[self showMainFlow];
 		[self restoreState];
 	} else {
@@ -154,6 +154,10 @@
     _configAccessor = [_builder configAccessor];
     _configAccessor.delegate = self;
     [_configAccessor loadDefaultConfig];
+
+    if (![[_builder userDefaults] boolForKey:VBXUserDefaultsCompletedSetup]) {
+        [self showSetupFlow];
+    }
 
     if (launchOptions != nil && [launchOptions allKeys].count > 0) {
         NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
