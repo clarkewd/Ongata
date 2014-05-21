@@ -256,7 +256,6 @@
 
 - (UINavigationController *)navControllerWrapping:(UIViewController *)controller {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    navController.navigationBar.tintColor = ThemedColor(@"navigationBarTintColor", RGBHEXCOLOR(0x8094ae));
     return navController;
 }
 

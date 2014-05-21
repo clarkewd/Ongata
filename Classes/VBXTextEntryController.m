@@ -46,8 +46,6 @@
 }
 
 - (void)applyConfig {
-    _navBar.tintColor = ThemedColor(@"navigationBarTintColor", RGBHEXCOLOR(0x8094ae));
-
     _textView.backgroundColor = ThemedColor(@"textEntryBackgroundColor", ThemedColor(@"tableViewPlainBackgroundColor", [UIColor whiteColor]));
     self.view.backgroundColor = _textView.backgroundColor;
     

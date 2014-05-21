@@ -96,8 +96,6 @@
 }
 
 - (void)applyConfig {
-    self.navigationController.navigationBar.tintColor = ThemedColor(@"navigationBarTintColor", RGBHEXCOLOR(0x8094ae));
-    self.navigationController.toolbar.tintColor = ThemedColor(@"toolbarTintColor", self.navigationController.navigationBar.tintColor);
 }
 
 - (void)setOverlayView:(UIView *)overlayView {

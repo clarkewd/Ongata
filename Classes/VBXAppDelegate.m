@@ -120,6 +120,7 @@
 - (void)applyConfig {
     UIStatusBarStyle style = [[VBXConfiguration sharedConfiguration] statusBarStyleForKey:@"statusBarStyle" defaultValue:UIStatusBarStyleDefault];
     [[UIApplication sharedApplication] setStatusBarStyle:style animated:NO];
+    self.window.tintColor = ThemedColor(@"navigationBarTintColor", RGBHEXCOLOR(0x8094ae));
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
