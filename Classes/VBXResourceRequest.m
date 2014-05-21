@@ -89,6 +89,7 @@
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if (_method) [urlRequest setHTTPMethod:_method];
     if (body) [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    urlRequest.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData; // we have our own cache (VBXCache)
     return urlRequest;
 }
 
