@@ -117,7 +117,6 @@
 
 @interface BodyCell : UITableViewCell <VBXVariableHeightCell, UIScrollViewDelegate, VBXConfigurable> {
     UITextView *_bodyTextView;
-    UIImageView *_shadowView;
     RemainingCharsView *_remainingCharsView;
 }
 
@@ -136,18 +135,14 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifer {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifer]) {
         // The height is just tall enough to bring us down to the top of the keyboard
-        _bodyTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
+        CGFloat padding = 4;
+        _bodyTextView = [[UITextView alloc] initWithFrame:CGRectMake(padding, 0, 320 - padding, 120)];
         _bodyTextView.keyboardType = UIKeyboardTypeDefault;
         _bodyTextView.autocorrectionType = UITextAutocorrectionTypeYes;
         _bodyTextView.autocapitalizationType = UITextAutocapitalizationTypeSentences;            
         _bodyTextView.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:_bodyTextView];
-        
-        _shadowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow.png"]];
-        [self.contentView addSubview:_shadowView];
-        _shadowView.left = 0;
-        _shadowView.top = 0;
-        
+
         _remainingCharsView = [[RemainingCharsView alloc] initWithFrame:CGRectZero];
         _remainingCharsView.number = 160;
         [self.contentView addSubview:_remainingCharsView];        
