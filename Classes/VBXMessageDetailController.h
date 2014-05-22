@@ -51,7 +51,6 @@
     UILabel *_timeLabel;
     UIView *_audioControlsFrame;
     VBXAudioControl *_audioControl;
-    UIButton *_actionButton;
     UIWebView *_webView;
 
     UITableViewCell *_addNoteCell;

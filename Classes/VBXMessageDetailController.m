@@ -642,25 +642,6 @@
     }
 
     _accessor.delegate = self;
-    
-    VBXHSL barButtonNormalHsl = ThemedHSL(@"messageDetailReplyButtonNormalHSL", VBXHSLMake(211, 26, 11));
-    VBXHSL barButtonHighlightedHsl = ThemedHSL(@"messageDetailReplyButtonHighlightedHSL", VBXHSLMake(211, 26, -20));    
-
-    _actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _actionButton.backgroundColor = VBXTableViewGroupedBackgroundColor();
-    [_actionButton setTitle:LocalizedString(@"REPLY", @"Message Detail: Title for reply button") forState:UIControlStateNormal];    
-    [_actionButton setBackgroundImage:VBXAdjustImageWithPhotoshopHSLWithCache(_userDefaults, @"barbutton.png", @"normal", barButtonNormalHsl) forState:UIControlStateNormal];
-    [_actionButton setBackgroundImage:VBXAdjustImageWithPhotoshopHSLWithCache(_userDefaults, @"barbutton.png", @"highlighted", barButtonHighlightedHsl) forState:UIControlStateHighlighted];    
-    _actionButton.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    _actionButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
-    _actionButton.titleLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.2];
-    
-    [_actionButton sizeToFit];
-    _actionButton.right = 312;
-    _actionButton.top = round((_headerView.height / 2) - (_actionButton.height / 2)) + 5;    
-    
-    [_headerView addSubview:_actionButton];
-    [_actionButton addTarget:self action:@selector(reply) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

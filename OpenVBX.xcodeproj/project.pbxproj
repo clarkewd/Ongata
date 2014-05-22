@@ -12,7 +12,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		280CF243113F0838000F4FD7 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280CF242113F0838000F4FD7 /* libicucore.dylib */; };
-		280CF57C113F8662000F4FD7 /* barbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 280CF57B113F8662000F4FD7 /* barbutton.png */; };
 		281800F811209E7C0021AF7A /* VBXViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 281800F711209E7C0021AF7A /* VBXViewCell.m */; };
 		281801081120A0D70021AF7A /* openvbx-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 281801071120A0D70021AF7A /* openvbx-logo.png */; };
 		2818026A1120B1750021AF7A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281802691120B1750021AF7A /* AudioToolbox.framework */; };
@@ -157,7 +156,6 @@
 		1D6058910D05DD3D006BFB54 /* OpenVBX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVBX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		280CF242113F0838000F4FD7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		280CF57B113F8662000F4FD7 /* barbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = barbutton.png; path = Resources/barbutton.png; sourceTree = "<group>"; };
 		281800F611209E7C0021AF7A /* VBXViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXViewCell.h; sourceTree = "<group>"; };
 		281800F711209E7C0021AF7A /* VBXViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXViewCell.m; sourceTree = "<group>"; };
 		281801071120A0D70021AF7A /* openvbx-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "openvbx-logo.png"; path = "Resources/openvbx-logo.png"; sourceTree = "<group>"; };
@@ -697,7 +695,6 @@
 				2847D437114AFD8100C5326C /* security-alert-background.png */,
 				284CC46C114199AE006358D2 /* gear.png */,
 				BF014D2C192D7D5E00B71DB4 /* gear@2x.png */,
-				280CF57B113F8662000F4FD7 /* barbutton.png */,
 				284CF6141135C7C30070FEF3 /* inbox-icon-mask.png */,
 				BF014D30192D847100B71DB4 /* inbox-icon-mask@2x.png */,
 				28C2F9F5112E059D00892A64 /* dialer-backspace-icon-mask.png */,
@@ -841,7 +838,6 @@
 				28C2F9F8112E059D00892A64 /* dialer-contacts-icon-mask.png in Resources */,
 				284CF6161135C7C30070FEF3 /* inbox-icon-mask.png in Resources */,
 				BF014D31192D847100B71DB4 /* inbox-icon-mask@2x.png in Resources */,
-				280CF57C113F8662000F4FD7 /* barbutton.png in Resources */,
 				BF014D3B192DA05800B71DB4 /* dialer-backspace-icon-mask@2x.png in Resources */,
 				284CC46D114199AE006358D2 /* gear.png in Resources */,
 				2847D438114AFD8100C5326C /* security-alert-background.png in Resources */,
