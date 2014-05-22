@@ -542,7 +542,7 @@ typedef enum {
     AccessoryKey *contacts = [[AccessoryKey alloc] initWithImage:[UIImage imageNamed:@"dialer-contacts-icon-mask.png"]];
     AccessoryKey *backspace = [[AccessoryKey alloc] initWithImage:[UIImage imageNamed:@"dialer-backspace-icon-mask.png"]];
     
-    [contacts addTarget:self action:@selector(chooseContactPressed) forControlEvents:UIControlEventTouchDown];
+    [contacts addTarget:self action:@selector(chooseContactPressed) forControlEvents:UIControlEventTouchUpInside];
     [backspace addTarget:self action:@selector(deletePressed) forControlEvents:UIControlEventTouchDown];    
     [backspace addTarget:self action:@selector(deleteStartTimer) forControlEvents:UIControlEventTouchDown];    
     [backspace addTarget:self action:@selector(deleteStopTimer) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];    
