@@ -228,8 +228,6 @@
         [_userDefaults setObject:_serverField.textField.text forKey:VBXUserDefaultsBaseURL];
         [_userDefaults synchronize];
         
-        DialerBuildImages();
-        
         [self unsetPromptAndUndim];
         self.navigationItem.rightBarButtonItem.enabled = YES;
         

@@ -21,8 +21,6 @@
 #import <UIKit/UIKit.h>
 #import "VBXViewController.h"
 
-void DialerBuildImages();
-
 @class VBXDialerAccessor;
 @class CallerIdControl;
 @class NumberAreaView;

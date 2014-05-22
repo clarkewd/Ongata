@@ -34,70 +34,10 @@
 #import "VBXObjectBuilder.h"
 #import "VBXConfiguration.h"
 
-static UIImage *__callerIdNormalImage = nil;
-static UIImage *__callerIdHighlightedImage = nil;
-static UIImage *__callKeyNormalImage = nil;
-static UIImage *__callKeyHighlightedImage = nil;
-static UIImage *__accessoryKeyNormalImage = nil;
-static UIImage *__accessoryKeyHighlightedImage = nil;
-static UIImage *__numberKeyNormalSideImage = nil;
-static UIImage *__numberKeyHighlightedSideImage = nil;
-static UIImage *__numberKeyNormalMiddleImage = nil;
-static UIImage *__numberKeyHighlightedMiddleImage = nil;
-static UIImage *__numberAreaBackgroundImage = nil;
-
-UIImage *DialerNumberAreaBackgroundImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-numberarea-bg.png", @"normal", ThemedHSL(@"dialerNumberAreaTintHSL", VBXHSLMake(200, 15, 1)));
-}
-UIImage *DialerCallerIdNormalImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-callerid-bg.png", @"normal", ThemedHSL(@"dialerCallerIdTintHSL", VBXHSLMake(207, 10, 2)));
-}
-UIImage *DialerCallerIdHighlightedImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-callerid-bg.png", @"highlighted", ThemedHSL(@"dialerCallerIdHighlightedTintHSL", VBXHSLMake(222, 100, -31)));
-}
-UIImage *DialerCallKeyNormalImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-call-bg.png", @"normal", ThemedHSL(@"dialerCallKeyTintHSL", VBXHSLMake(121, 61, 0)));
-}
-UIImage *DialerCallKeyHighlightedImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-call-bg.png", @"highlighted", ThemedHSL(@"dialerCallKeyHighlightedTintHSL", VBXHSLMake(121, 61, 10)));
-}
-UIImage *DialerSpecialKeyNormalImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-accessory-key-bg.png", @"normal", ThemedHSL(@"dialerSpecialKeyTintHSL", VBXHSLMake(207, 10, 2)));
-}
-UIImage *DialerSpecialKeyHighlightedImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-accessory-key-bg.png", @"highlighted", ThemedHSL(@"dialerSpecialKeyHighlightedTintHSL", VBXHSLMake(215, 100, -39)));
-}
-UIImage *DialerNumberKeySideNormalImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-number-side-bg.png", @"normal", ThemedHSL(@"dialerNumberKeyTintHSL", VBXHSLMake(218, 12, 0)));
-}
-UIImage *DialerNumberKeySideHighlightedImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-number-side-bg.png", @"highlighted", ThemedHSL(@"dialerNumberKeyHighlightedTintHSL", VBXHSLMake(218, 100, 0)));
-}
-UIImage *DialerNumberKeyMiddleNormalImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-number-middle-bg.png", @"normal", ThemedHSL(@"dialerNumberKeyTintHSL", VBXHSLMake(218, 12, 0)));
-}
-UIImage *DialerNumberKeyMiddleHighlightedImage(NSUserDefaults *userDefaults) {
-    return VBXAdjustImageWithPhotoshopHSLWithCache(userDefaults, @"dialer-number-middle-bg.png", @"highlighted", ThemedHSL(@"dialerNumberKeyHighlightedTintHSL", VBXHSLMake(218, 100, 0)));
-}
-
-void DialerBuildImages() {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-
-    @autoreleasepool { DialerCallerIdNormalImage(userDefaults); }
-    @autoreleasepool { DialerCallerIdHighlightedImage(userDefaults); }
-    @autoreleasepool { DialerCallKeyNormalImage(userDefaults); }
-    @autoreleasepool { DialerCallKeyHighlightedImage(userDefaults); }
-    @autoreleasepool { DialerSpecialKeyNormalImage(userDefaults); }
-    @autoreleasepool { DialerSpecialKeyHighlightedImage(userDefaults); }
-    @autoreleasepool { DialerNumberKeySideNormalImage(userDefaults); }
-    @autoreleasepool { DialerNumberKeySideHighlightedImage(userDefaults); }
-    @autoreleasepool { DialerNumberKeyMiddleNormalImage(userDefaults); }
-    @autoreleasepool { DialerNumberKeyMiddleHighlightedImage(userDefaults); }
-    @autoreleasepool { DialerNumberAreaBackgroundImage(userDefaults); }
-}
+const static int KEY_BACKGROUND_COLOR = 0xfcfcfc;
+const static int KEY_HIGHLIGHTED_BACKGROUND_COLOR = 0xb1b4b8;
 
 @interface NumberAreaView : UIView <VBXConfigurable> {
-    UIImageView *_backgroundView;
     UILabel *_numberLabel;
 }
 @end
@@ -106,13 +46,10 @@ void DialerBuildImages() {
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 320, 89)]) {
-        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];        
-        [self addSubview:_backgroundView];
-        
-        _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];        
+        _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _numberLabel.text = @"123...text to be replaced later";
         _numberLabel.backgroundColor = [UIColor clearColor];
-        _numberLabel.font = [UIFont systemFontOfSize:30];
+        _numberLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:30];
         _numberLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
         _numberLabel.minimumFontSize = 14;
         _numberLabel.numberOfLines = 1;
@@ -132,29 +69,25 @@ void DialerBuildImages() {
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    _backgroundView.frame = self.bounds;
-    
+
     _numberLabel.width = 250;
     _numberLabel.left = round((self.width / 2) - (_numberLabel.width / 2));
     _numberLabel.top = round((self.height / 2) - (_numberLabel.height / 2));
 }
 
 - (void)applyConfig {
-    _backgroundView.image = __numberAreaBackgroundImage;
+    self.backgroundColor = ThemedColor(@"dialerNumberAreaBackgroundColor", [UIColor whiteColor]);
 
     _numberLabel.textColor = ThemedColor(@"dialerNumberTextColor", [UIColor blackColor]);
-    _numberLabel.shadowColor = ThemedColor(@"dialerNumberTextShadowColor", [UIColor colorWithWhite:0 alpha:0.2]);
-    _numberLabel.shadowOffset = CGSizeMake(0, 1);    
 }
 
 @end
 
 
 @interface CallerIdControl : UIControl <VBXConfigurable> {
-    UIImageView *_backgroundView;
     UILabel *_callerIdLabel;
     UILabel *_numberLabel;
+    UITableViewCell *_chevronView;
 }
 
 - (void)setCallerId:(NSString *)callerId;
@@ -166,9 +99,6 @@ void DialerBuildImages() {
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 320, 50)]) {
-        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_backgroundView];
-        
         _callerIdLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _callerIdLabel.text = LocalizedString(@"CALLER ID", @"Dailer: Label for caller id number.");
         _callerIdLabel.backgroundColor = [UIColor clearColor];
@@ -182,7 +112,13 @@ void DialerBuildImages() {
         _numberLabel.font = [UIFont boldSystemFontOfSize:18];        
         [_numberLabel sizeToFit];
         [self addSubview:_numberLabel];        
-        
+
+        // silly hack to use the built-in chevron image
+        _chevronView = [[UITableViewCell alloc] initWithFrame:(CGRect){{0,0},{15,20}}];
+        _chevronView.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _chevronView.userInteractionEnabled = NO;
+        [self addSubview:_chevronView];
+
         [self applyConfig];
     }
     return self;
@@ -191,14 +127,15 @@ void DialerBuildImages() {
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    _backgroundView.frame = self.bounds;
-    
     _callerIdLabel.left = 10;
     _callerIdLabel.top = round((self.height / 2) - (_callerIdLabel.height / 2));
     
     [_numberLabel sizeToFit];
     _numberLabel.right = self.width - 25;
     _numberLabel.top = round((self.height / 2) - (_numberLabel.height / 2));
+
+    _chevronView.right = self.width + 3;
+    _chevronView.top = 3;
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -217,29 +154,22 @@ void DialerBuildImages() {
 
 - (void)applyConfig {
     if (self.isHighlighted) {
-        _backgroundView.image = __callerIdHighlightedImage;  
+        self.backgroundColor = ThemedColor(@"dialerCallerIdNumberHighlightedBackgroundColor", RGBHEXCOLOR(KEY_HIGHLIGHTED_BACKGROUND_COLOR));
 
-        _numberLabel.textColor = ThemedColor(@"dialerCallerIdNumberHighlightedTextColor", [UIColor whiteColor]);        
-        _callerIdLabel.textColor = ThemedColor(@"dialerCallerIdLabelHighlightedTextColor", [UIColor whiteColor]);
-                
-        _numberLabel.shadowOffset = CGSizeZero;        
-        _callerIdLabel.shadowOffset = CGSizeMake(0, 0);        
+        _numberLabel.textColor = ThemedColor(@"dialerCallerIdNumberHighlightedTextColor", [UIColor blackColor]);
+        _callerIdLabel.textColor = ThemedColor(@"dialerCallerIdLabelHighlightedTextColor", [UIColor blackColor]);
     } else {
+        self.backgroundColor = ThemedColor(@"dialerCallerIdNumberBackgroundColor", RGBHEXCOLOR(KEY_BACKGROUND_COLOR));
+
         _numberLabel.textColor = ThemedColor(@"dialerCallerIdNumberTextColor", ThemedColor(@"primaryTextColor", [UIColor blackColor]));
-        _numberLabel.shadowColor = ThemedColor(@"dialerCallerIdNumberTextShadowColor", [UIColor colorWithWhite:1.0 alpha:0.7]);
         _callerIdLabel.textColor = ThemedColor(@"dialerCallerIdLabelTextColor", RGBHEXCOLOR(0x333333));
-        _callerIdLabel.shadowColor = ThemedColor(@"dialerCallerIdLabelTextShadowColor", [UIColor colorWithWhite:1.0 alpha:0.7]);
-        _callerIdLabel.shadowOffset = CGSizeMake(0, 1);      
-        _numberLabel.shadowOffset = CGSizeMake(0, 1);
-        _backgroundView.image = __callerIdNormalImage;
-    }    
+    }
 }
 
 @end
 
 
 @interface CallKey : UIControl <VBXConfigurable> {
-    UIImageView *_backgroundView;
     UILabel *_label;
 }
 @end
@@ -248,9 +178,6 @@ void DialerBuildImages() {
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 110, 61)]) {
-        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_backgroundView];
-        
         _label = [[UILabel alloc] initWithFrame:CGRectZero];
         _label.text = LocalizedString(@"Call", @"Dialer: Label for call button");
         _label.backgroundColor = [UIColor clearColor];
@@ -267,9 +194,7 @@ void DialerBuildImages() {
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    _backgroundView.frame = self.bounds;
-    
+
     _label.top = round((self.height / 2) - (_label.height / 2));
     _label.left = round((self.width / 2) - (_label.width / 2));
 }
@@ -281,12 +206,10 @@ void DialerBuildImages() {
 
 - (void)applyConfig {
     if (self.isHighlighted) {
-        _backgroundView.image = __callKeyHighlightedImage;        
-        _label.shadowColor = ThemedColor(@"dialerCallKeyHighlightedTextShadowColor", ThemedColor(@"dialerNumberKeyDigitHighlightedTextShadowColor", [UIColor colorWithWhite:0 alpha:0.7]));
+        self.backgroundColor = RGBHEXCOLOR(0x2e8a38);
         _label.textColor = ThemedColor(@"dialerCallKeyHighlightedTextColor", ThemedColor(@"dialerNumberKeyDigitHighlightedTextColor", [UIColor whiteColor]));
     } else {
-        _backgroundView.image = __callKeyNormalImage;
-        _label.shadowColor = ThemedColor(@"dialerCallKeyTextShadowColor", ThemedColor(@"dialerNumberKeyDigitTextShadowColor", [UIColor colorWithWhite:0 alpha:0.7]));
+        self.backgroundColor = RGBHEXCOLOR(0x48d457);
         _label.textColor = ThemedColor(@"dialerCallKeyTextColor", ThemedColor(@"dialerNumberKeyDigitTextColor", [UIColor whiteColor]));
     }    
 }
@@ -295,7 +218,6 @@ void DialerBuildImages() {
 
 
 @interface AccessoryKey : UIControl <VBXConfigurable> {
-    UIImageView *_backgroundView;
     VBXMaskedImageView *_iconView;
 }
 
@@ -305,9 +227,6 @@ void DialerBuildImages() {
 
 - (id)initWithImage:(UIImage *)image {
     if (self = [super initWithFrame:CGRectMake(0, 0, 105, 61)]) {
-        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_backgroundView];
-        
         _iconView = [[VBXMaskedImageView alloc] initWithImage:image];
         _iconView.backgroundColor = [UIColor clearColor];
         [_iconView sizeToFit];
@@ -325,22 +244,20 @@ void DialerBuildImages() {
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    _backgroundView.frame = self.bounds;
-    
+
     _iconView.left = round((self.width / 2) - (_iconView.width / 2));
     _iconView.top = round((self.height / 2) - (_iconView.height / 2));
 }
 
 - (void)applyConfig {
     if (self.isHighlighted) {
-        _iconView.startColor = ThemedColor(@"dialerSpecialKeyIconHighlightedGradientBeginColor", RGBHEXCOLOR(0xffffff));
-        _iconView.endColor = ThemedColor(@"dialerSpecialKeyIconHighlightedGradientEndColor", RGBHEXCOLOR(0xffffff));
-        _backgroundView.image = __accessoryKeyHighlightedImage;  
+        _iconView.startColor = ThemedColor(@"dialerSpecialKeyIconHighlightedGradientBeginColor", [UIColor blackColor]);
+        _iconView.endColor = ThemedColor(@"dialerSpecialKeyIconHighlightedGradientEndColor", [UIColor blackColor]);
+        self.backgroundColor = ThemedColor(@"dialerSpecialKeyIconHighlightedBackgroundColor", RGBHEXCOLOR(KEY_BACKGROUND_COLOR));
     } else {
-        _iconView.startColor = ThemedColor(@"dialerSpecialKeyIconGradientBeginColor", RGBHEXCOLOR(0x505866));
-        _iconView.endColor = ThemedColor(@"dialerSpecialKeyIconGradientEndColor", RGBHEXCOLOR(0x68707d));
-        _backgroundView.image = __accessoryKeyNormalImage;
+        _iconView.startColor = ThemedColor(@"dialerSpecialKeyIconGradientBeginColor", [UIColor blackColor]);
+        _iconView.endColor = ThemedColor(@"dialerSpecialKeyIconGradientEndColor", [UIColor blackColor]);
+        self.backgroundColor = ThemedColor(@"dialerSpecialKeyIconBackgroundColor", RGBHEXCOLOR(KEY_HIGHLIGHTED_BACKGROUND_COLOR));
     }
     
     [_iconView setNeedsDisplay];    
@@ -355,7 +272,6 @@ typedef enum {
 
 @interface NumberKey : UIControl <VBXConfigurable> {
     NumberKeyType _type;
-    UIImageView *_backgroundView;
     UILabel *_numberLabel;
     UILabel *_lettersLabel;
 }
@@ -372,41 +288,50 @@ typedef enum {
 - (id)initWithType:(NumberKeyType)type number:(NSString *)number letters:(NSString *)letters {
     if (self = [super initWithFrame:CGRectMake(0, 0, (type == NumberKeyTypeMiddle ? 110 : 105), 54)]) {
         _type = type;
-        
-        _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_backgroundView];
-        
+
+        NSString *fontName = @"HelveticaNeue-Light";
+
         _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _numberLabel.text = number;
         _numberLabel.backgroundColor = [UIColor clearColor];
-        _numberLabel.font = [UIFont boldSystemFontOfSize:28];
-        _numberLabel.shadowOffset = CGSizeMake(0, -1);
+        _numberLabel.font = [UIFont fontWithName:fontName size:28];
         [_numberLabel sizeToFit];
         [self addSubview:_numberLabel];
         
         _lettersLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _lettersLabel.text = letters;
         _lettersLabel.backgroundColor = [UIColor clearColor];
-        _lettersLabel.font = [UIFont boldSystemFontOfSize:13];
+        _lettersLabel.font = [UIFont fontWithName:fontName size:11];
         [_lettersLabel sizeToFit];
-        [self addSubview:_lettersLabel];        
+        [self addSubview:_lettersLabel];
         
         [self applyConfig];
     }
     return self;
 }
 
-
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    _backgroundView.frame = self.bounds;
-    
-    _numberLabel.top = 5;
+
+    _numberLabel.top = 2;
     _numberLabel.left = round((self.width / 2) - (_numberLabel.width / 2));    
     
-    _lettersLabel.bottom = self.height - 4;
+    _lettersLabel.bottom = self.height - 6;
     _lettersLabel.left = round((self.width / 2) - (_lettersLabel.width / 2));
+}
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    [RGBHEXCOLOR(0x929292) setStroke];
+    CGRect r = self.bounds;
+    r.origin.y -= 1;
+    r.size.height += 1;
+    if (_type == NumberKeyTypeSide) {
+        r.origin.x -= 1;
+        r.size.width += 2;
+    }
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextStrokeRectWithWidth(ctx, r, 0.5f);
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -420,15 +345,13 @@ typedef enum {
 
 - (void)applyConfig {
     if (self.isHighlighted) {
-        _numberLabel.textColor = ThemedColor(@"dialerNumberKeyDigitHighlightedTextColor", [UIColor whiteColor]);
-        _numberLabel.shadowColor = ThemedColor(@"dialerNumberKeyDigitHighlightedTextShadowColor", [UIColor colorWithWhite:0 alpha:0.7]);
-        _lettersLabel.textColor = ThemedColor(@"dialerNumberKeyLettersHighlightedTextColor", [UIColor whiteColor]);
-        _backgroundView.image = (_type == NumberKeyTypeMiddle) ? __numberKeyHighlightedMiddleImage : __numberKeyHighlightedSideImage;
+        _numberLabel.textColor = ThemedColor(@"dialerNumberKeyDigitHighlightedTextColor", [UIColor blackColor]);
+        _lettersLabel.textColor = ThemedColor(@"dialerNumberKeyLettersHighlightedTextColor", [UIColor blackColor]);
+        self.backgroundColor = ThemedColor(@"dialerNumberKeyBackgroundColor", RGBHEXCOLOR(KEY_HIGHLIGHTED_BACKGROUND_COLOR));
     } else {
-        _backgroundView.image = (_type == NumberKeyTypeMiddle) ? __numberKeyNormalMiddleImage : __numberKeyNormalSideImage;
-        _numberLabel.textColor = ThemedColor(@"dialerNumberKeyDigitTextColor", [UIColor whiteColor]);
-        _numberLabel.shadowColor = ThemedColor(@"dialerNumberKeyDigitTextShadowColor", [UIColor colorWithWhite:0 alpha:0.7]);
-        _lettersLabel.textColor = ThemedColor(@"dialerNumberKeyLettersTextColor", [UIColor colorWithWhite:0.65 alpha:1.0]);
+        self.backgroundColor = ThemedColor(@"dialerNumberKeyBackgroundColor", RGBHEXCOLOR(KEY_BACKGROUND_COLOR));
+        _numberLabel.textColor = ThemedColor(@"dialerNumberKeyDigitTextColor", [UIColor blackColor]);
+        _lettersLabel.textColor = ThemedColor(@"dialerNumberKeyLettersTextColor", [UIColor blackColor]);
     }
 }
 
@@ -469,53 +392,12 @@ typedef enum {
 
 - (void)dealloc {
     self.accessor.delegate = nil;
-
-    
-    __callerIdNormalImage = nil;
-    __callerIdHighlightedImage = nil;
-    __callKeyNormalImage = nil;
-    __callKeyHighlightedImage = nil;
-    __accessoryKeyNormalImage = nil;
-    __accessoryKeyHighlightedImage = nil;
-    __numberKeyNormalSideImage = nil;
-    __numberKeyHighlightedSideImage = nil;
-    __numberKeyNormalMiddleImage = nil;
-    __numberKeyHighlightedMiddleImage = nil;
-    __numberAreaBackgroundImage = nil; 
-    
 }
 
 - (void)applyConfig {
     [super applyConfig];
-    
-    __callerIdNormalImage = nil;
-    __callerIdHighlightedImage = nil;
-    __callKeyNormalImage = nil;
-    __callKeyHighlightedImage = nil;
-    __accessoryKeyNormalImage = nil;
-    __accessoryKeyHighlightedImage = nil;
-    __numberKeyNormalSideImage = nil;
-    __numberKeyHighlightedSideImage = nil;
-    __numberKeyNormalMiddleImage = nil;
-    __numberKeyHighlightedMiddleImage = nil;
-    __numberAreaBackgroundImage = nil;
-    
-    __callerIdNormalImage = DialerCallerIdNormalImage(_userDefaults);
-    __callerIdHighlightedImage = DialerCallerIdHighlightedImage(_userDefaults);
-    __callKeyNormalImage = DialerCallKeyNormalImage(_userDefaults);
-    __callKeyHighlightedImage = DialerCallKeyHighlightedImage(_userDefaults);
-    __accessoryKeyNormalImage = DialerSpecialKeyNormalImage(_userDefaults);
-    __accessoryKeyHighlightedImage = DialerSpecialKeyHighlightedImage(_userDefaults);
-    __numberKeyNormalSideImage = DialerNumberKeySideNormalImage(_userDefaults);
-    __numberKeyHighlightedSideImage = DialerNumberKeySideHighlightedImage(_userDefaults);
-    __numberKeyNormalMiddleImage = DialerNumberKeyMiddleNormalImage(_userDefaults);
-    __numberKeyHighlightedMiddleImage = DialerNumberKeyMiddleHighlightedImage(_userDefaults);
-    __numberAreaBackgroundImage = DialerNumberAreaBackgroundImage(_userDefaults);
-        
-    // Make all our children views refresh with the new image (they might not exist yet, though)
-    // You might be wondering why these widgets don't just add themselves as config observers and
-    // refresh themselves.  The reason for this is that we consolidated all the image adjusting code
-    // here, and we need to be sure the new images are built before the child views refresh themselves.
+
+    // Make all our children views refresh with the new colors (they might not exist yet, though)
     if (_dialerView != nil) {
         [_dialerView.subviews makeObjectsPerformSelector:@selector(applyConfig)];
     }
