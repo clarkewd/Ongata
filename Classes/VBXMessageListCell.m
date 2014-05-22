@@ -158,12 +158,12 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
         
-    const NSInteger accessoryLeftX = self.contentView.width - 20;
+    const NSInteger accessoryLeftX = self.contentView.width;
     const NSInteger padding = 5;
     const NSInteger messageStartX = (_messageListController.editing ? 5 : 37);    
     
     _timestampLabel.width = 100;
-    _timestampLabel.right = accessoryLeftX - padding;
+    _timestampLabel.right = accessoryLeftX;
     _timestampLabel.height = 20;
     
     _titleLabel.left = messageStartX; 
