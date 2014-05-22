@@ -89,9 +89,9 @@
     UIColor *backgroundColor = nil;
 
     if (_messageSummary != nil && _messageSummary.unread) {
-        backgroundColor = ThemedColor(@"messageListUnreadBackgroundColor", ThemedColor(@"tableViewCellBackgroundColor", [UIColor whiteColor]));
+        backgroundColor = ThemedColor(@"messageListUnreadBackgroundColor", ThemedColor(@"tableViewCellBackgroundColor", RGBHEXCOLOR(0xf3f6fc)));
     } else {
-        backgroundColor = ThemedColor(@"messageListReadBackgroundColor", RGBHEXCOLOR(0xf3f6fc));        
+        backgroundColor = ThemedColor(@"messageListReadBackgroundColor", [UIColor whiteColor]);
     }
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectZero];
