@@ -52,9 +52,9 @@ static UIImage *__pauseImage = nil;
 
 - (UIImage *)imageWithSymbol:(UIImage *)symbolImage color:(UIColor *)color {
     CGSize size = CGSizeMake(24, 24);
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     
-    CGContextRef contextRef = UIGraphicsGetCurrentContext();		
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(contextRef);
     
     [color set];

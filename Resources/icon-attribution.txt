@@ -1,0 +1,8 @@
+The following icons are from pixeden.com's "Tab Bar Icons iOS 7" series:
+
+delivery-phone-icon
+dialer-contacts-icon-mask
+folder-icon-mask
+gear
+inbox-icon-mask
+iphone-call-icon
