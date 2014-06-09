@@ -41,7 +41,6 @@
                 // invalid cert.  I believe this a result code we'll never see on iPhone.  We can only
                 // choose to trust things once per app session, and as soon as the app restarts, we'll
                 // get prompted again.
-            case kSecTrustResultConfirm:
             case kSecTrustResultRecoverableTrustFailure:
                 // The current certificate is untrusted.
                 if (requireTrustedCertForThisURL && lastAcceptedCertWasTrusted) {
@@ -93,7 +92,6 @@
                 // invalid cert.  I believe this a result code we'll never see on iPhone.  We can only
                 // choose to trust things once per app session, and as soon as the app restarts, we'll
                 // get prompted again.
-            case kSecTrustResultConfirm:
             case kSecTrustResultRecoverableTrustFailure:
                 // The current certificate is untrusted.
                 if (requireTrustedCertForThisURL) {

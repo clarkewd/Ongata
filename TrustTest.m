@@ -56,14 +56,6 @@
                                                     lastAcceptedCertWasTrusted:YES
                                                     lastAcceptedCertData:[@"" dataUsingEncoding:NSUTF8StringEncoding]];
     STAssertEquals(expected, actual, nil);
-
-    actual = [VBXTrustHelper actionForPostSetupCertificateIssueWithOSStatus:noErr 
-                                                      secTrustResultType:kSecTrustResultConfirm 
-                                                                certData:[@"" dataUsingEncoding:NSUTF8StringEncoding]
-                                            requireTrustedCertForThisURL:YES 
-                                              lastAcceptedCertWasTrusted:YES
-                                                    lastAcceptedCertData:[@"" dataUsingEncoding:NSUTF8StringEncoding]];
-    STAssertEquals(expected, actual, nil);
 }
 
 // 2) Cert was OK and trusted during the initial setup, the server is NOT in secure mode,
@@ -76,14 +68,6 @@
     
     actual = [VBXTrustHelper actionForPostSetupCertificateIssueWithOSStatus:noErr 
                                                          secTrustResultType:kSecTrustResultRecoverableTrustFailure 
-                                                                certData:[@"" dataUsingEncoding:NSUTF8StringEncoding]
-                                                      requireTrustedCertForThisURL:NO 
-                                                    lastAcceptedCertWasTrusted:YES
-              lastAcceptedCertData:[@"" dataUsingEncoding:NSUTF8StringEncoding]];
-    STAssertEquals(expected, actual, nil);
-    
-    actual = [VBXTrustHelper actionForPostSetupCertificateIssueWithOSStatus:noErr 
-                                                         secTrustResultType:kSecTrustResultConfirm 
                                                                 certData:[@"" dataUsingEncoding:NSUTF8StringEncoding]
                                                       requireTrustedCertForThisURL:NO 
                                                     lastAcceptedCertWasTrusted:YES
@@ -106,15 +90,7 @@
                                               lastAcceptedCertWasTrusted:NO
                                                     lastAcceptedCertData:[@"new" dataUsingEncoding:NSUTF8StringEncoding]];
     STAssertEquals(expected, actual, nil);
-    
-    actual = [VBXTrustHelper actionForPostSetupCertificateIssueWithOSStatus:noErr 
-                                                      secTrustResultType:kSecTrustResultConfirm 
-                                                                certData:[@"original" dataUsingEncoding:NSUTF8StringEncoding]
-                                            requireTrustedCertForThisURL:NO 
-                                              lastAcceptedCertWasTrusted:NO
-                                                    lastAcceptedCertData:[@"new" dataUsingEncoding:NSUTF8StringEncoding]];
-    STAssertEquals(expected, actual, nil);    
-    
+
     actual = [VBXTrustHelper actionForPostSetupCertificateIssueWithOSStatus:noErr 
                                                       secTrustResultType:kSecTrustResultProceed 
                                                                 certData:[@"original" dataUsingEncoding:NSUTF8StringEncoding]
@@ -257,11 +233,6 @@
     actual = [VBXTrustHelper actionForSetupTrustIssueWithOSStatus:noErr
                                             secTrustResultType:kSecTrustResultRecoverableTrustFailure
                                   requireTrustedCertForThisURL:NO];
-    STAssertEquals(expected, actual, nil);    
-    
-    actual = [VBXTrustHelper actionForSetupTrustIssueWithOSStatus:noErr
-                                            secTrustResultType:kSecTrustResultConfirm
-                                  requireTrustedCertForThisURL:NO];
     STAssertEquals(expected, actual, nil);
 }
 
@@ -273,10 +244,5 @@
                                             secTrustResultType:kSecTrustResultRecoverableTrustFailure
                                   requireTrustedCertForThisURL:YES];
     STAssertEquals(expected, actual, nil);    
-    
-    actual = [VBXTrustHelper actionForSetupTrustIssueWithOSStatus:noErr
-                                            secTrustResultType:kSecTrustResultConfirm
-                                  requireTrustedCertForThisURL:YES];
-    STAssertEquals(expected, actual, nil);
 }
 @end

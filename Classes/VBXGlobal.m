@@ -740,8 +740,6 @@ NSString *VBXStringForSecTrustResultType(SecTrustResultType resultType) {
             return @"kSecTrustResultProceed";
         case kSecTrustResultUnspecified:
             return @"kSecTrustResultUnspecified";
-        case kSecTrustResultConfirm:
-            return @"kSecTrustResultConfirm";
         case kSecTrustResultRecoverableTrustFailure:
             return @"kSecTrustResultRecoverableTrustFailure";
         case kSecTrustResultInvalid:
