@@ -53,7 +53,6 @@
 		284CF6161135C7C30070FEF3 /* inbox-icon-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 284CF6141135C7C30070FEF3 /* inbox-icon-mask.png */; };
 		284CF7991135D5EE0070FEF3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 284CF7981135D5EE0070FEF3 /* Security.framework */; };
 		287226CC11470DF700FD3AAF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 284CF7981135D5EE0070FEF3 /* Security.framework */; };
-		287E9C94111A58A70025E5AE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 287E9C93111A58A70025E5AE /* Settings.bundle */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		288B3BDE11A34A250096A815 /* VBXSessionExpiredController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B3BDC11A34A250096A815 /* VBXSessionExpiredController.m */; };
 		28C12291120A88070086AA3D /* VBXUserDefaultsKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 969CDB2C10C66F89007FCB56 /* VBXUserDefaultsKeys.m */; };
@@ -220,7 +219,6 @@
 		284CF3EB1134BF050070FEF3 /* VBXTicketStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXTicketStatus.m; sourceTree = "<group>"; };
 		284CF6141135C7C30070FEF3 /* inbox-icon-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "inbox-icon-mask.png"; path = "Resources/inbox-icon-mask.png"; sourceTree = "<group>"; };
 		284CF7981135D5EE0070FEF3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		287E9C93111A58A70025E5AE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		288B3BDB11A34A250096A815 /* VBXSessionExpiredController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXSessionExpiredController.h; sourceTree = "<group>"; };
 		288B3BDC11A34A250096A815 /* VBXSessionExpiredController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXSessionExpiredController.m; sourceTree = "<group>"; };
@@ -493,7 +491,6 @@
 				96AF927410D18E2400E0DA8B /* UnitTests-Info.plist */,
 				668AC45310F3F2EE00FE1E22 /* Entitlements.plist */,
 				2838C964111225C900426893 /* default-config.json */,
-				287E9C93111A58A70025E5AE /* Settings.bundle */,
 				284BC7EB113DA4BB00EA7884 /* hideous-config.json */,
 				66619AC512FB7FFE002FAA85 /* license.html */,
 			);
@@ -817,7 +814,6 @@
 				28CF072B11179A51001C10B2 /* folder-icon-mask.png in Resources */,
 				28CF09441117C386001C10B2 /* play-symbol.png in Resources */,
 				28CF09BF1117D032001C10B2 /* pause-symbol.png in Resources */,
-				287E9C94111A58A70025E5AE /* Settings.bundle in Resources */,
 				BF014D2F192D846D00B71DB4 /* folder-icon-mask@2x.png in Resources */,
 				281801081120A0D70021AF7A /* openvbx-logo.png in Resources */,
 				2818030B1120C2050021AF7A /* stop-symbol.png in Resources */,
