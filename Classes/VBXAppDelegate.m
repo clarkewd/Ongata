@@ -80,20 +80,9 @@
     }
 }
 
-- (void)restoreState {    
+- (void)restoreStateWithURLState:(NSDictionary *)urlState {
     NSDictionary* appState = [[_builder userDefaults] objectForKey:VBXUserDefaultsApplicationState];
-	NSDictionary* urlState = [NSDictionary dictionaryWithObject:[NSArray array] forKey:@"controllerStates"];
-	
-	if ([[_builder userDefaults] objectForKey:VBXUserDefaultsApplicationLaunchURL]) {
-		NSURL *launchURL = [NSURL URLWithString:[[_builder userDefaults] 
-												 objectForKey:VBXUserDefaultsApplicationLaunchURL]];
-		
-		debug(@"launchURL: %@", launchURL);
-		[[_builder userDefaults] setObject:nil forKey:VBXUserDefaultsApplicationLaunchURL];
-		[[_builder userDefaults] synchronize];
-		urlState = [VBXAppURL route:launchURL];
-	}
-	
+
     @try {
 		if ([[urlState objectForKey:@"controllerStates"] count] >= 1) {
 			debug(@"restoring app state: %@", urlState);
@@ -108,6 +97,11 @@
     }
 }
 
+- (void)restoreState {
+    NSDictionary* urlState = [NSDictionary dictionaryWithObject:[NSArray array] forKey:@"controllerStates"];
+    [self restoreStateWithURLState:urlState];
+}
+
 - (void)saveState {
     // Only save our state if we've complete the setup process
 	debug(@"saveState");
@@ -117,6 +111,18 @@
     }    
 }
 
+- (void)handleLaunchURL {
+	if ([[_builder userDefaults] objectForKey:VBXUserDefaultsApplicationLaunchURL]) {
+		NSURL *launchURL = [NSURL URLWithString:[[_builder userDefaults]
+												 objectForKey:VBXUserDefaultsApplicationLaunchURL]];
+
+		debug(@"launchURL: %@", launchURL);
+		[[_builder userDefaults] setObject:nil forKey:VBXUserDefaultsApplicationLaunchURL];
+		[[_builder userDefaults] synchronize];
+		[self restoreStateWithURLState:[VBXAppURL route:launchURL]];
+	}
+}
+
 - (void)applyConfig {
     UIStatusBarStyle style = [[VBXConfiguration sharedConfiguration] statusBarStyleForKey:@"statusBarStyle" defaultValue:UIStatusBarStyleDefault];
     [[UIApplication sharedApplication] setStatusBarStyle:style animated:NO];
@@ -124,13 +130,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	if ([[_builder userDefaults] boolForKey:VBXUserDefaultsCompletedSetup]) {
-		[self showMainFlow];
-		[self restoreState];
-	} else {
-        [self restoreState];
-    }
-
+	[self handleLaunchURL];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -156,6 +156,9 @@
 
     if (![[_builder userDefaults] boolForKey:VBXUserDefaultsCompletedSetup]) {
         [self showSetupFlow];
+    } else {
+		[self showMainFlow];
+		[self restoreState];
     }
 
     if (launchOptions != nil && [launchOptions allKeys].count > 0) {

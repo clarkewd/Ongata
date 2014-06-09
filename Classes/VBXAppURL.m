@@ -26,6 +26,9 @@
 #import "NSURLExtensions.h"
 #import "VBXUserDefaultsKeys.h"
 #import "VBXConfiguration.h"
+#import <objc/runtime.h>
+
+static const char kAlertKey;
 
 @implementation VBXAppURL
 
@@ -77,11 +80,17 @@
     
     if ([[[builder userDefaults] objectForKey:VBXUserDefaultsCompletedSetup] boolValue]) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"You are already signed in", @"Send Text: Title for alert when user wants to change their login.")
-                                                    message:LocalizedString(@"Are you sure you want change your OpenVBX login?", @"Send Text: Body for alert when user wants to change their login.")
-                                                   delegate:self 
-                                          cancelButtonTitle:LocalizedString(@"No", nil)
-                                              otherButtonTitles:LocalizedString(@"Yes", nil), nil];
+        UIAlertView *alert =
+        [[UIAlertView alloc]
+         initWithTitle:LocalizedString(@"You are already signed in", @"Send Text: Title for alert when user wants to change their login.")
+         message:LocalizedString(@"Are you sure you want change your OpenVBX login?", @"Send Text: Body for alert when user wants to change their login.")
+         delegate:self
+         cancelButtonTitle:LocalizedString(@"Don't Change", nil)
+         otherButtonTitles:LocalizedString(@"Sign Out", nil), nil];
+
+        // Keep us around to receive the delegate message
+        objc_setAssociatedObject(alert, kAlertKey, self, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
         [alert show];
         return controllerStates;
     }
@@ -111,16 +120,16 @@
         defaultPhone = [queryComponents stringForKey:@"phone"];
     }
     
+    VBXClearAllData();
+
     if (baseURLString && [defaultEmail length] > 0) {
-        VBXClearAllData();
-        
-        [defaults setValue:baseURLString forKey:VBXUserDefaultsBaseURL];    
+        [defaults setValue:baseURLString forKey:VBXUserDefaultsBaseURL];
         [defaults setValue:defaultEmail forKey:VBXUserDefaultsEmailAddress];
         [defaults setValue:defaultPhone forKey:VBXUserDefaultsCallbackPhone];
         [defaults setBool:YES forKey:VBXUserDefaultsAutoconfigure];
-        VBXAppDelegate *appDelegate = (VBXAppDelegate *)[UIApplication sharedApplication].delegate;
-        [appDelegate showSetupFlow];
-    }    
+    }
+    VBXAppDelegate *appDelegate = (VBXAppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate showSetupFlow];
 }
 
 - (NSArray*)routeMessages {
