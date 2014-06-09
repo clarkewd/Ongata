@@ -53,6 +53,10 @@
         ////////////////////////////////////////////////////
         // Application-wide settings
         //
+
+        // Logo image that appears at the login screen
+        // Default: The OpenVBX logo
+        // "loginLogo" : "a base64-encoded image"
     
         // Image that appears at the top of the folder / label list screen.  Encoded as a Base64 string.
         // Default: Empty, and instead of showing an email we show the contents of i18n/folderListTitle which defaults to "Messages"

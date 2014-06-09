@@ -206,7 +206,7 @@
     _icon.top = round((size.height / 2) - (_icon.height / 2));
     
     [_numberView sizeToFit];
-    _numberView.right = 295;
+    _numberView.right = 290;
     _numberView.top = round((size.height / 2) - (_numberView.height / 2));
     
     [_label sizeToFit];    

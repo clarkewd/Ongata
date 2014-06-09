@@ -79,29 +79,24 @@
     
     _logoutButton = [[VBXButtonCell alloc] initWithText:LocalizedString(@"Logout", @"Settings: Label for logout button.") reuseIdentifier:nil];
     _licenseButton = [[VBXButtonCell alloc] initWithText:LocalizedString(@"Software Licenses", @"Settings: Label for license button.") reuseIdentifier:nil];
-    
-    VBXFooterTextCell *serverLabel = [[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"Server:", @"Settings: Label that appears before the server."), nil] reuseIdentifier:nil];
-    [serverLabel setBackgroundView:[self tableBackgroundView]];
-    
-    
-    VBXFooterTextCell *serverUrl = [[VBXFooterTextCell alloc] initWithText:[_userDefaults objectForKey:VBXUserDefaultsBaseURL] reuseIdentifier:nil];
-    serverUrl.label.lineBreakMode = NSLineBreakByCharWrapping;
-    [serverUrl setBackgroundView:[self tableBackgroundView]];    
-    
-    VBXFooterTextCell *loggedInAs = [[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil];
 
-    [loggedInAs setBackgroundView:[self tableBackgroundView]];        
+    NSString *serverPrefix = [NSString stringWithFormat:LocalizedString(@"Server:", @"Settings: Label that appears before the server."), nil];
+    NSString *serverURL = [_userDefaults objectForKey:VBXUserDefaultsBaseURL];
+    NSString *serverUser = [NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]];
+    NSString *serverText = [NSString stringWithFormat:@"%@ %@\n%@", serverPrefix, serverURL, serverUser];
+    VBXFooterTextCell *serverLabel = [[VBXFooterTextCell alloc] initWithText:serverText reuseIdentifier:nil];
+    serverLabel.contentInsets = UIEdgeInsetsMake(12, 0, 12, 0);
+    [serverLabel setBackgroundView:[self tableBackgroundView]];
+
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
                       // Callback phone number
                       @"",
                       _callbackPhoneField,
                       LocalizedString(@"When you place phone calls using OpenVBX, you'll be called at this number to make the connection.", @"Settings: description text shown below phone number in the settings app, explains why we need the phone number."),
                       // Server info / Login info
-                      @"\n\n\n",
+                      @"\n",
                       serverLabel,
-                      serverUrl,
-                      loggedInAs,
-					  @"\n\n\n",
+					  @"\n",
 					  @"",
                       // Logout Button
                       _logoutButton,
@@ -109,7 +104,8 @@
 					  _licenseButton,
 					  @"",
                       nil];
-    
+
+    self.tableView.alwaysBounceVertical = NO;
     self.tableView.dataSource = _cellDataSource;
     self.tableView.delegate = _cellDataSource;
     _cellDataSource.proxyToDelegate = self;

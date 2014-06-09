@@ -510,6 +510,9 @@ typedef enum {
     [_callerIdControl addTarget:self action:@selector(callerIdPressed) forControlEvents:UIControlEventTouchUpInside];
     
     _numberAreaView = [[NumberAreaView alloc] init];
+    if (self.view.height >= 568) { // 4" screen
+        _numberAreaView.height += 88;
+    }
     [_dialerView addSubview:_numberAreaView];
     _numberAreaView.left = 0; _numberAreaView.top = _callerIdControl.bottom;
     

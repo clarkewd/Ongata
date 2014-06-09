@@ -108,11 +108,11 @@
 - (void)loadView {
     [super loadView];
 
-    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 200)];
     
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"openvbx-logo.png"]];
+    UIImageView *logo = [[UIImageView alloc] initWithImage:ThemedImage(@"loginLogo", @"openvbx-logo.png")];
     [logo centerHorizontallyInView:logoView];
-    logo.top = 10;
+    [logo centerVerticallyInView:logoView];
     logo.backgroundColor = _tableView.backgroundColor;
     [logoView addSubview:logo];
     
@@ -120,6 +120,7 @@
     logoViewCell.showBackground = NO;
     logoViewCell.backgroundColor = _tableView.backgroundColor;
     logoViewCell.selectedBackgroundView.backgroundColor = logoView.backgroundColor;
+    logoViewCell.contentInsets = UIEdgeInsetsZero;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *serverURL = [defaults objectForKey:VBXUserDefaultsBaseURL];    
 
