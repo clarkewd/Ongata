@@ -308,13 +308,8 @@
 @synthesize dialerButton = _dialerButton;
 
 - (void)toggleMediaRoute {
-    if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStyleBordered) {
-        [_playbackController setOutputToSpeaker];
-        self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleDone;
-    } else {
-        [_playbackController setOutputToEarpiece];
-        self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleBordered;
-    }
+    BOOL isSpeaker = [_playbackController toggleSpeakerOutput];
+    self.navigationItem.rightBarButtonItem.style = isSpeaker ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
 }
 
 - (void)setupSpeakerToggleButton {

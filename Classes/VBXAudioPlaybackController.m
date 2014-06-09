@@ -205,6 +205,16 @@
     [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
 }
 
+- (BOOL)toggleSpeakerOutput {
+    BOOL isSpeaker = [[NSUserDefaults standardUserDefaults] boolForKey:VBXUserDefaultsSpeakerMode];
+    if (isSpeaker) {
+        [self setOutputToEarpiece];
+    } else {
+        [self setOutputToSpeaker];
+    }
+    return !isSpeaker;
+}
+
 - (void)play {
     if (!audioPlayer) {
         waitingToPlay = YES;

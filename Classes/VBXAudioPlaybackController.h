@@ -67,6 +67,7 @@
 
 - (void)setOutputToEarpiece;
 - (void)setOutputToSpeaker;
+- (BOOL)toggleSpeakerOutput; // returns YES if the output is now set to the speaker
 
 - (IBAction)playOrPause;
 - (IBAction)sliderChanged;
