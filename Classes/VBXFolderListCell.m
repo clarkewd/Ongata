@@ -81,10 +81,14 @@
 
     // By setting our blend mode to clear, we're just clearing these pixels
     CGContextSetBlendMode(context, kCGBlendModeClear);
-    [[NSString stringWithFormat:@"%d", _number] drawInRect:rect 
-                 withFont:[UIFont boldSystemFontOfSize:16.0] 
-                                            lineBreakMode:UILineBreakModeMiddleTruncation 
-                                                alignment:UITextAlignmentCenter];
+
+    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+    parStyle.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    parStyle.alignment = NSTextAlignmentCenter;
+    [[NSString stringWithFormat:@"%d", _number]
+     drawInRect:rect
+     withAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0],
+                      NSParagraphStyleAttributeName: parStyle}];
 }
 
 - (void)setColor:(UIColor *)color {
@@ -109,7 +113,7 @@
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-    CGSize fitSize = [[NSString stringWithFormat:@"%d", _number] sizeWithFont:[UIFont boldSystemFontOfSize:16.0]];
+    CGSize fitSize = [[NSString stringWithFormat:@"%d", _number] sizeWithAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16.0]}];
     
     return CGSizeMake(MAX(30, fitSize.width + 16), 20);
 }
@@ -137,8 +141,8 @@
         _label.font = [UIFont boldSystemFontOfSize:19.0];
         _label.textColor = [UIColor blackColor];
         _label.numberOfLines = 1;
-        _label.lineBreakMode = UILineBreakModeTailTruncation;
-        _label.textAlignment = UITextAlignmentLeft;
+        _label.lineBreakMode = NSLineBreakByTruncatingTail;
+        _label.textAlignment = NSTextAlignmentLeft;
         _label.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_label];
         

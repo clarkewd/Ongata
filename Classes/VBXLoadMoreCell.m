@@ -33,7 +33,7 @@
         _titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
         _titleLabel.text = LocalizedString(@"Load more...", @"Load More Cell: Default text");
         _titleLabel.numberOfLines = 1;
-        _titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _titleLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_titleLabel];
         
@@ -41,7 +41,7 @@
         _descriptionLabel.font = [UIFont systemFontOfSize:13.0];
         _descriptionLabel.text = @"";
         _descriptionLabel.numberOfLines = 1;
-        _descriptionLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        _descriptionLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _descriptionLabel.backgroundColor = [UIColor clearColor];        
         [self.contentView addSubview:_descriptionLabel];
         

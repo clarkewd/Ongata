@@ -65,9 +65,9 @@
         label.text = footerText;
         label.font = [UIFont systemFontOfSize:15.0];
         label.numberOfLines = 0;
-        label.textAlignment = UITextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentCenter;
         label.shadowOffset = CGSizeMake(0, 1);
-        label.lineBreakMode = UILineBreakModeWordWrap;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
         label.textColor = ThemedColor(@"tableViewFooterTextColor", RGBHEXCOLOR(0x4d576b));
         label.shadowColor = ThemedColor(@"tableViewFooterTextShadowColor", RGBHEXCOLOR(0xf8f9fa));
         label.width = 305;
@@ -99,9 +99,9 @@
         label.text = headerText;
         label.font = [UIFont boldSystemFontOfSize:17.0];
         label.numberOfLines = 1;
-        label.textAlignment = UITextAlignmentLeft;
+        label.textAlignment = NSTextAlignmentLeft;
         label.shadowOffset = CGSizeMake(0, 1);
-        label.lineBreakMode = UILineBreakModeTailTruncation;
+        label.lineBreakMode = NSLineBreakByTruncatingTail;
         label.textColor = ThemedColor(@"tableViewHeaderTextColor", RGBHEXCOLOR(0x4b566d));
         label.shadowColor = ThemedColor(@"tableViewHeaderTextShadowColor", RGBHEXCOLOR(0xffffff));
         label.width = 300;

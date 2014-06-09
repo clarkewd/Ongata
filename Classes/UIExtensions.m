@@ -98,8 +98,7 @@
     DECLARE_SINGLETON(NSMutableDictionary, styles);
     styles = [NSMutableDictionary new];
     [styles setInt:UIStatusBarStyleDefault forKey:@"UIStatusBarStyleDefault"];
-    [styles setInt:UIStatusBarStyleBlackOpaque forKey:@"UIStatusBarStyleBlackOpaque"];
-    [styles setInt:UIStatusBarStyleBlackTranslucent forKey:@"UIStatusBarStyleBlackTranslucent"];
+    [styles setInt:UIStatusBarStyleLightContent forKey:@"UIStatusBarStyleLightContent"];
     return styles;
 }
 

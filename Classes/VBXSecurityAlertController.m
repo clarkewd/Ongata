@@ -84,8 +84,8 @@
     firstLabel.font = [UIFont boldSystemFontOfSize:15];
     firstLabel.backgroundColor = [UIColor clearColor];
     firstLabel.text = _headingText;
-    firstLabel.lineBreakMode = UILineBreakModeWordWrap;
-    firstLabel.textAlignment = UITextAlignmentCenter;
+    firstLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    firstLabel.textAlignment = NSTextAlignmentCenter;
     [firstLabel sizeToFit];
     [view addSubview:firstLabel];
     
@@ -94,7 +94,7 @@
     secondLabel.font = [UIFont systemFontOfSize:14];
     secondLabel.backgroundColor = [UIColor clearColor];
     secondLabel.text = _descriptionText;
-    secondLabel.lineBreakMode = UILineBreakModeWordWrap;
+    secondLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [secondLabel sizeToFit];
     [view addSubview:secondLabel];
     

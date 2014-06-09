@@ -77,22 +77,22 @@
         nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
         nameLabel.numberOfLines = 1;
-        nameLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
+        nameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", anAnnotation.firstName, anAnnotation.lastName];
         [self.contentView addSubview:nameLabel];
         
         timestampLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         timestampLabel.font = [UIFont systemFontOfSize:14.0];
         timestampLabel.numberOfLines = 1;
-        timestampLabel.lineBreakMode = UILineBreakModeTailTruncation;
-        timestampLabel.textAlignment = UITextAlignmentRight;
+        timestampLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        timestampLabel.textAlignment = NSTextAlignmentRight;
         timestampLabel.text = VBXDateToDateAndTimeString(VBXParseISODateString(anAnnotation.created));
         [self.contentView addSubview:timestampLabel];
         
         bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         bodyLabel.font = [UIFont systemFontOfSize:14.0];
         bodyLabel.numberOfLines = 0;
-        bodyLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
+        bodyLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         bodyLabel.contentMode = UIViewContentModeBottomLeft;
         bodyLabel.text = anAnnotation.description;        
         [self.contentView addSubview:bodyLabel];        
@@ -175,22 +175,22 @@
         nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
         nameLabel.numberOfLines = 1;
-        nameLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
+        nameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", anAnnotation.firstName, anAnnotation.lastName];
         [self.contentView addSubview:nameLabel];
         
         timestampLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         timestampLabel.font = [UIFont systemFontOfSize:14.0];
         timestampLabel.numberOfLines = 1;
-        timestampLabel.lineBreakMode = UILineBreakModeTailTruncation;
-        timestampLabel.textAlignment = UITextAlignmentRight;
+        timestampLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        timestampLabel.textAlignment = NSTextAlignmentRight;
         timestampLabel.text = VBXDateToDateAndTimeString(VBXParseISODateString(anAnnotation.created));
         [self.contentView addSubview:timestampLabel];
         
         bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         bodyLabel.font = [UIFont systemFontOfSize:14.0];
         bodyLabel.numberOfLines = 0;
-        bodyLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
+        bodyLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         bodyLabel.contentMode = UIViewContentModeBottomLeft;
         bodyLabel.text = anAnnotation.description;
         [self.contentView addSubview:bodyLabel];
@@ -424,7 +424,7 @@
 
         _addNoteCell = [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         _addNoteCell.textLabel.text = @"Add Note";
-        _addNoteCell.textLabel.textAlignment = UITextAlignmentCenter;
+        _addNoteCell.textLabel.textAlignment = NSTextAlignmentCenter;
         
         [items addObject:@""]; // empty header
         [items addObject:_addNoteCell];
@@ -967,7 +967,7 @@
         controller.navigationItem.title = attributeCell.attribute.name;
         [[self navigationController] pushViewController:controller animated:YES];
     } else if (cell == _addNoteCell) {
-        [self presentModalViewController:[self addNoteController] animated:YES];
+        [self presentViewController:[self addNoteController] animated:YES completion:nil];
     } else if (cell == _loadMoreCell) {
         [self loadMoreAnnotations];
     } else {
@@ -982,7 +982,7 @@
     
     if (_noteText) [state setObject:_noteText forKey:@"newNoteText"];
     
-    UIViewController *modalController = [self modalViewController];
+    UIViewController *modalController = self.presentedViewController;
     if ([modalController isKindOfClass:[VBXTextEntryController class]]) {
         VBXTextEntryController *textEntryController = (VBXTextEntryController *)modalController;
         if (textEntryController.delegate == self) {
@@ -1011,7 +1011,7 @@
     if ([state objectForKey:@"addNoteState"]) {
         VBXTextEntryController *addNoteController = [self addNoteController];
         [addNoteController restoreState:[state objectForKey:@"addNoteState"]];
-        [self presentModalViewController:addNoteController animated:NO];
+        [self presentViewController:addNoteController animated:NO completion:nil];
     }
     
     if ([state boolForKey:@"dialerIsShown"]) {

@@ -85,7 +85,7 @@
     
     
     VBXFooterTextCell *serverUrl = [[VBXFooterTextCell alloc] initWithText:[_userDefaults objectForKey:VBXUserDefaultsBaseURL] reuseIdentifier:nil];
-    serverUrl.label.lineBreakMode = UILineBreakModeCharacterWrap;
+    serverUrl.label.lineBreakMode = NSLineBreakByCharWrapping;
     [serverUrl setBackgroundView:[self tableBackgroundView]];    
     
     VBXFooterTextCell *loggedInAs = [[VBXFooterTextCell alloc] initWithText:[NSString stringWithFormat:LocalizedString(@"\nLogged in as %@", @"Settings: Indicates the current account being used.\n\n"), [_userDefaults stringForKey:VBXUserDefaultsEmailAddress]] reuseIdentifier:nil];
@@ -120,7 +120,7 @@
 }
 
 - (void)done {
-    [self.presentingViewController dismissModalViewControllerAnimated:YES];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)fadeToMainFlow:(UIView *)blackView {
@@ -157,7 +157,7 @@
 }
 
 - (void)phoneNumberWasValidated:(UIViewController *)sender {
-    [sender.navigationController dismissModalViewControllerAnimated:YES];
+    [sender.navigationController dismissViewControllerAnimated:YES completion:nil];
     _callbackPhoneField.detailTextLabel.text = [_userDefaults stringForKey:VBXUserDefaultsCallbackPhone];    
 }
 

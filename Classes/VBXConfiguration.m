@@ -256,10 +256,8 @@ static void FakeRelease(CFAllocatorRef allocator, const void *value) { }
     
     if ([@"UIStatusBarStyleDefault" isEqualToString:value]) {
         return UIStatusBarStyleDefault;
-    } else if ([@"UIStatusBarStyleBlackOpaque" isEqualToString:value]) {
-        return UIStatusBarStyleBlackOpaque;
-    } else if ([@"UIStatusBarStyleBlackTranslucent" isEqualToString:value]) {
-        return UIStatusBarStyleBlackTranslucent;
+    } else if ([@"UIStatusBarStyleLightContent" isEqualToString:value]) {
+        return UIStatusBarStyleLightContent;
     } else {
         return defaultValue;
     }

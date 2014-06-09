@@ -50,10 +50,10 @@ const static int KEY_HIGHLIGHTED_BACKGROUND_COLOR = 0xb1b4b8;
         _numberLabel.text = @"123...text to be replaced later";
         _numberLabel.backgroundColor = [UIColor clearColor];
         _numberLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:30];
-        _numberLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
-        _numberLabel.minimumFontSize = 14;
+        _numberLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _numberLabel.minimumScaleFactor = 14.0f/30.0f;
         _numberLabel.numberOfLines = 1;
-        _numberLabel.textAlignment = UITextAlignmentCenter;
+        _numberLabel.textAlignment = NSTextAlignmentCenter;
         [_numberLabel sizeToFit];
         [self addSubview:_numberLabel];
         
@@ -634,7 +634,7 @@ typedef enum {
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     picker.displayedProperties = [NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]];
-    [self.navigationController presentModalViewController:picker animated:YES];
+    [self.navigationController presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)makeCallAfterDelay {
@@ -680,7 +680,7 @@ typedef enum {
         [self unsetPromptAndUndim];
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(makeCallAfterDelay) object:nil];
     } else {
-        [self.presentingViewController dismissModalViewControllerAnimated:YES];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -691,7 +691,7 @@ typedef enum {
 #pragma mark PeoplePicker delegate methods
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -722,7 +722,7 @@ typedef enum {
     [_phoneNumber setString:[self stripNonNumbers:phone]];
     [self refreshView];
     
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
     // Don't do the default action - we'll handle closing the picker
     return NO;

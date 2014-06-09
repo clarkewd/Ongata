@@ -32,10 +32,10 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
         _titleLabel.font = [UIFont boldSystemFontOfSize:19.0];
         _titleLabel.textColor = ThemedColor(@"tableStatusTitleTextColor", ThemedColor(@"secondaryTextColor", [UIColor darkGrayColor]));
-        _titleLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
+        _titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _titleLabel.numberOfLines = 1;
         _titleLabel.text = @"Title";
-        _titleLabel.textAlignment = UITextAlignmentCenter;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.backgroundColor = [UIColor clearColor];
 
         [self addSubview:_titleLabel];
@@ -43,10 +43,10 @@
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
         _descriptionLabel.font = [UIFont systemFontOfSize:14.0];
         _descriptionLabel.textColor = ThemedColor(@"tableStatusDescriptionTextColor", ThemedColor(@"tertiaryTextColor", [UIColor grayColor]));
-        _descriptionLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
+        _descriptionLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _descriptionLabel.numberOfLines = 2;
         _descriptionLabel.text = @"You should explain what went wrong here.";
-        _descriptionLabel.textAlignment = UITextAlignmentCenter;
+        _descriptionLabel.textAlignment = NSTextAlignmentCenter;
         _descriptionLabel.backgroundColor = [UIColor clearColor];        
         [self addSubview:_descriptionLabel];
 

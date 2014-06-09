@@ -41,17 +41,17 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
         _titleLabel.numberOfLines = 1;
-        _titleLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
+        _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self.contentView addSubview:_titleLabel];
         
         _timestampLabel = [[VBXStringPartLabel alloc] initWithFrame:CGRectZero];
-        _timestampLabel.textAlignment = UITextAlignmentRight;
+        _timestampLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:_timestampLabel];
                 
         _bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _bodyLabel.font = [UIFont systemFontOfSize:13.0];
         _bodyLabel.numberOfLines = 2;
-        _bodyLabel.lineBreakMode = UILineBreakModeTailTruncation | UILineBreakModeWordWrap;
+        _bodyLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _bodyLabel.contentMode = UIViewContentModeBottomLeft;
         [self.contentView addSubview:_bodyLabel];
         
@@ -158,9 +158,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
         
-    const NSInteger accessoryLeftX = self.contentView.width;
     const NSInteger padding = 5;
-    const NSInteger messageStartX = (_messageListController.editing ? 5 : 37);    
+    const NSInteger accessoryLeftX = self.contentView.width - (_messageListController.editing ? 2*padding : 0);
+    const NSInteger messageStartX = (_messageListController.editing ? 5 : 37);
     
     _timestampLabel.width = 100;
     _timestampLabel.right = accessoryLeftX;
@@ -189,11 +189,15 @@
     _bodyLabel.left = messageStartX;
     _bodyLabel.top = _folderLabel.bottom;
     _bodyLabel.width = _timestampLabel.right - messageStartX;    
-    _bodyLabel.height = self.contentView.height - padding - _bodyLabel.top;
-    _bodyLabel.height = [_bodyLabel.text sizeWithFont:_bodyLabel.font 
-                                    constrainedToSize:_bodyLabel.frame.size 
-                                        lineBreakMode:_bodyLabel.lineBreakMode].height;
-    
+
+    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+    parStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    _bodyLabel.height = [_bodyLabel.text boundingRectWithSize:(CGSize){_bodyLabel.width, self.contentView.height - padding - _bodyLabel.top}
+                                                      options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine
+                                                   attributes:@{NSFontAttributeName: _bodyLabel.font,
+                                                                NSParagraphStyleAttributeName: parStyle}
+                                                      context:nil].size.height;
+
     if (self.editing || _messageSummary.isSms) {
         _audioControl.hidden = YES;
     } else {

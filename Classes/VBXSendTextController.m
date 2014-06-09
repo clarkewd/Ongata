@@ -87,10 +87,15 @@
     CGContextSetBlendMode(context, kCGBlendModeClear);
     
     rect.origin.y += 1;
-    [[NSString stringWithFormat:@"%d", _number] drawInRect:rect
-                                                  withFont:[UIFont boldSystemFontOfSize:14.0] 
-                                             lineBreakMode:UILineBreakModeMiddleTruncation 
-                                                 alignment:UITextAlignmentCenter];
+
+    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+    parStyle.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    parStyle.alignment = NSTextAlignmentCenter;
+    [[NSString stringWithFormat:@"%d", _number]
+     drawInRect:rect
+     withAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14.0],
+                      NSParagraphStyleAttributeName: parStyle}];
+
 }
 
 - (void)setColor:(UIColor *)color {
@@ -107,7 +112,7 @@
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-    CGSize fitSize = [[NSString stringWithFormat:@"%d", _number] sizeWithFont:[UIFont boldSystemFontOfSize:14.0]];
+    CGSize fitSize = [[NSString stringWithFormat:@"%d", _number] sizeWithAttributes: @{NSFontAttributeName:[UIFont boldSystemFontOfSize:14.0]}];
     
     return CGSizeMake(MAX(30, fitSize.width + 16), 20);
 }
@@ -204,11 +209,11 @@
         _label.text = LocalizedString(@"To:", @"Send Text: Label for the To: field.");
         _label.font = [UIFont systemFontOfSize:15.0];        
         _label.numberOfLines = 1;
-        _label.lineBreakMode = UILineBreakModeTailTruncation;
+        _label.lineBreakMode = NSLineBreakByTruncatingTail;
         
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.font = [UIFont systemFontOfSize:15.0];
-        _textField.textAlignment = UITextAlignmentLeft;
+        _textField.textAlignment = NSTextAlignmentLeft;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.keyboardType = UIKeyboardTypePhonePad;
         _textField.backgroundColor = [UIColor clearColor];
@@ -291,11 +296,11 @@
         _label.text = LocalizedString(@"From:", @"Send Text: Label for the From: field.");
         _label.font = [UIFont systemFontOfSize:15.0];
         _label.numberOfLines = 1;
-        _label.lineBreakMode = UILineBreakModeTailTruncation;
+        _label.lineBreakMode = NSLineBreakByTruncatingTail;
         
         _valueField = [[UILabel alloc] initWithFrame:CGRectZero];
         _valueField.font = [UIFont systemFontOfSize:15.0];
-        _valueField.textAlignment = UITextAlignmentLeft;
+        _valueField.textAlignment = NSTextAlignmentLeft;
         _valueField.text = @"";
         _valueField.backgroundColor = [UIColor clearColor];
         
@@ -358,7 +363,7 @@
 @synthesize sendTextPoster = _sendTextPoster;
 
 - (void)cancel {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)send {    
@@ -409,7 +414,7 @@
 }
 
 - (void)dismissAfterDelay {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)loader:(VBXResourceLoader *)loader didSendText:(NSDictionary *)response {
@@ -521,7 +526,7 @@
         ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
         picker.peoplePickerDelegate = self;
         picker.displayedProperties = [NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]];
-        [self.navigationController presentModalViewController:picker animated:YES];
+        [self.navigationController presentViewController:picker animated:YES completion:nil];
     }
 }
 
@@ -572,7 +577,7 @@
 #pragma mark PeoplePicker delegate methods
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -594,7 +599,7 @@
     
     _toCell.textField.text = VBXStripNonDigitsFromString(phone);
     
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     // Don't do the default action - we'll handle closing the picker
     return NO;

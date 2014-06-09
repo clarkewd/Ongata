@@ -34,9 +34,9 @@
         _label.text = text;
         _label.font = [UIFont systemFontOfSize:15.0];
         _label.numberOfLines = 0;
-        _label.textAlignment = UITextAlignmentCenter;
+        _label.textAlignment = NSTextAlignmentCenter;
         _label.shadowOffset = CGSizeMake(0, 1);
-        _label.lineBreakMode = UILineBreakModeWordWrap;
+        _label.lineBreakMode = NSLineBreakByWordWrapping;
         _label.backgroundColor = [UIColor clearColor];
         _label.width = 300;
         [_label sizeToFit];
@@ -85,10 +85,11 @@
     [self setNeedsLayout];
     [self layoutIfNeeded];
 
-    CGSize size = [_label.text sizeWithFont:[UIFont systemFontOfSize:15.0]
-                          constrainedToSize:CGSizeMake(300 - (_contentInsets.left + _contentInsets.right), 9999)
-                              lineBreakMode:UILineBreakModeWordWrap];
-    
+    CGSize size = [_label.text boundingRectWithSize:CGSizeMake(300 - (_contentInsets.left + _contentInsets.right), 9999)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15.0]}
+                                            context:nil].size;
+
     return size.height + _contentInsets.top + _contentInsets.bottom;
 }
 

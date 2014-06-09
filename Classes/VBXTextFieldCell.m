@@ -34,7 +34,7 @@
         _label.text = @"";
         _label.font = [UIFont boldSystemFontOfSize:17.0];
         _label.numberOfLines = 1;
-        _label.lineBreakMode = UILineBreakModeTailTruncation;
+        _label.lineBreakMode = NSLineBreakByTruncatingTail;
         
         _helpLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _helpLabel.backgroundColor = [UIColor clearColor];
@@ -42,11 +42,11 @@
         _helpLabel.text = @"";
         _helpLabel.font = [UIFont italicSystemFontOfSize:13.0];
         _helpLabel.numberOfLines = 1;
-        _helpLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        _helpLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.font = [UIFont systemFontOfSize:17.0];
-        _textField.textAlignment = UITextAlignmentLeft;
+        _textField.textAlignment = NSTextAlignmentLeft;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.text = @"";
         

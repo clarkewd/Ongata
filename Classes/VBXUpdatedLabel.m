@@ -26,7 +26,7 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        self.textAlignment = UITextAlignmentCenter;
+        self.textAlignment = NSTextAlignmentCenter;
     }
     return self;
 }

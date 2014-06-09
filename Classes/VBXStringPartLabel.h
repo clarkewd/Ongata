@@ -37,13 +37,13 @@
     CGSize _shadowOffset;
     UIColor *_shadowColor;
     NSArray *_parts;
-    UITextAlignment _textAlignment;    
+    NSTextAlignment _textAlignment;
 }
 
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, assign) CGSize shadowOffset;
 @property (nonatomic, strong) UIColor *shadowColor;
 @property (nonatomic, strong) NSArray *parts;
-@property (nonatomic, assign) UITextAlignment textAlignment;
+@property (nonatomic, assign) NSTextAlignment textAlignment;
 
 @end

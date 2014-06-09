@@ -82,7 +82,7 @@
 
 - (void)settingsPressed {
     UIViewController *controller = [_builder navControllerWrapping:[_builder settingsController]];
-    [self presentModalViewController:controller animated:YES];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {    

@@ -66,7 +66,7 @@
     CGFloat maxAscender = 0.0;
     int i = 0;
     for (VBXStringPart *part in _parts) {
-        CGSize size = [part.text sizeWithFont:part.font];
+        CGSize size = [part.text sizeWithAttributes:@{NSFontAttributeName:part.font}];
         sizes[i++] = size;
 
         bounds.width += size.width;
@@ -80,13 +80,13 @@
     CGPoint point = {0};
     
     switch (_textAlignment) {
-        case UITextAlignmentLeft:
+        case NSTextAlignmentLeft:
             point = CGPointMake(0, 0);
             break;
-        case UITextAlignmentRight:
+        case NSTextAlignmentRight:
             point = CGPointMake(rect.size.width - bounds.width, 0);
             break;
-        case UITextAlignmentCenter:
+        case NSTextAlignmentCenter:
             point = CGPointMake(round((rect.size.width / 2) - (bounds.width / 2)), 0);
             break;
         default:
@@ -96,7 +96,7 @@
     i = 0;
     for (VBXStringPart *part in _parts) {
         CGSize size = sizes[i++];
-        [part.text drawAtPoint:CGPointMake(point.x, point.y + (maxAscender - part.font.ascender)) withFont:part.font];
+        [part.text drawAtPoint:CGPointMake(point.x, point.y + (maxAscender - part.font.ascender)) withAttributes:@{NSFontAttributeName:part.font}];
         point.x += size.width;
     }
 }
@@ -122,7 +122,7 @@
     }
 }
 
-- (void)setTextAlignment:(UITextAlignment)textAlignment {
+- (void)setTextAlignment:(NSTextAlignment)textAlignment {
     _textAlignment = textAlignment;
     [self setNeedsDisplay];
 }
@@ -132,7 +132,7 @@
     CGSize bounds = CGSizeMake(0, 0);
     
     for (VBXStringPart *part in _parts) {
-        CGSize size = [part.text sizeWithFont:part.font];
+        CGSize size = [part.text sizeWithAttributes:@{NSFontAttributeName:part.font}];
         
         bounds.width += size.width;
         bounds.height = MAX(bounds.height, size.height);

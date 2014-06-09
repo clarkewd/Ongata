@@ -193,20 +193,16 @@
     [userDefaults setBool:NO forKey:VBXUserDefaultsSpeakerMode];
     [userDefaults synchronize];     
     
-    UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
-    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);    
-    UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
-    AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:nil];
 }
 
 - (void)setOutputToSpeaker {
     [userDefaults setBool:YES forKey:VBXUserDefaultsSpeakerMode];
     [userDefaults synchronize];     
     
-    UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
-    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);    
-    UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
-    AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
 }
 
 - (void)play {
