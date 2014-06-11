@@ -36,7 +36,7 @@
 
 @property (nonatomic, weak) id<VBXSetNumberControllerDelegate> delegate;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic, weak) NSString *finishedButtonText;
+@property (nonatomic, strong) NSString *finishedButtonText;
 
 @end
 

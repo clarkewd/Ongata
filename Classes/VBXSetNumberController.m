@@ -46,7 +46,6 @@
 
 @synthesize delegate;
 @synthesize userDefaults = _userDefaults;
-@dynamic finishedButtonText;
 
 - (void)finish {
     
@@ -86,6 +85,10 @@
 
 - (void)setFinishedButtonText:(NSString *)text {
     self.navigationItem.rightBarButtonItem.title = text;
+}
+
+- (NSString *)finishedButtonText {
+    return self.navigationItem.rightBarButtonItem.title;
 }
 
 - (void)loadView {
