@@ -28,7 +28,7 @@
 @interface VBXFolderListController : VBXStatefulTableViewController {
     NSUserDefaults *_userDefaults;
     VBXFolderListAccessor *_accessor;
-    VBXObjectBuilder *__weak _builder;
+    VBXObjectBuilder *_builder;
     NSString *_selectedFolderKey;
     
     UIBarButtonItem *_refreshButton;
@@ -41,7 +41,7 @@
 
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic, strong) VBXFolderListAccessor *accessor;
-@property (nonatomic, weak) VBXObjectBuilder *builder;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *dialerButton;

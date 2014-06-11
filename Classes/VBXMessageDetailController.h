@@ -37,7 +37,7 @@
     VBXDialerAccessor *_dialerAccessor;
     VBXAudioPlaybackController *_playbackController;
     VBXMessageListController *_messageListController;
-    VBXObjectBuilder *__weak _builder;
+    VBXObjectBuilder *_builder;
     NSBundle *_bundle;
     NSString *_newNoteText;
     
@@ -69,7 +69,7 @@
 @property (nonatomic, strong) VBXDialerAccessor *dialerAccessor;
 @property (nonatomic, strong) VBXAudioPlaybackController *playbackController;
 @property (nonatomic, strong) VBXMessageListController *messageListController;
-@property (nonatomic, weak) VBXObjectBuilder *builder;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
 @property (nonatomic, strong) NSBundle *bundle;
 
 

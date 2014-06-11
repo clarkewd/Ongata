@@ -32,7 +32,7 @@
     VBXAudioPlaybackController *_playbackController;
     VBXMessageListAccessor *_accessor;    
     NSBundle *_bundle;
-    VBXObjectBuilder *__weak _builder;
+    VBXObjectBuilder *_builder;
     NSIndexPath *_selectedMessageIndexPath;
     NSString *_selectedMessageKey;
     NSString *_selectedMessageRecordingURL;
@@ -49,7 +49,7 @@
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic, strong) VBXMessageListAccessor *accessor;
 @property (nonatomic, strong) NSBundle *bundle;
-@property (nonatomic, weak) VBXObjectBuilder *builder;
+@property (nonatomic, strong) VBXObjectBuilder *builder;
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *dialerButton;
