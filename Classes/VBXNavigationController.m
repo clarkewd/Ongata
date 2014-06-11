@@ -131,7 +131,7 @@
 - (void)showDialerWithState:(NSDictionary *)state animated:(BOOL)animated {
     _dialerIsShown = YES;
     _dialerController = [_builder dialerController];
-    [_dialerController performSelector:@selector(restoreState:) withObject:state];
+    [_dialerController restoreState:state];
 
     UINavigationController *navController = [_builder navControllerWrapping:_dialerController];
     [self presentViewController:navController animated:animated completion:nil];
@@ -140,7 +140,7 @@
 - (void)showSendTextWithState:(NSDictionary *)state animated:(BOOL)animated {
     _sendTextIsShown = YES;
     _sendTextController = [_builder sendTextController];
-    [_sendTextController performSelector:@selector(restoreState:) withObject:state];
+    [_sendTextController restoreState:state];
     [self presentViewController:[_builder navControllerWrapping:_sendTextController] animated:animated completion:nil];
 }
 
