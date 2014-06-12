@@ -100,34 +100,38 @@
         [self applyConfig];
         
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [self layoutLabels];
     }
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
+- (void)layoutLabels {
     CGSize size = self.contentView.size;
-    
+
     const NSInteger vertPadding = 4;
     const NSInteger horizPadding = 8;
-    
+
     timestampLabel.width = 100;
     [timestampLabel sizeToFit];
     timestampLabel.right = size.width - horizPadding;
-    
+
     nameLabel.left = horizPadding;
     nameLabel.top = vertPadding;
-    [nameLabel sizeToFit];    
+    [nameLabel sizeToFit];
     nameLabel.width = timestampLabel.left - horizPadding - horizPadding;
-    
+
     timestampLabel.bottom = nameLabel.bottom;
-    
+
     bodyLabel.left = horizPadding;
     bodyLabel.top = nameLabel.bottom + vertPadding + vertPadding;
     bodyLabel.width = timestampLabel.right - (horizPadding / 2);
     [bodyLabel sizeToFit];
-    bodyLabel.height = MIN(bodyLabel.height, self.contentView.height - vertPadding - bodyLabel.top);    
+    bodyLabel.height = MIN(bodyLabel.height, self.contentView.height - vertPadding - bodyLabel.top);
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self layoutLabels];
 }
 
 
@@ -145,8 +149,7 @@
 }
 
 - (CGFloat)heightForCell {
-    self.height = 9999;    
-    return bodyLabel.bottom + 4;
+    return bodyLabel.bottom + 10;
 }
 
 @end
@@ -198,34 +201,37 @@
         [self applyConfig];
         
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [self layoutLabels];
     }
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
+- (void)layoutLabels {
     CGSize size = self.contentView.size;
-    
+
     const NSInteger vertPadding = 4;
     const NSInteger horizPadding = 8;
-    
+
     timestampLabel.width = 100;
     [timestampLabel sizeToFit];
     timestampLabel.right = size.width - horizPadding;
-    
+
     nameLabel.left = horizPadding;
     nameLabel.top = vertPadding;
-    [nameLabel sizeToFit];    
+    [nameLabel sizeToFit];
     nameLabel.width = timestampLabel.left - horizPadding - horizPadding;
-    
+
     timestampLabel.bottom = nameLabel.bottom;
-    
+
     bodyLabel.left = horizPadding;
     bodyLabel.top = nameLabel.bottom + vertPadding + vertPadding;
     bodyLabel.width = timestampLabel.right - (horizPadding / 2);
     [bodyLabel sizeToFit];
-    bodyLabel.height = MIN(bodyLabel.height, self.contentView.height - vertPadding - bodyLabel.top);    
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self layoutLabels];
 }
 
 - (void)applyConfig {
@@ -243,8 +249,7 @@
 
 
 - (CGFloat)heightForCell {
-    self.height = 9999;    
-    return bodyLabel.bottom + 4;
+    return bodyLabel.bottom + 6;
 }   
 
 @end

@@ -42,14 +42,8 @@ CGRect VBXNavigationFrameWithKeyboard() {
 }
 
 NSDate *VBXParseISODateString(NSString *input) {
-
-    // This trailing time zone info is always +00:00 (because everything is UTC),
-    // so we just remove it because I can't figure out how to get the date format
-    // string to parse it.
-    input = [input stringByReplacingOccurrencesOfString:@"+00:00" withString:@""];
-
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
     
     // Convert from GMT to local time while we're at it
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
