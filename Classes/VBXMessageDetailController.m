@@ -53,7 +53,7 @@
 #define kSheetTagArchive 102
 #define kSheetTagContactFromLinkInTranscription 103
 
-@interface ChangeAnnotationCell : VBXTableViewCell <VBXVariableHeightCell> {
+@interface AnnotationCell : VBXTableViewCell <VBXVariableHeightCell> {
     VBXAnnotation *annotation;
     
     UILabel *nameLabel;
@@ -65,7 +65,7 @@
 
 @end
 
-@implementation ChangeAnnotationCell 
+@implementation AnnotationCell
 
 @synthesize annotation;
 
@@ -126,131 +126,50 @@
     bodyLabel.top = nameLabel.bottom + vertPadding + vertPadding;
     bodyLabel.width = timestampLabel.right - (horizPadding / 2);
     [bodyLabel sizeToFit];
-    bodyLabel.height = MIN(bodyLabel.height, self.contentView.height - vertPadding - bodyLabel.top);
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self layoutLabels];
 }
-
 
 - (void)applyConfig {
     [super applyConfig];
     
     self.backgroundColor = ThemedColor(@"messageDetailChangeAnnotationBackgroundColor", RGBHEXCOLOR(0xf0f0f0));    
     nameLabel.backgroundColor = self.backgroundColor;
-    timestampLabel.backgroundColor = self.backgroundColor;    
+    timestampLabel.backgroundColor = self.backgroundColor;
     bodyLabel.backgroundColor = self.backgroundColor;
-    
+
     nameLabel.textColor = ThemedColor(@"messageDetailAnnotationNameTextColor", ThemedColor(@"primaryTextColor", [UIColor blackColor]));
     timestampLabel.textColor = ThemedColor(@"messageDetailAnnotationTimestampTextColor", ThemedColor(@"messageListTimestampTextColor", RGBHEXCOLOR(0x2470d8)));
     bodyLabel.textColor = ThemedColor(@"messageDetailAnnotationBodyTextColor", ThemedColor(@"secondaryTextColor", [UIColor grayColor]));
 }
 
 - (CGFloat)heightForCell {
-    return bodyLabel.bottom + 10;
+    return bodyLabel.bottom + 6;
 }
 
 @end
 
-@interface NoteAnnotationCell : VBXTableViewCell <VBXVariableHeightCell> {
-    VBXAnnotation *annotation;
+@interface ChangeAnnotationCell : AnnotationCell
+@end
 
-    UILabel *nameLabel;
-    UILabel *timestampLabel;
-    UILabel *bodyLabel;
-}
+@implementation ChangeAnnotationCell
+@end
 
-@property (nonatomic, strong) VBXAnnotation *annotation;
-
+@interface NoteAnnotationCell : AnnotationCell
 @end
 
 @implementation NoteAnnotationCell 
 
-@synthesize annotation;
-
-- (id)initWithAnnotation:(VBXAnnotation *)anAnnotation reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
-        self.annotation = anAnnotation;
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
-        nameLabel.numberOfLines = 1;
-        nameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        nameLabel.text = [NSString stringWithFormat:@"%@ %@", anAnnotation.firstName, anAnnotation.lastName];
-        [self.contentView addSubview:nameLabel];
-        
-        timestampLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        timestampLabel.font = [UIFont systemFontOfSize:14.0];
-        timestampLabel.numberOfLines = 1;
-        timestampLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        timestampLabel.textAlignment = NSTextAlignmentRight;
-        timestampLabel.text = VBXDateToDateAndTimeString(VBXParseISODateString(anAnnotation.created));
-        [self.contentView addSubview:timestampLabel];
-        
-        bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        bodyLabel.font = [UIFont systemFontOfSize:14.0];
-        bodyLabel.numberOfLines = 0;
-        bodyLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        bodyLabel.contentMode = UIViewContentModeBottomLeft;
-        bodyLabel.text = anAnnotation.description;
-        [self.contentView addSubview:bodyLabel];
-        
-        [self applyConfig];
-        
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [self layoutLabels];
-    }
-    return self;
-}
-
-- (void)layoutLabels {
-    CGSize size = self.contentView.size;
-
-    const NSInteger vertPadding = 4;
-    const NSInteger horizPadding = 8;
-
-    timestampLabel.width = 100;
-    [timestampLabel sizeToFit];
-    timestampLabel.right = size.width - horizPadding;
-
-    nameLabel.left = horizPadding;
-    nameLabel.top = vertPadding;
-    [nameLabel sizeToFit];
-    nameLabel.width = timestampLabel.left - horizPadding - horizPadding;
-
-    timestampLabel.bottom = nameLabel.bottom;
-
-    bodyLabel.left = horizPadding;
-    bodyLabel.top = nameLabel.bottom + vertPadding + vertPadding;
-    bodyLabel.width = timestampLabel.right - (horizPadding / 2);
-    [bodyLabel sizeToFit];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self layoutLabels];
-}
-
 - (void)applyConfig {
     [super applyConfig];
-    
     self.backgroundColor = ThemedColor(@"messageDetailNoteAnnotationBackgroundColor", ThemedColor(@"tableViewCellBackgroundColor", [UIColor whiteColor]));
     nameLabel.backgroundColor = self.backgroundColor;
-    timestampLabel.backgroundColor = self.backgroundColor;    
+    timestampLabel.backgroundColor = self.backgroundColor;
     bodyLabel.backgroundColor = self.backgroundColor;
-    
-    nameLabel.textColor = ThemedColor(@"messageDetailAnnotationNameTextColor", ThemedColor(@"primaryTextColor", [UIColor blackColor]));
-    timestampLabel.textColor = ThemedColor(@"messageDetailAnnotationTimestampTextColor", ThemedColor(@"messageListTimestampTextColor", RGBHEXCOLOR(0x2470d8)));
-    bodyLabel.textColor = ThemedColor(@"messageDetailAnnotationBodyTextColor", ThemedColor(@"secondaryTextColor", [UIColor grayColor]));    
 }
-
-
-- (CGFloat)heightForCell {
-    return bodyLabel.bottom + 6;
-}   
 
 @end
 
