@@ -140,7 +140,7 @@ static UIImage *__pauseImage = nil;
 }
 
 - (void)controlButtonPressed {
-    if (_delegate != nil) {
+    if (!self.hidden) {
         [_delegate audioControlDidPressControl:self];
     }
 }
