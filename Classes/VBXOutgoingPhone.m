@@ -25,12 +25,22 @@
 @implementation VBXOutgoingPhone
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
+    if (![dictionary isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
     if (self = [super init]) {
         self.key = [dictionary stringForKey:@"id"];
         self.name = [dictionary stringForKey:@"name"];
         self.phone = [dictionary stringForKey:@"phone"];
     }
     return self;
+}
+
+- (NSDictionary *)dictionary {
+    return @{ @"id": self.key,
+              @"name": self.name,
+              @"phone": self.phone,
+            };
 }
 
 @synthesize key = _key;

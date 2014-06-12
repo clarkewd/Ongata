@@ -86,16 +86,17 @@ const static int KEY_HIGHLIGHTED_BACKGROUND_COLOR = 0xb1b4b8;
 
 @interface CallerIdControl : UIControl <VBXConfigurable> {
     UILabel *_callerIdLabel;
+    UILabel *_numberNameLabel;
     UILabel *_numberLabel;
     UITableViewCell *_chevronView;
 }
 
-- (void)setCallerId:(NSString *)callerId;
-- (NSString *)callerId;
+@property (nonatomic, strong) VBXOutgoingPhone *callerID;
 
 @end
 
 @implementation CallerIdControl
+
 
 - (id)init {
     if (self = [super initWithFrame:CGRectMake(0, 0, 320, 50)]) {
@@ -106,12 +107,18 @@ const static int KEY_HIGHLIGHTED_BACKGROUND_COLOR = 0xb1b4b8;
         [_callerIdLabel sizeToFit];
         [self addSubview:_callerIdLabel];    
 
+        _numberNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _numberNameLabel.font = [UIFont boldSystemFontOfSize:16];
+        _numberNameLabel.adjustsFontSizeToFitWidth = YES;
+        _numberNameLabel.minimumScaleFactor = 0.5f;
+        _numberNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _numberNameLabel.textAlignment = NSTextAlignmentRight;
+        [self addSubview:_numberNameLabel];
+
         _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _numberLabel.text = @"";
-        _numberLabel.backgroundColor = [UIColor clearColor];
-        _numberLabel.font = [UIFont boldSystemFontOfSize:18];        
-        [_numberLabel sizeToFit];
-        [self addSubview:_numberLabel];        
+        _numberLabel.font = [UIFont systemFontOfSize:12];
+        _numberLabel.textAlignment = NSTextAlignmentRight;
+        [self addSubview:_numberLabel];
 
         // silly hack to use the built-in chevron image
         _chevronView = [[UITableViewCell alloc] initWithFrame:(CGRect){{0,0},{15,20}}];
@@ -126,13 +133,24 @@ const static int KEY_HIGHLIGHTED_BACKGROUND_COLOR = 0xb1b4b8;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+
+    const CGFloat leftEdgePadding = 10;
+    const CGFloat chevronPadding = 25;
     
-    _callerIdLabel.left = 10;
+    _callerIdLabel.left = leftEdgePadding;
     _callerIdLabel.top = round((self.height / 2) - (_callerIdLabel.height / 2));
+
+    CGFloat numberLabelWidth = self.width - _callerIdLabel.width - 2*_callerIdLabel.left - chevronPadding;
     
+    [_numberNameLabel sizeToFit];
+    _numberNameLabel.width = numberLabelWidth;
+    _numberNameLabel.right = self.width - chevronPadding;
+    _numberNameLabel.bottom = round(self.height / 2) + 5;
+
     [_numberLabel sizeToFit];
-    _numberLabel.right = self.width - 25;
-    _numberLabel.top = round((self.height / 2) - (_numberLabel.height / 2));
+    _numberLabel.width = numberLabelWidth;
+    _numberLabel.right = self.width - chevronPadding;
+    _numberLabel.top = round(self.height / 2) + 2;
 
     _chevronView.right = self.width + 3;
     _chevronView.top = 3;
@@ -143,13 +161,11 @@ const static int KEY_HIGHLIGHTED_BACKGROUND_COLOR = 0xb1b4b8;
     [self applyConfig];
 }
 
-- (void)setCallerId:(NSString *)callerId {
-    _numberLabel.text = callerId;
+- (void)setCallerId:(VBXOutgoingPhone *)callerID {
+    _numberNameLabel.text = callerID.name;
+    _numberLabel.text = callerID.phone;
+    _callerID = callerID;
     [self setNeedsLayout];
-}
-
-- (NSString *)callerId {
-    return _numberLabel.text;
 }
 
 - (void)applyConfig {
@@ -590,18 +606,18 @@ typedef enum {
 }
 
 - (void)viewDidLoad {
-    _callerIdNumber = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
+    _callerID = [[VBXOutgoingPhone alloc] initWithDictionary:[_userDefaults dictionaryForKey:VBXUserDefaultsCallerId]];
     
-    if (_callerIdNumber == nil) {
-        _callerIdNumber = ((VBXOutgoingPhone *)[_accessor.callerIDs objectAtIndex:0]).phone;
+    if (_callerID == nil) {
+        _callerID = [_accessor.callerIDs objectAtIndex:0];
     }
-    
+
+    // Default to whatever our last used number was...
+    [_callerIdControl setCallerId:_callerID];
+
     _accessor.delegate = self;
     [_accessor loadCallerIDs];
-    
-    // Default to whatever our last used number was...
-    [_callerIdControl setCallerId:[_userDefaults stringForKey:VBXUserDefaultsCallerId]];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange:)
         name:NSUserDefaultsDidChangeNotification object:nil];
 
@@ -618,8 +634,8 @@ typedef enum {
     
     if (_callerIdPickerIsOpen) {
         _callerIdPickerIsOpen = NO;
-        _callerIdNumber = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
-        [_callerIdControl setCallerId:_callerIdNumber];
+        _callerID = [[VBXOutgoingPhone alloc] initWithDictionary:[_userDefaults dictionaryForKey:VBXUserDefaultsCallerId]];
+        [_callerIdControl setCallerId:_callerID];
     }
 }
 
@@ -642,11 +658,11 @@ typedef enum {
 
 - (void)makeCallAfterDelay {
     _callIsBeingScheduled = NO;
-    [_accessor call:_phoneNumber usingCallerID:_callerIdNumber];
+    [_accessor call:_phoneNumber usingCallerID:_callerID.phone];
 }
 
 - (void)callPressed {
-    if (_callerIdNumber == nil || _callerIdNumber.length == 0) {
+    if (_callerID == nil || _callerID.phone.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"Emtpy Caller ID", @"Dialer: Title for alert when caller id is not set")
                                                         message:LocalizedString(@"You must set your caller ID before placing a call.", @"Dialer: Body for alert when caller id is not set.")
                                                        delegate:nil 
@@ -734,10 +750,10 @@ typedef enum {
 #pragma mark DialerAccessor delegate methods
 
 - (void)accessorCallerIDsResponseArrived:(VBXDialerAccessor *)accessor fromCache:(BOOL)fromCache {
-    if (accessor.callerIDs.count > 0 && [[_callerIdControl callerId] length] < 1) {
-        _callerIdNumber = [[_accessor.callerIDs objectAtIndex:0] phone];
-        [_userDefaults setValue:_callerIdNumber forKey:VBXUserDefaultsCallerId];
-        [_callerIdControl setCallerId:_callerIdNumber];
+    if (accessor.callerIDs.count > 0 && _callerIdControl.callerID.phone.length < 1) {
+        _callerID = [_accessor.callerIDs objectAtIndex:0];
+        [_userDefaults setValue:[_callerID dictionary] forKey:VBXUserDefaultsCallerId];
+        [_callerIdControl setCallerId:_callerID];
 
     }
     [self refreshView];
@@ -769,8 +785,8 @@ typedef enum {
         [state setObject:_phoneNumber forKey:@"to"];
     }
 
-    if (_callerIdNumber != nil) {
-        [state setObject:_callerIdNumber forKey:@"from"];
+    if (_callerID != nil) {
+        [state setObject:[_callerID dictionary] forKey:@"from"];
     }
     
     return state;
@@ -782,7 +798,7 @@ typedef enum {
     [self view];
     
     NSString *phoneValue = [state stringForKey:@"to"];
-    NSString *fromValue = [state stringForKey:@"from"];
+    id fromValue = [state objectForKey:@"from"];
     
     if (phoneValue) {
         self.phoneNumber = [NSMutableString stringWithString:phoneValue];
@@ -790,8 +806,8 @@ typedef enum {
     }
     
     if (fromValue) {
-        _callerIdNumber = fromValue;
-        [_callerIdControl setCallerId:_callerIdNumber];
+        _callerID = [[VBXOutgoingPhone alloc] initWithDictionary:fromValue];
+        [_callerIdControl setCallerId:_callerID];
     }
 }
 

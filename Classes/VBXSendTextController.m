@@ -22,6 +22,7 @@
 #import "VBXSectionedDataSource.h"
 #import "VBXObjectBuilder.h"
 #import "VBXCallerIdController.h"
+#import "VBXOutgoingPhone.h"
 #import "UIViewPositioningExtension.h"
 #import "VBXViewCell.h"
 #import "VBXGlobal.h"
@@ -301,7 +302,10 @@
         _valueField = [[UILabel alloc] initWithFrame:CGRectZero];
         _valueField.font = [UIFont systemFontOfSize:15.0];
         _valueField.textAlignment = NSTextAlignmentLeft;
+        _valueField.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _valueField.text = @"";
+        _valueField.adjustsFontSizeToFitWidth = YES;
+        _valueField.minimumScaleFactor = 0.8f;
         _valueField.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:_label];
@@ -354,7 +358,10 @@
 
 
 
-@interface VBXSendTextController (Private) <UITextViewDelegate, UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate>
+@interface VBXSendTextController () <UITextViewDelegate, UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate>
+
+@property (nonatomic, strong) VBXOutgoingPhone *callerID;
+
 @end
 
 @implementation VBXSendTextController
@@ -362,13 +369,18 @@
 @synthesize userDefaults = _userDefaults;
 @synthesize sendTextPoster = _sendTextPoster;
 
+- (void)setCallerID:(VBXOutgoingPhone *)callerID {
+    _callerID = callerID;
+    _callerIdCell.valueField.text = callerID.name;
+}
+
 - (void)cancel {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)send {    
     NSString *toNumber = VBXStripNonDigitsFromString(_toCell.textField.text);
-    NSString *fromNumber = VBXStripNonDigitsFromString(_callerIdCell.valueField.text);
+    NSString *fromNumber = VBXStripNonDigitsFromString(self.callerID.phone);
     NSString *body = _bodyCell.bodyTextView.text;
     
     if (toNumber.length > 0 && toNumber.length != 10 && ![[toNumber substringToIndex:1] isEqualToString:@"+"]) {    
@@ -399,7 +411,7 @@
         
         VBXResourceRequest *request = [VBXResourceRequest requestWithResource:@"messages/sms" method:@"POST"];
         [request.params setObject:_toCell.textField.text forKey:@"to"];
-        [request.params setObject:_callerIdCell.valueField.text forKey:@"from"];
+        [request.params setObject:self.callerID.phone forKey:@"from"];
         [request.params setObject:_bodyCell.bodyTextView.text forKey:@"content"];
         
         __block __typeof__(self) selph = self;
@@ -501,7 +513,7 @@
     [_toCell.textField becomeFirstResponder];
     
     // Default to whatever our last used caller id was...
-    _callerIdCell.valueField.text = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
+    self.callerID = [[VBXOutgoingPhone alloc] initWithDictionary:[_userDefaults objectForKey:VBXUserDefaultsCallerId]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -510,7 +522,8 @@
     
     if (_callerIdPickerIsOpen) {
         _callerIdPickerIsOpen = NO;
-        _callerIdCell.valueField.text = [_userDefaults stringForKey:VBXUserDefaultsCallerId];
+        VBXOutgoingPhone *selectedCallerID = [[VBXOutgoingPhone alloc] initWithDictionary:[_userDefaults objectForKey:VBXUserDefaultsCallerId]];
+        self.callerID = selectedCallerID;
     }
     
     // Focus on the body if the to field is already populated.
@@ -608,7 +621,7 @@
 - (NSDictionary *)saveState {
     NSMutableDictionary *state = [NSMutableDictionary dictionary];
     [state setValue:_toCell.textField.text forKey:@"to"];
-    [state setValue:_callerIdCell.valueField.text forKey:@"from"];
+    [state setValue:[self.callerID dictionary] forKey:@"from"];
     [state setValue:_bodyCell.bodyTextView.text forKey:@"body"];
     return state;
 }
@@ -618,7 +631,7 @@
     [self view];
     
     NSString *toValue = [state objectForKey:@"to"];
-    NSString *fromValue = [state objectForKey:@"from"];
+    NSDictionary *fromValue = [state objectForKey:@"from"];
     NSString *bodyValue = [state objectForKey:@"body"];
     
     if (toValue) {
@@ -626,7 +639,7 @@
     }
     
     if (fromValue) {
-        _callerIdCell.valueField.text = fromValue;
+        self.callerID = [[VBXOutgoingPhone alloc] initWithDictionary:fromValue];
     }
     
     if (bodyValue) {

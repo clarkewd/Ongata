@@ -76,10 +76,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VBXOutgoingPhone *phone = [_accessor.callerIDs objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-    cell.textLabel.text = phone.phone;
-    
-    if ([[_userDefaults objectForKey:VBXUserDefaultsCallerId] isEqualToString:phone.phone]) {
+    UITableViewCell *cell = [[VBXTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    cell.textLabel.text = phone.name;
+    cell.detailTextLabel.text = phone.phone;
+
+    VBXOutgoingPhone *selectedPhone = [[VBXOutgoingPhone alloc] initWithDictionary:[_userDefaults dictionaryForKey:VBXUserDefaultsCallerId]];
+    if ([selectedPhone.phone isEqualToString:phone.phone]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
@@ -89,7 +91,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];    
     
-    [_userDefaults setObject:cell.textLabel.text forKey:VBXUserDefaultsCallerId];
+    [_userDefaults setObject:[[_accessor.callerIDs objectAtIndex:indexPath.row] dictionary] forKey:VBXUserDefaultsCallerId];
     [_userDefaults synchronize];
     
     cell.accessoryType = UITableViewCellAccessoryCheckmark;

@@ -24,13 +24,14 @@
 @class VBXDialerAccessor;
 @class CallerIdControl;
 @class NumberAreaView;
+@class VBXOutgoingPhone;
 
 @interface VBXDialerController : VBXViewController {
     NSUserDefaults *_userDefaults;
     VBXDialerAccessor *_accessor;
     NSMutableString *_phoneNumber;
     NSInteger _selectedCallerIDIndex;
-    NSString *_callerIdNumber;
+    VBXOutgoingPhone *_callerID;
 
     CallerIdControl *_callerIdControl;
     NumberAreaView *_numberAreaView;

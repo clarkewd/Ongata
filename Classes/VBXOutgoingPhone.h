@@ -28,6 +28,7 @@
 }
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionary;
 
 @property (nonatomic, strong) NSString *key;
 @property (nonatomic, strong) NSString *name;
