@@ -92,7 +92,7 @@
                       // Callback phone number
                       @"",
                       _callbackPhoneField,
-                      LocalizedString(@"When you place phone calls using OpenVBX, you'll be called at this number to make the connection.", @"Settings: description text shown below phone number in the settings app, explains why we need the phone number."),
+                      LocalizedString(@"When you place phone calls using Ongata, you'll be called at this number to make the connection.", @"Settings: description text shown below phone number in the settings app, explains why we need the phone number."),
                       // Server info / Login info
                       @"\n",
                       serverLabel,

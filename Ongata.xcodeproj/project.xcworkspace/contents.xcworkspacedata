@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:OpenVBX.xcodeproj">
+      location = "self:Ongata.xcodeproj">
    </FileRef>
 </Workspace>

@@ -150,7 +150,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* VBXAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* VBXAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* OpenVBX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVBX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Ongata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ongata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		280CF242113F0838000F4FD7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		281800F611209E7C0021AF7A /* VBXViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXViewCell.h; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 		28FD28551125DD5C00384850 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		28FD28571125DD5C00384850 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* OpenVBX_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVBX_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* Ongata_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ongata_Prefix.pch; sourceTree = "<group>"; };
 		666199FF12FB5AC4002FAA85 /* VBXLicenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXLicenseController.h; sourceTree = "<group>"; };
 		66619A0012FB5AC4002FAA85 /* VBXLicenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXLicenseController.m; sourceTree = "<group>"; };
 		66619AC512FB7FFE002FAA85 /* license.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = license.html; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 		66CAE605130633C70050D773 /* VBXVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXVersion.m; sourceTree = "<group>"; };
 		66D2219D121132970092D4EA /* VBXAppURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXAppURL.h; sourceTree = "<group>"; };
 		66D2219E121132970092D4EA /* VBXAppURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXAppURL.m; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* OpenVBX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OpenVBX-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Ongata-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ongata-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		963160EC10E0793300F105C7 /* VBXMessageAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXMessageAttribute.h; sourceTree = "<group>"; };
 		963160ED10E0793300F105C7 /* VBXMessageAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBXMessageAttribute.m; sourceTree = "<group>"; };
 		963161F510E16D7500F105C7 /* VBXMessageAttributeAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBXMessageAttributeAccessor.h; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* OpenVBX.app */,
+				1D6058910D05DD3D006BFB54 /* Ongata.app */,
 				96AF927310D18E2400E0DA8B /* UnitTests.octest */,
 			);
 			name = Products;
@@ -469,7 +469,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* OpenVBX_Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* Ongata_Prefix.pch */,
 				96F6838C10F7F31C009D8498 /* VBXError.h */,
 				96F6838D10F7F31C009D8498 /* VBXError.m */,
 				969CDB2B10C66F89007FCB56 /* VBXUserDefaultsKeys.h */,
@@ -487,7 +487,7 @@
 				BF014D40192DA92B00B71DB4 /* Images.xcassets */,
 				96EFB6E91108269000833652 /* images */,
 				96D7D36010D71F5600329AFA /* en.lproj */,
-				8D1107310486CEB800E47090 /* OpenVBX-Info.plist */,
+				8D1107310486CEB800E47090 /* Ongata-Info.plist */,
 				96AF927410D18E2400E0DA8B /* UnitTests-Info.plist */,
 				668AC45310F3F2EE00FE1E22 /* Entitlements.plist */,
 				2838C964111225C900426893 /* default-config.json */,
@@ -727,9 +727,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* OpenVBX */ = {
+		1D6058900D05DD3D006BFB54 /* Ongata */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OpenVBX" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ongata" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -741,9 +741,9 @@
 			dependencies = (
 				96AF931010D1A27900E0DA8B /* PBXTargetDependency */,
 			);
-			name = OpenVBX;
+			name = Ongata;
 			productName = Twilio;
-			productReference = 1D6058910D05DD3D006BFB54 /* OpenVBX.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Ongata.app */;
 			productType = "com.apple.product-type.application";
 		};
 		96AF927210D18E2400E0DA8B /* UnitTests */ = {
@@ -771,9 +771,9 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Twilio, Inc";
+				ORGANIZATIONNAME = "Optasia Construction Inc.";
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OpenVBX" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ongata" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -789,7 +789,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* OpenVBX */,
+				1D6058900D05DD3D006BFB54 /* Ongata */,
 				96AF927210D18E2400E0DA8B /* UnitTests */,
 			);
 		};
@@ -990,16 +990,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OpenVBX_Prefix.pch;
+				GCC_PREFIX_HEADER = Ongata_Prefix.pch;
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "OpenVBX-Info.plist";
+				INFOPLIST_FILE = "Ongata-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = OpenVBX;
+				PRODUCT_NAME = Ongata;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1013,14 +1015,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Twilio, Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OpenVBX_Prefix.pch;
-				INFOPLIST_FILE = "OpenVBX-Info.plist";
+				GCC_PREFIX_HEADER = Ongata_Prefix.pch;
+				INFOPLIST_FILE = "Ongata-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = OpenVBX;
+				PRODUCT_NAME = Ongata;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1055,15 +1058,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OpenVBX_Prefix.pch;
-				INFOPLIST_FILE = "OpenVBX-Info.plist";
+				GCC_PREFIX_HEADER = Ongata_Prefix.pch;
+				INFOPLIST_FILE = "Ongata-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = OpenVBX;
+				PRODUCT_NAME = Ongata;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1196,7 +1201,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OpenVBX" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ongata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -1216,7 +1221,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OpenVBX" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ongata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

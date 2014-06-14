@@ -118,7 +118,7 @@
     _cellDataSource = [VBXSectionedCellDataSource dataSourceWithHeadersCellsAndFooters:
                       @"", // no header
                       _numberField,
-                      LocalizedString(@"When you place phone calls using OpenVBX, you'll be called at this number to complete the connection.", @"Set Number: Sub text that explains why we need their phone number."),
+                      LocalizedString(@"When you place phone calls using Ongata, you'll be called at this number to complete the connection.", @"Set Number: Sub text that explains why we need their phone number."),
                       nil];
     
     self.tableView.dataSource = _cellDataSource;

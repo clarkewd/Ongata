@@ -53,7 +53,7 @@
     [super loadView];
 	
 	_webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
-	[_webView loadHTMLString:self.summary baseURL:[NSURL URLWithString:@"http://openvbx.org/"]];
+	[_webView loadHTMLString:self.summary baseURL:[NSURL URLWithString:@"file://"]];
 	
 	//[self.view addSubview:_textView];
 	self.view = _webView;
